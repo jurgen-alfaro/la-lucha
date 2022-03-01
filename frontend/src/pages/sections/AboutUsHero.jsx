@@ -1,7 +1,7 @@
 import HeroImg from "../../assets/about-us_hero-img.jpg";
 function AboutUsHero() {
   return (
-    <section className='about-us-hero md:h-screen grid grid-cols-1 sm:grid-cols-2 justify-center mt-12'>
+    <section className='about-us-hero md:h-screen grid grid-cols-1 sm:grid-cols-2 justify-center'>
       <div className='hero-image'>
         <img src={HeroImg} alt='People at work' />
       </div>

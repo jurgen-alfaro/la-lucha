@@ -23,5 +23,6 @@ app.use("/api/asada", require("./routes/asadaRoutes"));
 app.use("/api/login", require("./routes/authRoutes"));
 app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/user-files", require("./routes/userFilesRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 
 app.use = app.listen(port, () => console.log(`Server started on port ${port}`));

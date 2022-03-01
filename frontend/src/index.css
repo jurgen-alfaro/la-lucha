@@ -307,6 +307,33 @@ html {
   left: 50%;
   text-align: center;
 }
+
+/* POSTS */
+
+.posts-section {
+  height: 100vh;
+}
+
+.posts-section .bg {
+  position: relative;
+  top: 0;
+  background-attachment: fixed;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("./assets/river.jpg");
+  background-position: center;
+}
+
+.posts-section .wrapper {
+  position: relative;
+  width: 1000px;
+  margin: 2rem auto;
+
+  background: rgb(172, 76, 76);
+  padding: 50px;
+}
+
 /* ANIMATIONS */
 .anim-opacity-fade-in {
   animation: opacityFadeIn 1s linear forwards;

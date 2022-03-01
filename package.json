@@ -1,0 +1,39 @@
+{
+  "name": "la-lucha",
+  "version": "1.0.0",
+  "description": "Página informacional para la ASADA La Lucha, La Tigra, San Carlos. ",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "keywords": [
+    "acueducto",
+    "asada",
+    "utn",
+    "web",
+    "webpage"
+  ],
+  "author": "Jurgen Alfaro",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-async-handler": "^1.2.0",
+    "express-mysql-session": "^2.1.7",
+    "express-sessions": "^1.0.6",
+    "express-validator": "^6.14.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "timeago.js": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

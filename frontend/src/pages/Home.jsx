@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import HomeServicesHome from "./sections/HomeServicesHome";
 import HomeProjects from "./sections/HomeProjects";
 import HomePhotoGallery from "./sections/HomePhotoGallery";
@@ -29,12 +29,13 @@ function Home() {
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
-            <button
-              className='btn btn-primary btn-lg hover:bg-secondary hover:scale-105 anim-opacity-fade-in'
+            <Link
+              to='/posts'
+              className='btn btn-primary lg:btn-lg hover:bg-secondary hover:scale-105 anim-opacity-fade-in'
               id='id02'
             >
               Ver publicaciones más recientes
-            </button>
+            </Link>
           </div>
         </div>
       </div>

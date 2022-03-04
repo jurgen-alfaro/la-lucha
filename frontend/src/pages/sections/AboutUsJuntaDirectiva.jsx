@@ -3,7 +3,7 @@ import peopleImg from "../../assets/about-us_junta-directiva-img.jpg";
 function AboutUsJuntaDirectiva() {
   return (
     <section
-      id='#junta-directiva'
+      id='junta-directiva'
       className='about-us-junta-directiva flex justify-center px-2'
     >
       <div className='container my-12'>

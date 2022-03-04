@@ -12,7 +12,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
 
   if (user.length && (await bcrypt.compare(password, user[0].password))) {
-    res.json({
+    res.status(200).json({
       _id: user[0].iduser,
       name: user[0].name,
       email: user[0].email,

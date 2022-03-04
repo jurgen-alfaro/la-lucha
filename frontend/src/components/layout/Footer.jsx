@@ -63,6 +63,7 @@ function Footer() {
               url='https://www.facebook.com/people/Asada-La-Lucha-La-Vega/100006408049102/'
               style={{ width: "42px", height: "42px" }}
               className='transition hover:scale-125  duration-300  cursor-pointer'
+              target='_blank'
             />
 
             <SocialIcon

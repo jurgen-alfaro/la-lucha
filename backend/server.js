@@ -24,5 +24,6 @@ app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/user-files", require("./routes/userFilesRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/suggestions", require("./routes/suggestionRoutes"));
+app.use("/api/forms", require("./routes/formRoutes"));
 
 app.use = app.listen(port, () => console.log(`Server started on port ${port}`));

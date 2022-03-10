@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const pool = require("../config/database");
-const upload = require("../plugin/multer");
+const upload = require("../middleware/multer");
 
 const getUserFiles = asyncHandler(async (req, res) => {
   try {

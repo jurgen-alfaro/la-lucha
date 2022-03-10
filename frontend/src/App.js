@@ -11,6 +11,8 @@ import Contact from "./pages/Contact";
 import Dashboard from "./components/layout/Dashboard";
 import UserLogin from "./components/users/UserLogin";
 import SuggestionList from "./components/suggestions/SuggestionList";
+import SuggestionItem from "./components/suggestions/SuggestionItem";
+import FormsList from "./components/forms/FormsList";
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
         <Route path='/admin' element={<AdminLayout />}>
           <Route path='dashboard' index element={<Dashboard />} />
           <Route path='suggestions' element={<SuggestionList />} />
+          <Route path='suggestions/:id' element={<SuggestionItem />} />
+          <Route path='forms' element={<FormsList />} />
           <Route path='login' element={<UserLogin />} />
         </Route>
       </Routes>

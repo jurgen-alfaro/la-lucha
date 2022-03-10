@@ -34,7 +34,6 @@ function AdminLayout() {
             onClick={handleClick}
           >
             <svg
-              className='w-5 h-5'
               xmlns='http://www.w3.org/2000/svg'
               className='h-6 w-6'
               fill='none'
@@ -83,17 +82,17 @@ function AdminLayout() {
               Buzón de Sugerencias
             </NavLink>
             <NavLink
-              to='posts'
+              to='forms'
               className='block py-2.5 px-4 transition duration-200 rounded hover:bg-primary hover:text-white focus:bg-primary-focus focus:text-white focus:text-bold'
             >
-              Features
+              Formularios
             </NavLink>
-            <a
-              href=''
+            <NavLink
+              to='notdefined'
               className='block py-2.5 px-4 transition duration-200 rounded hover:bg-primary hover:text-white focus:bg-primary-focus focus:text-white focus:text-bold'
             >
               Pricing
-            </a>
+            </NavLink>
           </nav>
         </div>
 

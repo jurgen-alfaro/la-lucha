@@ -333,6 +333,13 @@ html {
   width: 1000px;
   margin: 2rem auto;
 }
+.modal-info-display {
+  grid-template-columns: 1fr 2fr;
+}
+.suggestion-info {
+  max-width: 80%;
+  grid-template-columns: 1fr 2fr;
+}
 
 /* ANIMATIONS */
 .anim-opacity-fade-in {

@@ -3,11 +3,13 @@ const router = express.Router();
 const {
   registerSuggestion,
   getSuggestions,
-  editSuggestion,
+  getSuggestion,
+  updateSuggestion,
 } = require("../controllers/suggestionController");
 const { protect } = require("../middleware/authMiddleware");
 
 router.route("/").post(registerSuggestion).get(protect, getSuggestions);
-router.route("/:id").put(protect, editSuggestion);
+
+router.route("/:id").get(protect, getSuggestion).put(protect, updateSuggestion);
 
 module.exports = router;

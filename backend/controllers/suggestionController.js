@@ -64,10 +64,38 @@ const getSuggestions = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Get suggestion by ID
+// @route GET /api/suggestions/:id
+// @access Private
+const getSuggestion = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const suggestion = await pool.query(
+      "SELECT * FROM suggestions WHERE idsuggestions = ?",
+      [id]
+    );
+
+    if (!suggestion) {
+      res.status(400);
+      throw new Error("GET suggestion by id failed");
+    }
+
+    res.status(200).json({
+      suggestion: suggestion,
+    });
+  } catch (error) {
+    throw new Error(
+      "An error occured on the GET request for suggestions table",
+      error
+    );
+  }
+});
+
 // @desc Update a suggestion
 // @route PUT /api/suggestions/:id
 // @access Private
-const editSuggestion = asyncHandler(async (req, res) => {
+const updateSuggestion = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const { is_pending } = req.body;
@@ -81,9 +109,14 @@ const editSuggestion = asyncHandler(async (req, res) => {
       is_pending,
     };
 
+    await pool.query("UPDATE suggestions SET ? WHERE idsuggestions = ?", [
+      updSuggestion,
+      id,
+    ]);
+
     const updatedSuggestion = await pool.query(
-      "UPDATE suggestions SET ? WHERE idsuggestions = ?",
-      [updSuggestion, id]
+      "SELECT * FROM suggestions WHERE idsuggestions = ?",
+      [id]
     );
 
     if (!updatedSuggestion) {
@@ -91,7 +124,10 @@ const editSuggestion = asyncHandler(async (req, res) => {
       throw new Error("UPDATE failed on suggestions table");
     }
 
-    res.status(200).json({ updatedSuggestion: updSuggestion });
+    res.status(200).json({
+      message: "Sugerencia actualizada exitosamente",
+      updatedSuggestion: updatedSuggestion,
+    });
   } catch (error) {
     console.log(error);
     res.status(400);
@@ -99,4 +135,9 @@ const editSuggestion = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerSuggestion, getSuggestions, editSuggestion };
+module.exports = {
+  registerSuggestion,
+  getSuggestions,
+  getSuggestion,
+  updateSuggestion,
+};

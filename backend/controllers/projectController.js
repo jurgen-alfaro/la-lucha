@@ -19,7 +19,7 @@ const getProjects = asyncHandler(async (req, res) => {
 // @desc Add a project
 // @route POST /api/projects
 // @access Private
-const setProject = asyncHandler(async (req, res) => {
+const addProject = asyncHandler(async (req, res) => {
   try {
     const { title, desc, total_cost, estimated_cost, is_pending } = req.body;
 
@@ -38,7 +38,7 @@ const setProject = asyncHandler(async (req, res) => {
       is_pending,
     };
 
-    const { rows, fields } = await pool.query(`INSERT INTO projects SET ?`, [
+    const resultHeader = await pool.query(`INSERT INTO projects SET ?`, [
       newProject,
     ]);
 
@@ -107,4 +107,4 @@ const deleteProject = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getProjects, setProject, editProject, deleteProject };
+module.exports = { getProjects, addProject, editProject, deleteProject };

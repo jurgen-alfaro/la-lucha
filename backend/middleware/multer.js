@@ -15,8 +15,13 @@ const fileStorageEngine = multer.diskStorage({
     cb(null, jsonPath);
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
+    cb(
+      null,
+      file.originalname.trim().replace(".pdf", "") +
+        "-" +
+        Date.now() +
+        path.extname(file.originalname)
+    );
   },
 });
 
@@ -24,4 +29,4 @@ const fileStorageEngine = multer.diskStorage({
 
 const upload = multer({ storage: fileStorageEngine });
 
-module.exports = upload.single("file_doc");
+module.exports = upload.single("fdoc");

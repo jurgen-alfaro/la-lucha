@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo2.png";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => setIsOpen(!isOpen);
 
@@ -190,7 +191,7 @@ function Navbar() {
             </li>
             <li>
               <NavLink
-                to='finance'
+                to='documentation'
                 className='block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
                 style={({ isActive }) =>
                   isActive
@@ -200,53 +201,10 @@ function Navbar() {
                     : { color: "#545e6f" }
                 }
               >
-                Transparencia
+                Documentación
               </NavLink>
             </li>
-            <li className='dropdown dropdown-hover'>
-              <NavLink
-                to='forms'
-                className='block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
-                style={({ isActive }) =>
-                  isActive
-                    ? {
-                        color: "#79b9d6",
-                      }
-                    : { color: "#545e6f" }
-                }
-              >
-                Formularios
-                <svg
-                  className='fill-current inline'
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='20'
-                  height='20'
-                  viewBox='0 0 24 24'
-                >
-                  <path d='M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z' />
-                </svg>
-              </NavLink>
-              <ul
-                tabIndex='0'
-                className='p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52'
-              >
-                <li>
-                  <a>Solicitud de Servicio Nuevo</a>
-                </li>
-                <li>
-                  <a>Disponibilidad de Agua</a>
-                </li>
-                <li>
-                  <a>Suspensión Definitiva del Servicio</a>
-                </li>
-                <li>
-                  <a>Cambio de Nombre</a>
-                </li>
-                <li>
-                  <a>Afiliación</a>
-                </li>
-              </ul>
-            </li>
+
             <li className='dropdown dropdown-hover'>
               <NavLink
                 to='financial-statements'

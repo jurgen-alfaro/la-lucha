@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import LoginContext from "../login/LoginContext";
 const SuggestionContext = createContext();
 

@@ -58,12 +58,14 @@ function SuggestionItem() {
   } = suggestion;
 
   useEffect(() => {
-    const checkIf = async () => {
-      estado === is_pending ? setBtnDisable(true) : setBtnDisable(false);
+    const checkIf = () => {
+      Number(estado) === Number(is_pending)
+        ? setBtnDisable(true)
+        : setBtnDisable(false);
     };
 
     checkIf();
-  }, [estado, suggestion]);
+  }, [estado, suggestion.is_pending]);
 
   if (!isLoading) {
     return (
@@ -208,7 +210,9 @@ function SuggestionItem() {
                   className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
                   htmlFor='grid-message'
                 >
-                  {`Estado actual: ${is_pending ? "Pendiente" : "Revisado"}`}
+                  {`Estado actual: ${
+                    Number(is_pending) === 1 ? "Pendiente" : "Revisado"
+                  }`}
                 </label>
 
                 <div className='form-control'>
@@ -228,6 +232,7 @@ function SuggestionItem() {
                 <button
                   type='submit'
                   className='btn btn-primary'
+                  defaultValue={false}
                   disabled={btnDisable}
                 >
                   Guardar cambios

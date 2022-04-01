@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
 import Map from "../components/maps/Map";
 import { toast } from "react-toastify";
@@ -17,6 +18,10 @@ function Contact() {
   });
 
   const { name, last_name, email, subject, message } = formData;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -75,7 +80,11 @@ function Contact() {
               <h2 className='text-2xl py-2'>Contáctanos</h2>
 
               <div className='form mt-3 px-1'>
-                <form className='w-full max-w-lg' onSubmit={onSubmit}>
+                <form
+                  className='w-full max-w-lg'
+                  onSubmit={onSubmit}
+                  autoComplete='off'
+                >
                   <div className='flex flex-wrap -mx-3 mb-4'>
                     <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
                       <label
@@ -276,6 +285,47 @@ function Contact() {
                 />
                 &nbsp;(+506) 8709-4950
               </span>
+            </div>
+            <div className='recruitment mt-12'>
+              <h2 className='text-2xl py-2'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-7 w-7 inline'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'
+                >
+                  <path
+                    fillRule='evenodd'
+                    d='M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z'
+                    clipRule='evenodd'
+                  />
+                  <path d='M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z' />
+                </svg>
+                &nbsp;¿Te gustaría trabajar con nosotros?
+              </h2>
+              <p className='max-w-lg my-4'>
+                Si estás interesado en formar parte de un excelente grupo de
+                trabajo y ayudar a nuestra comunidad, por favor déjanos tu
+                información en la siguiente sección:
+              </p>
+              <Link
+                to='jobs'
+                className='btn btn-secondary btn-outline btn-sm mt-1'
+              >
+                Me interesa&nbsp;
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-5 w-5'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'
+                >
+                  <path
+                    fillRule='evenodd'
+                    d='M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z'
+                    clipRule='evenodd'
+                  />
+                </svg>
+              </Link>
             </div>
           </div>
         </div>

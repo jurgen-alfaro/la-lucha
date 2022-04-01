@@ -37,7 +37,6 @@ function UserLogin() {
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log(user);
       const userl = await userLogin(formData);
       setUser(userl);
     } catch (error) {

@@ -21,7 +21,7 @@ function SuggestionTable() {
         Header: "Fecha de Emisión",
         accessor: "created_at",
         Cell: ({ value }) => {
-          return <Moment format='DD/MM/YYYY'>{value.created_at}</Moment>;
+          return <Moment format='DD/MM/YYYY'>{value}</Moment>;
         },
       },
       {

@@ -1,71 +1,63 @@
+import { useContext, useEffect } from "react";
 import peopleImg from "../../assets/about-us_junta-directiva-img.jpg";
+import JuntaDirectivaContext from "../../context/juntaDirectiva/JuntaDirectivaContext";
+import Moment from "react-moment";
 
 function AboutUsJuntaDirectiva() {
+  const { members, getMembers, isLoading } = useContext(JuntaDirectivaContext);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      await getMembers();
+    };
+    fetchMembers();
+  }, []);
+
   return (
     <section
       id='junta-directiva'
       className='about-us-junta-directiva flex justify-center px-2'
     >
       <div className='container my-12'>
-        <div className='junta-directiva-title my-12 px-12'>
-          <h1 className='text-7xl border-b pb-5 w-50'>Junta Directiva</h1>
+        <div className='junta-directiva-title my-12 px-12 justify-center'>
+          <h1 className='text-7xl border-b pb-5 w-50 flex justify-center'>
+            Junta Directiva
+          </h1>
         </div>
         <div className='junta-directiva-members flex flex-wrap justify-around'>
-          <div className='card lg:card-side bg-base-100 shadow-xl mt-5'>
-            <figure>
-              <img src={peopleImg} alt='Album' />
-            </figure>
-            <div className='card-body'>
-              <h2 className='card-title'>Ana Lourdes Zuñiga Rojas</h2>
-              <p>
-                <strong>Cargo:</strong> <br />
-                <strong>Vigencia:</strong> Febrero 2023
-              </p>
-            </div>
-          </div>
+          {members.length !== 0 &&
+            members.map((member) => {
+              const { name, last_name, position, vigency, photo } = member;
 
-          <div className='card lg:card-side bg-base-100 shadow-xl mt-5'>
-            <figure>
-              <img src={peopleImg} alt='Album' />
-            </figure>
-            <div className='card-body'>
-              <h2 className='card-title'>Juan Morera Gutierrez</h2>
-              <p>
-                <strong>Cargo:</strong> Administradora <br />
-                <strong>Vigencia:</strong> Febrero 2023
-              </p>
-            </div>
-          </div>
-          <div className='card lg:card-side bg-base-100 shadow-xl mt-5'>
-            <figure>
-              <img src={peopleImg} alt='Album' />
-            </figure>
-            <div className='card-body'>
-              <h2 className='card-title'>New album is released!</h2>
-              <p>Click the button to listen on Spotiwhy app.</p>
-            </div>
-          </div>
-          <div className='card lg:card-side bg-base-100 shadow-xl mt-5'>
-            <figure>
-              <img src={peopleImg} alt='Album' />
-            </figure>
-            <div className='card-body'>
-              <h2 className='card-title'>Ana Lourdes Zuñiga Rojas</h2>
-              <p>
-                <strong>Cargo:</strong> <br />
-                <strong>Vigencia:</strong> Febrero 2023
-              </p>
-            </div>
-          </div>
-          <div className='card lg:card-side  bg-base-100 shadow-xl mt-5'>
-            <figure>
-              <img src={peopleImg} alt='Album' />
-            </figure>
-            <div className='card-body'>
-              <h2 className='card-title'>New album is released!</h2>
-              <p>Click the button to listen on Spotiwhy app.</p>
-            </div>
-          </div>
+              return (
+                <div
+                  className='card lg:card-side bg-base-100 shadow-xl mt-5'
+                  key={member.idmember}
+                >
+                  <figure className='w-100 h-100'>
+                    <img
+                      src={`http://localhost:5000/junta/${photo}`}
+                      alt='Album'
+                      className='w-full h-full object-fill'
+                    />
+                  </figure>
+                  <div className='card-body '>
+                    <h2 className='card-title text-2xl'>
+                      {name + " " + last_name}&nbsp;{}
+                    </h2>
+                    <article>
+                      <p>
+                        <strong>Cargo:</strong>&nbsp;{position} <br />
+                      </p>
+                      <p>
+                        <strong>Vigencia:</strong>&nbsp;
+                        <Moment format='MMMM, YYYY '>{vigency}</Moment>
+                      </p>
+                    </article>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
     </section>

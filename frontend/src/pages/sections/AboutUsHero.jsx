@@ -1,4 +1,4 @@
-import HeroImg from "../../assets/about-us_hero-img.jpg";
+import HeroImg from "../../assets/our-history.jpg";
 function AboutUsHero() {
   return (
     <section className='about-us-hero md:h-screen grid grid-cols-1 sm:grid-cols-2 justify-center'>

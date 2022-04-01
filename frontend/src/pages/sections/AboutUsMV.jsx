@@ -11,7 +11,10 @@ function AboutUsMV() {
           Quam!
         </p>
       </div>
-      <div className='vision-container bg-primary h-full flex flex-col justify-center px-12'>
+      <div
+        style={{ backgroundColor: "var(--asada-lemonade-green)" }}
+        className='vision-container  h-full flex flex-col justify-center px-12'
+      >
         <h1 className='lg:text-7xl text-3xl text-white text-center'>Visión</h1>
         <div className='divider'></div>
         <p className='sm:text-lg text-center text-white'>

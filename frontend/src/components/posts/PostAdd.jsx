@@ -1,29 +1,20 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PostContext from "../../context/posts/PostContext";
 
 function PostAdd() {
-  const { getPosts, addPost } = useContext(PostContext);
+  const { getPosts, addPost, isLoading } = useContext(PostContext);
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [postType, setPostType] = useState("Anuncios");
   const [photos, setPhotos] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const titleChange = (e) => {
-    setTitle(e.target.value);
-  };
-  const descChange = (e) => {
-    setDesc(e.target.value);
-  };
-
-  const postTypeChange = (e) => {
-    setPostType(e.target.value);
-  };
-
-  const onFilesChange = (e) => {
-    setPhotos(Array.from(e.target.files));
-  };
+  const titleChange = (e) => setTitle(e.target.value);
+  const descChange = (e) => setDesc(e.target.value);
+  const postTypeChange = (e) => setPostType(e.target.value);
+  const onFilesChange = (e) => setPhotos(Array.from(e.target.files));
 
   const formReset = () => {
     setTitle("");
@@ -34,13 +25,12 @@ function PostAdd() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const fd = new FormData();
     fd.set("title", title);
     fd.set("desc", desc);
     fd.set("post_type", postType);
-    photos.forEach((photo) => {
-      fd.append("images", photo, photos.filename);
-    });
+    photos.forEach((photo) => fd.append("images", photo, photos.filename));
 
     await addPost(fd);
     await getPosts();

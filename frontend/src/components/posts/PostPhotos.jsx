@@ -1,37 +1,44 @@
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
 import PostContext from "../../context/posts/PostContext";
 import Spinner from "../shared/Spinner";
 
-function PostPhotos({ photo, pos, index, setIndex }) {
+function PostPhotos({ photo }) {
+  const { deletePostPhoto } = useContext(PostContext);
+
+  const [photoId, setPhotoId] = useState(photo.idphotos);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    deletePostPhoto(photoId);
+  };
+
   return (
-    <>
-      <div
-        className={`carousel-item w-full relative h-full transition duration-150 ease-out ${
-          pos === "activeSlide" ? pos : `${pos} opacity-0`
-        }`}
+    <div className={`w-full relative h-96 transition duration-150 ease-out`}>
+      <img
+        className='w-full h-full object-cover'
+        alt='Post image'
+        src={`http://localhost:5000/posts/${photo.photo}`}
+        id={photoId}
+      />
+      <button
+        className='btn btn-sm btn-square absolute top-4 right-4 z-10'
+        type='button'
+        onClick={handleClick}
       >
-        <img
-          className='w-full h-full object-cover'
-          src={`http://localhost:5000/${photo.photo}`}
-        />
-        <div className='absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2'>
-          <button
-            type='button'
-            className='btn btn-circle prev'
-            onClick={() => setIndex(index - 1)}
-          >
-            ❮
-          </button>
-          <button
-            type='button'
-            className='btn btn-circle next'
-            onClick={() => setIndex(index + 1)}
-          >
-            ❯
-          </button>
-        </div>
-      </div>
-    </>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          className='h-5 w-5'
+          viewBox='0 0 20 20'
+          fill='currentColor'
+        >
+          <path
+            fillRule='evenodd'
+            d='M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z'
+            clipRule='evenodd'
+          />
+        </svg>
+      </button>
+    </div>
   );
 }
 

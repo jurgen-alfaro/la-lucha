@@ -166,7 +166,9 @@ const updateMember = asyncHandler(async (req, res) => {
   }
 });
 
-// Delete a member
+// @desc    Delete member by Id
+// @route   DELETE /api/junta/:id
+// @access  Private
 const deleteMember = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
@@ -175,6 +177,10 @@ const deleteMember = asyncHandler(async (req, res) => {
 
     if (resultHeader.affectedRows > 0)
       return res.status(200).json({ resultHeader: resultHeader });
+    else
+      return res
+        .status(200)
+        .json({ error: "No se ha podido eliminar el registro del miembro" });
   } catch (error) {
     console.log(error);
     if (error) return res.status(400).json({ error: error });

@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Outlet, NavLink, useNavigate, useLocation } from "react-router-dom";
 import UserLogin from "../users/UserLogin";
 import LoginContext from "../../context/login/LoginContext";
 
@@ -7,13 +7,14 @@ function Dashboard() {
   const { user } = useContext(LoginContext);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   if (!user) {
     <UserLogin />;
   }
 
   useEffect(() => {
-    navigate("general");
+    if (location.pathname === "/admin/dashboard") navigate("general");
   }, []);
 
   return (

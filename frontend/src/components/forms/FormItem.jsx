@@ -22,9 +22,7 @@ function FormItem() {
   const { fname, fdesc, fdoc } = form;
 
   useEffect(() => {
-    const fetchForm = async () => {
-      await getForm(id);
-    };
+    const fetchForm = async () => await getForm(id);
 
     if (Object.keys(form).length === 0) {
       fetchForm();
@@ -83,120 +81,118 @@ function FormItem() {
   };
 
   return (
-    <div className='rounded-lg shadow-lg card bg-base-100'>
-      <div className='card-body'>
-        <h2 className='text-2xl my-4 font-bold card-title'>
-          <button
-            onClick={() => navigate(-1)}
-            className='btn btn-outline btn-secondary btn-sm hover:text-white'
+    <>
+      <h2 className='text-2xl my-4 font-bold card-title'>
+        <button
+          onClick={() => navigate(-1)}
+          className='btn btn-outline btn-secondary btn-sm hover:text-white'
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-6 w-6 '
+            viewBox='0 0 20 20'
+            fill='currentColor'
           >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-6 w-6 '
-              viewBox='0 0 20 20'
-              fill='currentColor'
+            <path
+              fillRule='evenodd'
+              d='M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z'
+              clipRule='evenodd'
+            />
+          </svg>
+        </button>
+        Editar formulario
+      </h2>
+
+      <div className='suggestion-info text-lg'>
+        <form className='w-full max-w-lg' onSubmit={handleSubmit}>
+          <div className='w-full px-3'>
+            <label
+              className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+              htmlFor='grid-fname'
             >
-              <path
-                fillRule='evenodd'
-                d='M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z'
-                clipRule='evenodd'
-              />
-            </svg>
-          </button>
-          Editar formulario
-        </h2>
-
-        <div className='suggestion-info text-lg'>
-          <form className='w-full max-w-lg' onSubmit={handleSubmit}>
-            <div className='w-full px-3'>
-              <label
-                className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-                htmlFor='grid-fname'
-              >
-                Nombre
-              </label>
-              <input
-                className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-                id='grid-fname'
-                type='text'
-                required
-                name='fname'
-                placeholder='Nombre del formulario'
-                defaultValue={fname}
-                onChange={onNewFnameChange}
-              />
-            </div>
-            <div className='w-full px-3'>
-              <label
-                className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-                htmlFor='grid-fdesc'
-              >
-                Descripción
-              </label>
-              <input
-                className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-                id='grid-fdesc'
-                type='text'
-                required
-                name='fdesc'
-                placeholder='Descripción breve del formulario'
-                defaultValue={fdesc}
-                onChange={onNewFdescChange}
-              />
-            </div>
-            <div className='w-full px-3'>
-              <label
-                className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-                htmlFor='grid-fdoc'
-              >
-                Documento
-              </label>
-              <input
-                className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-                id='grid-fdoc'
-                type='file'
-                name='fdoc'
-                onChange={onNewFdocChange}
-              />
-              <small className='text-xs'>
-                Documento actual: {fdoc}
-                <br />
-                <button
-                  className='btn btn-primary btn-outline btn-xs'
-                  onClick={downloadDocument}
-                >
-                  Descargar&nbsp;
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-4 w-4'
-                    viewBox='0 0 20 20'
-                    fill='currentColor'
-                  >
-                    <path
-                      fillRule='evenodd'
-                      d='M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z'
-                      clipRule='evenodd'
-                    />
-                  </svg>
-                </button>
-              </small>
-            </div>
-
-            <div className='divider'></div>
-
-            <div className='card-actions justify-start'>
+              Nombre
+            </label>
+            <input
+              className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+              id='grid-fname'
+              type='text'
+              required
+              name='fname'
+              placeholder='Nombre del formulario'
+              defaultValue={fname}
+              onChange={onNewFnameChange}
+            />
+          </div>
+          <div className='w-full px-3'>
+            <label
+              className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+              htmlFor='grid-fdesc'
+            >
+              Descripción
+            </label>
+            <textarea
+              className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+              id='grid-fdesc'
+              type='text'
+              required
+              name='fdesc'
+              placeholder='Descripción breve del formulario'
+              defaultValue={fdesc}
+              onChange={onNewFdescChange}
+            />
+          </div>
+          <div className='w-full px-3'>
+            <label
+              className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+              htmlFor='grid-fdoc'
+            >
+              Documento
+            </label>
+            <input
+              className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+              id='grid-fdoc'
+              type='file'
+              name='fdoc'
+              onChange={onNewFdocChange}
+            />
+            <small className='text-xs'>
+              Documento actual: {fdoc}
+              <br />
               <button
-                type='submit'
-                disabled={btnDisabled}
-                className={`btn btn-primary ${isLoading ? "loading" : ""}`}
+                className='btn btn-primary btn-outline btn-xs'
+                onClick={downloadDocument}
               >
-                Guardar cambios
+                Descargar&nbsp;
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='h-4 w-4'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'
+                >
+                  <path
+                    fillRule='evenodd'
+                    d='M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z'
+                    clipRule='evenodd'
+                  />
+                </svg>
               </button>
-            </div>
-          </form>
-        </div>
+            </small>
+          </div>
+
+          <div className='divider'></div>
+
+          <div className='card-actions justify-start'>
+            <button
+              type='submit'
+              disabled={btnDisabled}
+              className={`btn btn-primary ${isLoading ? "loading" : ""}`}
+            >
+              Guardar cambios
+            </button>
+          </div>
+        </form>
       </div>
-    </div>
+    </>
   );
 }
 

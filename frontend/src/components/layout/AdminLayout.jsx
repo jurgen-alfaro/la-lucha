@@ -7,6 +7,11 @@ import { JobProvider } from "../../context/jobs/JobContext";
 import { PostProvider } from "../../context/posts/PostContext";
 import { JuntaDirectivaProvider } from "../../context/juntaDirectiva/JuntaDirectivaContext";
 import { UserProvider } from "../../context/users/UserContext";
+import { ProjectProvider } from "../../context/projects/ProjectContext";
+import { TanksProvider } from "../../context/tanks/TanksContext";
+import { QuiebraGradientesProvider } from "../../context/quiebraGradientes/QuiebraGradientesContext";
+import { ReglamentosProvider } from "../../context/reglamentos/ReglamentosContext";
+import { InformesProvider } from "../../context/informes/InformesContext";
 
 import UserLogin from "../users/UserLogin";
 import logo from "../../assets/logo2.png";
@@ -85,11 +90,12 @@ function AdminLayout() {
           >
             Buzón de Sugerencias
           </NavLink>
+
           <NavLink
-            to='forms'
+            to='docs'
             className='block py-2.5 px-4 transition duration-200 rounded hover:bg-primary hover:text-white focus:bg-primary-focus focus:text-white focus:text-bold'
           >
-            Formularios
+            Documentación
           </NavLink>
           <NavLink
             to='jobs'
@@ -98,10 +104,28 @@ function AdminLayout() {
             Solicitudes de Empleo
           </NavLink>
           <NavLink
+            to='tanks'
+            className='block py-2.5 px-4 transition duration-200 rounded hover:bg-primary hover:text-white focus:bg-primary-focus focus:text-white focus:text-bold'
+          >
+            Tanques de Almacenamiento
+          </NavLink>
+          <NavLink
+            to='projects'
+            className='block py-2.5 px-4 transition duration-200 rounded hover:bg-primary hover:text-white focus:bg-primary-focus focus:text-white focus:text-bold'
+          >
+            Proyectos
+          </NavLink>
+          <NavLink
             to='posts'
             className='block py-2.5 px-4 transition duration-200 rounded hover:bg-primary hover:text-white focus:bg-primary-focus focus:text-white focus:text-bold'
           >
             Publicaciones
+          </NavLink>
+          <NavLink
+            to='gradientes'
+            className='block py-2.5 px-4 transition duration-200 rounded hover:bg-primary hover:text-white focus:bg-primary-focus focus:text-white focus:text-bold'
+          >
+            Quiebra Gradientes
           </NavLink>
         </nav>
       </div>
@@ -114,7 +138,17 @@ function AdminLayout() {
               <PostProvider>
                 <JuntaDirectivaProvider>
                   <UserProvider>
-                    <Outlet />
+                    <ProjectProvider>
+                      <TanksProvider>
+                        <QuiebraGradientesProvider>
+                          <ReglamentosProvider>
+                            <InformesProvider>
+                              <Outlet />
+                            </InformesProvider>
+                          </ReglamentosProvider>
+                        </QuiebraGradientesProvider>
+                      </TanksProvider>
+                    </ProjectProvider>
                   </UserProvider>
                 </JuntaDirectivaProvider>
               </PostProvider>

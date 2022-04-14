@@ -367,6 +367,13 @@ html {
   transform: translateX(100%);
 }
 
+/* REACT SLIDER */
+/* .slick-arrow.slick-prev,
+.slick-arrow.slick-next {
+  background-color: #333c4d;
+  border-radius: 50%;
+} */
+
 /* ANIMATIONS */
 .anim-opacity-fade-in {
   animation: opacityFadeIn 1s linear forwards;

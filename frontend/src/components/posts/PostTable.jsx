@@ -21,7 +21,7 @@ function PostTable() {
       },
       {
         Header: "Descripción",
-        accessor: "desc",
+        accessor: "pdesc",
         Cell: ({ value }) => {
           return <div style={{ whiteSpace: "pre-wrap" }}>{value}</div>;
         },

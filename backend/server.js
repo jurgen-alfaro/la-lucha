@@ -12,6 +12,7 @@ const app = express();
 // Middlewares
 app.use(morgan("dev"));
 app.use(express.static(path.join("backend", "uploads")));
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,5 +28,9 @@ app.use("/api/forms", require("./routes/formRoutes"));
 app.use("/api/jobs", require("./routes/jobRoutes"));
 app.use("/api/posts", require("./routes/postRoute"));
 app.use("/api/junta", require("./routes/juntaDirectivaRoutes"));
+app.use("/api/waterTanks", require("./routes/waterTankRoutes"));
+app.use("/api/quiebraGradientes", require("./routes/quiebraGradientesRoutes"));
+app.use("/api/reglamentos", require("./routes/reglamentoRoutes"));
+app.use("/api/informes", require("./routes/informeRoutes"));
 
 app.use = app.listen(port, () => console.log(`Server started on port ${port}`));

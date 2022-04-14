@@ -5,9 +5,7 @@ import JuntaDirectivaContext from "../../context/juntaDirectiva/JuntaDirectivaCo
 import Spinner from "../shared/Spinner";
 
 function JuntaDirectiva() {
-  const { members, isLoading, getMembers, setMember } = useContext(
-    JuntaDirectivaContext
-  );
+  const { members, isLoading, getMembers } = useContext(JuntaDirectivaContext);
 
   useEffect(() => {
     const fetchMembers = async () => {

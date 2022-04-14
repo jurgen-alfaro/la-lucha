@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import HomeServicesHome from "./sections/HomeServicesHome";
 import HomeProjects from "./sections/HomeProjects";
 import HomePhotoGallery from "./sections/HomePhotoGallery";
+import { motion } from "framer-motion";
 
 /* MEDIA */
 import bgVideo from "../assets/pexels-ambientnature-atmosphere.mov";
@@ -12,9 +13,29 @@ import cardBg4 from "../assets/water-card-1.jpg";
 import tankImg from "../assets/water-tank-image.jpg";
 import riverImg from "../assets/river.jpg";
 
+// Framer motion variants
+const pageVariants = {
+  in: {
+    opacity: 1,
+  },
+  out: {
+    opacity: 0,
+  },
+};
+
+const pageTransition = {
+  duration: 0.5,
+};
+
 function Home() {
   return (
-    <>
+    <motion.div
+      exit='out'
+      animate='in'
+      initial='out'
+      variants={pageVariants}
+      transition={pageTransition}
+    >
       <div className='hero'>
         <div className='video-container'>
           <video src={bgVideo} autoPlay muted loop></video>
@@ -187,7 +208,7 @@ function Home() {
       <HomeServicesHome />
       <HomeProjects />
       <HomePhotoGallery />
-    </>
+    </motion.div>
   );
 }
 

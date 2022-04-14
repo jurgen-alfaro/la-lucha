@@ -5,11 +5,14 @@ const {
   getPosts,
   getPost,
   getPostPhotos,
+  updatePost,
+  deletePostPhoto,
 } = require("../controllers/postController");
 const uploadForPosts = require("../middleware/multerForPosts");
+const { protect } = require("../middleware/authMiddleware");
 
-router.route("/").post(uploadForPosts, addPost).get(getPosts);
-router.route("/:id").get(getPost);
-router.route("/:id/photos").get(getPostPhotos);
+router.route("/").post(protect, uploadForPosts, addPost).get(getPosts);
+router.route("/:id").get(getPost).put(protect, uploadForPosts, updatePost);
+router.route("/photo/:id").delete(deletePostPhoto);
 
 module.exports = router;

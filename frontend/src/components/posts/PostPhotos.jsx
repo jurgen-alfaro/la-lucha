@@ -5,7 +5,7 @@ import Spinner from "../shared/Spinner";
 function PostPhotos({ photo }) {
   const { deletePostPhoto } = useContext(PostContext);
 
-  const [photoId, setPhotoId] = useState(photo.idphotos);
+  const [photoId, setPhotoId] = useState(photo.idphoto);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -17,7 +17,7 @@ function PostPhotos({ photo }) {
       <img
         className='w-full h-full object-cover'
         alt='Post image'
-        src={`http://localhost:5000/posts/${photo.photo}`}
+        src={`http://localhost:5000/${photo.photo}`}
         id={photoId}
       />
       <button

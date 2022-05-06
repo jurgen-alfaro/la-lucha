@@ -164,6 +164,7 @@ export const JuntaDirectivaProvider = ({ children }) => {
         updateMember,
         deleteMember,
         isLoading,
+        setIsLoading,
         members,
         setMember,
         member,

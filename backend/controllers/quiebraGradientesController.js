@@ -15,10 +15,10 @@ const getGradientes = asyncHandler(async (req, res) => {
         .status(400)
         .json({ error: "An error occurred trying to get gradientes" });
 
-    const photos = await pool.query("SELECT * FROM gradientes_photos");
+    const photos = await pool.query("SELECT * FROM uploaded_photos");
 
     gradientes.forEach((gradiente) => {
-      // Add property 'photos' to the tanks
+      // Add property 'photos' to the gradientes
       gradiente.photos = [];
       photos.forEach((photo) => {
         if (gradiente.idgradientes === photo.idgradientes)
@@ -39,7 +39,7 @@ const getGradiente = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const q1 = "SELECT * FROM gradientes WHERE idgradientes = ?";
-    const q2 = "SELECT * FROM gradientes_photos WHERE idgradientes = ?";
+    const q2 = "SELECT * FROM uploaded_photos WHERE idgradientes = ?";
     const gradienteOutput = await pool.query(q1, [id]);
     const photos = await pool.query(q2, [id]);
 
@@ -77,7 +77,7 @@ const addGradiente = asyncHandler(async (req, res) => {
 
     if (photos.length === 0)
       return res.status(400).json({
-        error: "Please enter at least one image for the water tank",
+        error: "Please enter at least one image for the quiebra gradientes",
       });
 
     const q =
@@ -89,18 +89,18 @@ const addGradiente = asyncHandler(async (req, res) => {
       throw new Error("Unable to insert data in 'tanks' table");
 
     const q2 =
-      "INSERT INTO `db_lalucha`.`gradientes_photos` (`photo`, `idgradientes`) VALUES (?, ?);";
+      "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idgradientes`) VALUES (?, ?);";
 
     if (photos.length > 0)
       for (let i = 0; i < photos.length; i++)
-        await pool.query(q2, [photos[i].originalname, resultHeaders.insertId]);
+        await pool.query(q2, [photos[i].filename, resultHeaders.insertId]);
 
     const gradiente = await pool.query(
       "SELECT * FROM gradientes WHERE idgradientes = ?",
       [resultHeaders.insertId]
     );
     const gradientePhotos = await pool.query(
-      "SELECT * FROM gradientes_photos WHERE idgradientes = ?",
+      "SELECT * FROM uploaded_photos WHERE idgradientes = ?",
       [resultHeaders.insertId]
     );
 
@@ -161,7 +161,7 @@ const updateGradiente = asyncHandler(async (req, res) => {
 
       // Add the new photos
       const q1 =
-        "INSERT INTO `db_lalucha`.`gradientes_photos` (`photo`, `idgradientes`) VALUES (?, ?)";
+        "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idgradientes`) VALUES (?, ?)";
       photos.forEach(async (photo) => {
         const resultHeader = await pool.query(q1, [photo.filename, id]);
       });
@@ -187,21 +187,15 @@ const updateGradiente = asyncHandler(async (req, res) => {
 const deleteGradientePhoto = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const q = "DELETE FROM gradientes_photos WHERE idphoto = ?";
+    const q = "DELETE FROM uploaded_photos WHERE idphoto = ?";
     const photo = await pool.query(
-      "SELECT photo FROM gradientes_photos WHERE idphoto = ? ",
+      "SELECT photo FROM uploaded_photos WHERE idphoto = ? ",
       [id]
     );
     const resultHeader = await pool.query(q, [id]);
 
     if (resultHeader.affectedRows > 0) {
-      const oldPath = path.join(
-        __dirname,
-        "..",
-        "uploads",
-        "gradientes",
-        photo[0].photo
-      );
+      const oldPath = path.join(__dirname, "..", "uploads", photo[0].photo);
 
       if (fs.existsSync(oldPath)) {
         fs.unlink(oldPath, (err) => {
@@ -214,11 +208,9 @@ const deleteGradientePhoto = asyncHandler(async (req, res) => {
       }
       return res.status(200).json({ resultHeader: resultHeader });
     } else
-      return res
-        .status(200)
-        .json({
-          error: "No se ha podido eliminar la foto del quiebra gradientes",
-        });
+      return res.status(200).json({
+        error: "No se ha podido eliminar la foto del quiebra gradientes",
+      });
   } catch (error) {
     console.log(error);
     if (error) return res.status(400).json({ error: error });

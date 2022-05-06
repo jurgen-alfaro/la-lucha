@@ -172,6 +172,7 @@ export const UserProvider = ({ children }) => {
         users,
         usuario,
         isLoading,
+        setIsLoading,
         updateUser,
         changePassword,
         isCurrentPassword,

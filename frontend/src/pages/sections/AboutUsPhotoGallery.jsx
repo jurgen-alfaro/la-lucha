@@ -1,45 +1,47 @@
-import { useState, useEffect } from "react";
-import AboutUsPhotoGalleryItem from "./AboutUsPhotoGalleryItem";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 function AboutUsPhotoGallery() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/user-files")
-      .then((res) => res.json())
-      .then((data) => {
-        setImages(data.userFiles);
-        setIsLoading(false);
-      })
-      .catch((err) => console.log(err));
+    const fetchImages = async () => {
+      const res = await fetch("/api/photos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      setImages(data);
+    };
+
+    fetchImages();
   }, []);
 
-  const openModal = () => {
-    setIsModalOpen(!isModalOpen);
-    isModalOpen
-      ? (document.body.style.overflow = "hidden")
-      : (document.body.style.overflow = "auto");
-  };
+  const handleClick = (e) => window.open(e.target.src);
 
   return (
     <section className='photo-gallery'>
       <div className='title py-12'>
-        <h1 className='lg:text-7xl text-3xl text-center'>Galería de Fotos</h1>
+        <h1 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-4xl text-center'>
+          Galería de Fotos
+        </h1>
       </div>
-      <div className='container mx-auto'>
-        {!isLoading && images.length === 0 && <h1>Loading...</h1>}
 
-        {isLoading ? (
-          <h1>Loading...</h1>
-        ) : (
-          <div className='container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-3 gap-3'>
-            {images.map((image) => (
-              <AboutUsPhotoGalleryItem key={image.id} image={image} />
-            ))}
-          </div>
-        )}
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-flow-row-dense py-0 px-[4px]'>
+        {images.length !== 0 &&
+          images.map((img, i) => {
+            return (
+              <img
+                key={i}
+                src={`http://localhost:5000/${img.photo}`}
+                alt='Foto de la galería'
+                className='mt-[8px] w-full cursor-pointer lg:object-cover hover:opacity-[0.92] lg:max-h-48 py-0 px-[4px]'
+                onClick={handleClick}
+              />
+            );
+          })}
       </div>
     </section>
   );

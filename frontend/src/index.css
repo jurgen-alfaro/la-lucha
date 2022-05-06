@@ -4,7 +4,7 @@
 
 :root {
   --asada-light-green: rgb(126, 174, 70);
-  --asada-lemonade-green: #529b03;
+  --asada-lemonade-green: #529b04;
   --asada-dark-green: #139048;
   --asada-dark-blue: rgb(23, 71, 118);
   --asada-light-blue: #79b9d6;
@@ -345,6 +345,36 @@ html {
   height: 100%;
   width: 1000px;
   margin: 2rem auto;
+}
+
+/* PROJECTS CLIENT */
+.projects-section {
+  height: 100%;
+  background-image: url("./assets/river.jpg");
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.projects-section .bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(23, 71, 118, 0.9);
+}
+
+.projects-section .project-item {
+  height: 100%;
+  width: 1000px;
+  margin: 2rem auto;
+}
+
+/* SERVICES */
+.services-bg {
+  background-image: url("./assets/seo.png");
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-repeat: no-repeat;
 }
 
 .modal-info-display {

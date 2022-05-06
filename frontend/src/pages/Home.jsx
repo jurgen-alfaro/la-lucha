@@ -1,4 +1,6 @@
+import { useContext, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import AsadaContext from "../context/asada/asadaContext";
 import HomeServicesHome from "./sections/HomeServicesHome";
 import HomeProjects from "./sections/HomeProjects";
 import HomePhotoGallery from "./sections/HomePhotoGallery";
@@ -10,7 +12,7 @@ import cardBg1 from "../assets/water-card-1.jpg";
 import cardBg2 from "../assets/water-card-2.jpg";
 import cardBg3 from "../assets/water-card-3.jpg";
 import cardBg4 from "../assets/water-card-1.jpg";
-import tankImg from "../assets/water-tank-image.jpg";
+import tankImg from "../assets/tank_image_home.jpg";
 import riverImg from "../assets/river.jpg";
 
 // Framer motion variants
@@ -28,6 +30,16 @@ const pageTransition = {
 };
 
 function Home() {
+  const { asada, getAsada } = useContext(AsadaContext);
+
+  useEffect(() => {
+    const fetchAsada = async () => await getAsada();
+
+    fetchAsada();
+  }, []);
+
+  const { extension, tanks, gradientes, users } = asada;
+
   return (
     <motion.div
       exit='out'
@@ -60,74 +72,59 @@ function Home() {
           </div>
         </div>
       </div>
-      <section className='general-info mt-12 mb-12 h-full py-8'>
-        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 justify-center place-items-center mt-2 gap-1 mx-1 px-20 h-full'>
-          <div className='card w-auto lg:w-full h-96 bg-base-100 shadow-xl image-full bg-opacity-90'>
+      <section className='general-info my-12  py-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 place-items-center mt-2 gap-3 mx-1 px-12 h-full'>
+          <div className='card w-96 h-96 lg:w-full  bg-base-100 shadow-xl image-full bg-opacity-90'>
             <figure>
               <img src={cardBg1} alt='Pour water in glass' />
             </figure>
-            <div className='card-body text-center flex justify-center '>
+            <div className='card-body max-h-min text-center flex justify-center '>
               <div className='shadow stats h-50 bg-opacity-30 '>
                 <div className='stat font-black text-white'>
-                  <div className='stat-title text-xl'>Extensión</div>
-                  <div className='stat-value '>26 km</div>
-                  <div className='stat-desc whitespace-pre-line mt-2'>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Earum, sint.
-                  </div>
+                  <h3 className='stat-title text-xl'>Extensión</h3>
+                  <p className='stat-title text-xl'>{extension}</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className='card w-auto lg:w-full h-96 bg-base-100 shadow-xl image-full'>
+          <div className='card w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full'>
             <figure>
               <img src={cardBg2} alt='Leaf with water drops' />
             </figure>
-            <div className='card-body text-center flex justify-center'>
-              <div className='shadow stats h-50 bg-opacity-30'>
+            <div className='card-body max-h-min text-center flex justify-center'>
+              <div className='shadow stats h-50 bg-opacity-30 '>
                 <div className='stat font-black text-white'>
-                  <div className='stat-title text-xl'>Usuarios Abastecidos</div>
-                  <div className='stat-value'>340</div>
-                  <div className='stat-desc whitespace-pre-line mt-2'>
-                    Esta es la cantidad de usuarios que actualmente cuentan con
-                    servicio de agua potable.
-                  </div>
+                  <h3 className='stat-title text-xl'>Usuarios Abastecidos</h3>
+                  <p className='stat-title text-xl'>{users}</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className='card w-auto lg:w-full h-96 bg-base-100 shadow-xl image-full'>
+          <div className='card w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full'>
             <figure>
               <img src={cardBg3} alt='Another leaf' />
             </figure>
-            <div className='card-body text-center flex justify-center'>
+            <div className='card-body max-h-min text-center flex justify-center'>
               <div className='shadow stats h-50 bg-opacity-30'>
                 <div className='stat font-black text-white'>
-                  <div className='stat-title text-xl'>
-                    Tanques de Almacenamiento
-                  </div>
-                  <div className='stat-value'>65</div>
-                  <div className='stat-desc whitespace-pre-line mt-2'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quisquam laborum modi consectetur hic culpa praesentium.
-                  </div>
+                  <h3 className='stat-title text-xl'>
+                    Tanques de <br />
+                    Almacenamiento
+                  </h3>
+                  <div className='stat-title text-xl'>{tanks}</div>
                 </div>
               </div>
             </div>
           </div>
-          <div className='card w-auto lg:w-full h-96 bg-base-100 shadow-xl image-full'>
+          <div className='card w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full'>
             <figure>
-              <img src={cardBg4} alt='Costa Rica beach' />
+              <img src={cardBg4} />
             </figure>
-            <div className='card-body text-center flex justify-center'>
+            <div className='card-body max-h-min text-center flex justify-center'>
               <div className='shadow stats h-50 bg-opacity-30'>
                 <div className='stat font-black text-white'>
                   <div className='stat-title text-xl'>Quiebra Gradientes</div>
-                  <div className='stat-value'>26</div>
-                  <div className='stat-desc whitespace-pre-line mt-2'>
-                    Esta es la cantidad de usuarios que actualmente cuentan con
-                    servicio de agua potable.
-                  </div>
+                  <div className='stat-title text-xl'>{gradientes}</div>
                 </div>
               </div>
             </div>
@@ -146,7 +143,7 @@ function Home() {
               recusandae beatae quo iste!
             </p>
             <NavLink
-              to='/storage-tanks'
+              to='/tanques'
               className='btn btn-primary hover:bg-secondary hover:scale-105 md:btn-md lg:btn-lg'
             >
               Ver más {""}
@@ -165,7 +162,7 @@ function Home() {
             </NavLink>
           </div>
           <div className='storage-tanks-image-container'>
-            <img src={tankImg} alt='Water storage tank' />
+            <img src={tankImg} alt='Water storage tank ' />
           </div>
         </div>
       </section>
@@ -185,7 +182,7 @@ function Home() {
               recusandae beatae quo iste!
             </p>
             <NavLink
-              to='/quiebra-gradientes'
+              to='/quiebraGradientes'
               className='btn btn-primary hover:bg-secondary hover:scale-105 md:btn-md lg:btn-lg'
             >
               Ver más {""}

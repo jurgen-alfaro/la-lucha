@@ -103,7 +103,7 @@ function Jobs() {
       transition={pageTransition}
     >
       <section>
-        <div className='container mx-auto'>
+        <div className='container mx-auto px-2'>
           <div className='title text-center py-6 text-3xl lg:text-7xl'>
             <h1 className='border-b pb-5'>Trabaja con Nosotros</h1>
           </div>

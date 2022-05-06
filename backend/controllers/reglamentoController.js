@@ -231,13 +231,10 @@ const downloadReglamentoDocumentClient = asyncHandler(async (req, res) => {
 const displayReglamento = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-
     const q = `SELECT rdoc FROM reglamentos WHERE idreglamento = ?`;
     const doc = await pool.query(q, [id]);
-
     const fileName = doc[0].rdoc;
 
-    console.log(filesPath);
     res.setHeader("Content-Type", "application/pdf");
     res.sendFile(fileName, { root: filesPath }, (err) => {
       if (err) console.log(err);

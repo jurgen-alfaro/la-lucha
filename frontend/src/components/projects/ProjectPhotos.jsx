@@ -15,7 +15,7 @@ function ProjectPhotos({ photo }) {
         <img
           className='w-full h-full object-cover'
           alt='Proyect image'
-          src={`http://localhost:5000/projects/${photo.photo}`}
+          src={`http://localhost:5000/${photo.photo}`}
           id={photoId}
         />
 

@@ -10,7 +10,7 @@ function PostPhotosClient({ photo }) {
       <img
         className='object-cover w-full h-full'
         alt='Proyect image'
-        src={`http://localhost:5000/posts/${photo.photo}`}
+        src={`http://localhost:5000/${photo.photo}`}
         id={photoId}
       />
     </div>

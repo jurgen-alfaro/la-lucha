@@ -24,7 +24,6 @@ export const PostProvider = ({ children }) => {
       },
     });
     const data = await response.data;
-
     setPosts(data.posts);
     setIsLoading(false);
   };
@@ -41,7 +40,6 @@ export const PostProvider = ({ children }) => {
   // Add a post
   const addPost = async (newPost) => {
     setIsLoading(true);
-
     try {
       const response = await axios.post("/api/posts", newPost, {
         headers: {
@@ -50,7 +48,6 @@ export const PostProvider = ({ children }) => {
         },
       });
       const data = await response.data;
-
       setPosts(data);
       setIsLoading(false);
 
@@ -152,6 +149,7 @@ export const PostProvider = ({ children }) => {
         getPost,
         setPost,
         isLoading,
+        setIsLoading,
         posts,
         post,
         addPost,

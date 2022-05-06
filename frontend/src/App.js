@@ -9,6 +9,8 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Documentation from "./pages/Documentation";
 import Jobs from "./components/jobs/Jobs";
+import TanksClient from "./components/tanks/TanksClient";
+import GradientesClient from "./components/quiebraGradientes/GradientesClient";
 /* Admin layout components */
 import Dashboard from "./components/layout/Dashboard";
 import DocsAdmin from "./components/layout/DocsAdmin";
@@ -49,6 +51,9 @@ import InformesAdd from "./components/informes/InformesAdd";
 import InformesItem from "./components/informes/InformesItem";
 /* FRAMER MOTION */
 import { AnimatePresence, motion } from "framer-motion";
+import TransparenciaList from "./components/transparencia/TransparenciaList";
+import TransparenciaAdd from "./components/transparencia/TransparenciaAdd";
+import TransparenciaItem from "./components/transparencia/TransparenciaItem";
 
 function App() {
   const location = useLocation();
@@ -77,6 +82,8 @@ function App() {
             <Route path='contact' element={<Contact />} />
             <Route path='contact/jobs' element={<Jobs />} />
             <Route path='documentation' element={<Documentation />} />
+            <Route path='tanques' element={<TanksClient />} />
+            <Route path='quiebraGradientes' element={<GradientesClient />} />
           </Route>
           <Route path='/admin' element={<AdminLayout />}>
             <Route path='dashboard' element={<Dashboard />}>
@@ -110,6 +117,9 @@ function App() {
               <Route path='reglamentos' element={<ReglamentosList />} />
               <Route path='reglamentos/add' element={<ReglamentosAdd />} />
               <Route path='reglamentos/:id' element={<ReglamentosItem />} />
+              <Route path='transparencia' element={<TransparenciaList />} />
+              <Route path='transparencia/add' element={<TransparenciaAdd />} />
+              <Route path='transparencia/:id' element={<TransparenciaItem />} />
             </Route>
             <Route path='jobs' element={<JobList />} />
             <Route path='jobs/:id' element={<JobItem />} />

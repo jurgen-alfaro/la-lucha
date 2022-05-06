@@ -20,7 +20,7 @@ function AboutUsJuntaDirectiva() {
     >
       <div className='container my-12'>
         <div className='junta-directiva-title my-12 px-12 justify-center'>
-          <h1 className='text-7xl border-b pb-5 w-50 flex justify-center'>
+          <h1 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-4xl border-b pb-5 w-50 flex justify-center'>
             Junta Directiva
           </h1>
         </div>

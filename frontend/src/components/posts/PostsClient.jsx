@@ -6,7 +6,7 @@ import Moment from "react-moment";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -54,6 +54,40 @@ const pageTransition = {
   duration: 0.5,
 };
 
+function FadeInWhenVisible({ children }) {
+  return (
+    <motion.div
+      initial='hidden'
+      whileInView='visible'
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      variants={{
+        visible: {
+          opacity: 1,
+          transition: {
+            delay: 0.6,
+          },
+        },
+        hidden: { opacity: 0 },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+const childVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+
+    transition: {
+      ease: "easeInOut",
+      staggerChildren: 2,
+    },
+  },
+};
+
 function PostsClient() {
   const { posts, getPosts, isLoading, post } = useContext(PostContext);
 
@@ -73,17 +107,22 @@ function PostsClient() {
   };
 
   useEffect(() => {
-    const fetchPosts = async () => await getPosts();
-    const btnClick = () => todo.current.focus();
-    fetchPosts();
-    setFilteredPosts(posts);
-    todo.current.focus();
-  }, []);
+    if (posts.length === 0) {
+      const fetchPosts = async () => await getPosts();
+
+      fetchPosts();
+      setFilteredPosts(posts.reverse()); // This will order the array backwards, to display from the earliest to the latest.
+    }
+  }, [filteredPosts]);
 
   const filterPosts = (e) => {
     const val = e.target.value;
     let filtered = [];
     switch (val) {
+      case "anuncios":
+        // filtered = posts.filter((post) => post.post_type === "Anuncios");
+        setFilteredPosts(posts.filter((post) => post.post_type === "Anuncios"));
+        break;
       case "eventos":
         // filtered = posts.filter((post) => post.post_type === "Anuncios");
         setFilteredPosts(posts.filter((post) => post.post_type === "Eventos"));
@@ -103,15 +142,6 @@ function PostsClient() {
         setFilteredPosts(filtered);
         break;
     }
-  };
-
-  const variants = {
-    offscreen: {
-      opacity: 0,
-    },
-    onscreen: {
-      opacity: 1,
-    },
   };
 
   return (
@@ -142,6 +172,13 @@ function PostsClient() {
                   <button
                     className='btn btn-ghost btn-sm text-white focus:outline'
                     onClick={filterPosts}
+                    value='anuncios'
+                  >
+                    Anuncios
+                  </button>
+                  <button
+                    className='btn btn-ghost btn-sm text-white focus:outline'
+                    onClick={filterPosts}
                     value='eventos'
                   >
                     Eventos
@@ -162,72 +199,189 @@ function PostsClient() {
                   </button>
                 </div>
                 {/* Card */}
+
                 {!isLoading && filteredPosts.length !== 0 ? (
-                  filteredPosts.map((post) => {
+                  filteredPosts.map((post, i) => {
                     return (
-                      <motion.div
-                        key={post.idposts}
-                        idx={post.idposts}
-                        className='card md:max-h-[600px] max-h-screen overflow-y grid grid-cols-1 md:grid-cols-2 mx-6 bg-base-100 shadow-xl max-w-screen-xl'
-                        initial='offscreen'
-                        whileInView='onscreen'
-                        viewport={{ once: true, amount: 0.8 }}
-                        variants={variants}
-                      >
-                        {/*   <figure className='max-h-[480px] min-h-[480px] w-full cursor-pointer'>
-                        <img
-                          src={`http://localhost:5000/${post.photos[0].photo}`}
-                          alt='Album'
-                          className='w-full h-full object-cover'
-                        />
-                      </figure> */}
-                        <div className='photos-container  relative'>
-                          <div
-                            className={`w-full h-full transition duration-150 ease-out`}
-                          >
-                            <Slider {...settings}>
-                              {!isLoading && post.photos ? (
-                                post.photos.map((photo, i) => {
-                                  return (
-                                    <PostPhotosClient
-                                      photo={photo}
-                                      key={i}
-                                      idphoto={photo.idphotos}
-                                    />
-                                  );
-                                })
-                              ) : (
-                                <Spinner />
-                              )}
-                            </Slider>
-                          </div>
-                        </div>
-                        <div className='card-body pt-6 px-8 '>
-                          <div className='flex flex-col gap-1 justify-between'>
-                            <div className='badge badge-primary '>
-                              {post.post_type}
+                      <AnimatePresence>
+                        <motion.div
+                          key={post.idposts}
+                          idx={i}
+                          className='card md:max-h-[600px] max-h-[600px] grid grid-cols-1 md:grid-cols-2 mx-6 bg-base-100 shadow-xl max-w-screen-xl '
+                          initial='hidden'
+                          whileInView='visible'
+                          exit='hidden'
+                          viewport={{ once: true }}
+                          transition={{ duration: 5 }}
+                          variants={{
+                            visible: {
+                              opacity: 1,
+                              transition: {
+                                delay: 0.3,
+                              },
+                            },
+                            hidden: {
+                              opacity: 0,
+                              transition: { duration: 0.3 },
+                            },
+                          }}
+                        >
+                          <div className='photos-container relative'>
+                            <div
+                              className={`w-full h-full transition duration-150 ease-out`}
+                            >
+                              <Slider {...settings}>
+                                {!isLoading && post.photos ? (
+                                  post.photos.map((photo, i) => {
+                                    return (
+                                      <PostPhotosClient
+                                        photo={photo}
+                                        key={i}
+                                        idphoto={photo.idphotos}
+                                      />
+                                    );
+                                  })
+                                ) : (
+                                  <Spinner />
+                                )}
+                              </Slider>
                             </div>
-                            <small className='text-xs pl-1w'>
-                              <Moment format='MMM DD, YYYY'>
-                                {post.created_at}
-                              </Moment>{" "}
-                              &middot;&nbsp;
-                              <Moment locale='es' fromNow>
-                                {post.created_at}
-                              </Moment>{" "}
-                            </small>
                           </div>
-                          <h2 className='font-medium text-3xl mt-7'>
-                            {post.title}
-                          </h2>
-                          <p className='text-sm mt-6'>{post.pdesc}</p>
-                          <div className='flex justify-end border-t'></div>
-                        </div>
-                      </motion.div>
+                          <div className='card-body my-6 px-8 overflow-y-scroll overflow-x-hidden md:overflow-hidden'>
+                            <FadeInWhenVisible>
+                              <motion.div
+                                className='flex flex-col gap-1 justify-between '
+                                variants={childVariants}
+                                initial='hidden'
+                                animate='show'
+                              >
+                                <motion.div
+                                  className='badge badge-primary '
+                                  initial='hidden'
+                                  whileInView='visible'
+                                  viewport={{ once: true }}
+                                  transition={{ duration: 0.8 }}
+                                  variants={{
+                                    visible: {
+                                      opacity: 1,
+                                      transition: {
+                                        delay: 0.3,
+                                      },
+                                    },
+                                    hidden: { opacity: 0 },
+                                  }}
+                                >
+                                  {post.post_type}
+                                </motion.div>
+                                <small className='text-xs pl-1w'>
+                                  <motion.span>
+                                    <Moment format='MMM DD, YYYY'>
+                                      {post.created_at}
+                                    </Moment>{" "}
+                                  </motion.span>
+                                  &middot;&nbsp;
+                                  <motion.span>
+                                    <Moment locale='es' fromNow>
+                                      {post.created_at}
+                                    </Moment>{" "}
+                                  </motion.span>
+                                </small>
+                              </motion.div>
+                              <div className=' h-full'>
+                                <motion.h2
+                                  className='font-medium text-3xl mt-7'
+                                  initial='hidden'
+                                  whileInView='visible'
+                                  viewport={{ once: true }}
+                                  transition={{ duration: 0.8 }}
+                                  variants={{
+                                    visible: {
+                                      opacity: 1,
+                                      x: "0",
+                                      transition: {
+                                        delay: 0.8,
+                                        duration: 0.5,
+                                      },
+                                    },
+                                    hidden: { opacity: 0, x: "200px" },
+                                  }}
+                                >
+                                  {post.title}
+                                </motion.h2>
+                                <motion.p
+                                  className='text-sm mt-6'
+                                  initial='hidden'
+                                  whileInView='visible'
+                                  viewport={{ once: true }}
+                                  transition={{ duration: 0.8 }}
+                                  variants={{
+                                    visible: {
+                                      opacity: 1,
+                                      x: "0",
+                                      transition: {
+                                        delay: 1.3,
+                                        duration: 0.5,
+                                      },
+                                    },
+                                    hidden: { opacity: 0, x: "200px" },
+                                  }}
+                                >
+                                  {post.pdesc}
+                                </motion.p>
+                              </div>
+                            </FadeInWhenVisible>
+
+                            <motion.div
+                              className='flex justify-end border-t'
+                              initial='hidden'
+                              whileInView='visible'
+                              viewport={{ once: true }}
+                              transition={{ duration: 0.8 }}
+                              variants={{
+                                visible: {
+                                  opacity: 1,
+                                  y: "0",
+                                  scale: 1,
+                                  transition: {
+                                    delay: 1.4,
+                                    duration: 0.5,
+                                  },
+                                },
+                                hidden: { opacity: 0, y: "100px", scale: 0 },
+                              }}
+                            >
+                              <div className='divider'></div>
+                            </motion.div>
+                          </div>
+                        </motion.div>
+                      </AnimatePresence>
                     );
                   })
                 ) : (
-                  <Spinner />
+                  <motion.div
+                    initial='hidden'
+                    whileInView='visible'
+                    exit='hidden'
+                    viewport={{ once: true }}
+                    transition={{ duration: 5 }}
+                    variants={{
+                      visible: {
+                        opacity: 1,
+                        transition: {
+                          delay: 0.3,
+                        },
+                      },
+                      hidden: {
+                        opacity: 0,
+                        transition: { duration: 0.3 },
+                      },
+                    }}
+                  >
+                    <h1 className='text-4xl max-w-3xl text-center text-white leading-loose'>
+                      <span className=''>Sin publicaciones.</span>
+                      <br /> Seleccione el tipo de publicación que desea ver.
+                    </h1>
+                  </motion.div>
                 )}
               </div>
             </div>

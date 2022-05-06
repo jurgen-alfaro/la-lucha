@@ -4,7 +4,8 @@ import InformesContext from "../../context/informes/InformesContext";
 import "moment/locale/es";
 
 function InformesAdd() {
-  const { addInforme, getInformes, isLoading } = useContext(InformesContext),
+  const { addInforme, getInformes, isLoading, setIsLoading } =
+      useContext(InformesContext),
     navigate = useNavigate(),
     [iname, setIname] = useState(""),
     [idesc, setIdesc] = useState(""),
@@ -15,6 +16,8 @@ function InformesAdd() {
     if (iname.length !== 0 && idesc.length !== 0 && idoc.length !== 0)
       setBtnDisabled(false);
     else setBtnDisabled(true);
+
+    setIsLoading(false);
   }, [iname, idesc, idoc]);
 
   const onNameChange = (e) => {

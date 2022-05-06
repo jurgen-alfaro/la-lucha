@@ -1,9 +1,9 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import JuntaDirectivaContext from "../../context/juntaDirectiva/JuntaDirectivaContext";
 
 function JuntaDirectivaAdd() {
-  const { addMember, getMembers, isLoading } = useContext(
+  const { addMember, getMembers, isLoading, setIsLoading } = useContext(
     JuntaDirectivaContext
   );
 
@@ -21,6 +21,10 @@ function JuntaDirectivaAdd() {
   const handlePhotoChange = (e) => setPhoto(e.target.files[0]);
 
   const dateToTimestamp = (str) => new Date(str).toISOString();
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -142,6 +146,8 @@ function JuntaDirectivaAdd() {
                 <option value={"Vice Presidente"}>Vice Presidente</option>
                 <option value={"Secretario(a)"}>Secretario(a)</option>
                 <option value={"Tesorero(a)"}>Tesorero(a)</option>
+                <option value={"Fiscal1"}>Fiscal 1</option>
+                <option value={"Fiscal2"}>Fiscal 2</option>
                 <option value={"Vocal 1"}>Vocal 1</option>
                 <option value={"Vocal 2"}>Vocal 2</option>
               </select>

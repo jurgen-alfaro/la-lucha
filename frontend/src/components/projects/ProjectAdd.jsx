@@ -55,7 +55,7 @@ function ProjectAdd() {
 
     const fd = new FormData();
     fd.set("title", title);
-    fd.set("desc", desc);
+    fd.set("pdesc", desc);
     fd.set("estimated_cost", estimatedCost);
     totalCost === "" || totalCost === undefined || totalCost === null
       ? fd.set("total_cost", 0)
@@ -113,16 +113,16 @@ function ProjectAdd() {
             <div className='w-full px-3'>
               <label
                 className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-                htmlFor='grid-fdesc'
+                htmlFor='grid-pdesc'
               >
                 Descripción
               </label>
               <textarea
                 className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-                id='grid-desc'
+                id='grid-pdesc'
                 type='text'
                 required
-                name='desc'
+                name='pdesc'
                 placeholder='Descripción del proyecto'
                 onChange={(e) => setDesc(e.target.value)}
               />

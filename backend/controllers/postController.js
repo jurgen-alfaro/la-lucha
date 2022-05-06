@@ -30,17 +30,17 @@ const addPost = asyncHandler(async (req, res) => {
       throw new Error("Unable to insert data in posts table");
 
     const q2 =
-      "INSERT INTO `db_lalucha`.`posts_photos` (`photo`, `idposts`) VALUES (?, ?);";
+      "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idposts`) VALUES (?, ?);";
 
     if (photos.length > 0)
       for (let i = 0; i < photos.length; i++)
-        await pool.query(q2, [photos[i].originalname, resultHeaders.insertId]);
+        await pool.query(q2, [photos[i].filename, resultHeaders.insertId]);
 
     const post = await pool.query("SELECT * FROM posts WHERE idposts = ?", [
       resultHeaders.insertId,
     ]);
     const postPhotos = await pool.query(
-      "SELECT * FROM posts_photos WHERE idposts = ?",
+      "SELECT * FROM uploaded_photos WHERE idposts = ?",
       [resultHeaders.insertId]
     );
 
@@ -61,7 +61,7 @@ const addPost = asyncHandler(async (req, res) => {
 // @access  Public
 const getPosts = asyncHandler(async (req, res) => {
   try {
-    const q = "SELECT * FROM posts";
+    const q = "SELECT * FROM posts ORDER BY created_at DESC";
     const posts = await pool.query(q);
 
     if (!posts)
@@ -69,7 +69,7 @@ const getPosts = asyncHandler(async (req, res) => {
         .status(400)
         .json({ error: "An error occurred trying to get posts" });
 
-    const photos = await pool.query("SELECT * FROM posts_photos");
+    const photos = await pool.query("SELECT * FROM uploaded_photos");
 
     posts.forEach((post) => {
       // Add property 'photos' to the posts
@@ -99,7 +99,7 @@ const getPosts = asyncHandler(async (req, res) => {
 const getPostPhotos = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const q = "SELECT * FROM posts_photos WHERE idposts = ?";
+    const q = "SELECT * FROM uploaded_photos WHERE idposts = ?";
     const photos = await pool.query(q, [id]);
 
     console.log("Photos", photos);
@@ -124,7 +124,7 @@ const getPost = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const q1 = "SELECT * FROM posts WHERE idposts = ?";
-    const q2 = "SELECT * FROM posts_photos WHERE idposts = ?";
+    const q2 = "SELECT * FROM uploaded_photos WHERE idposts = ?";
     const postOutput = await pool.query(q1, [id]);
     const photos = await pool.query(q2, [id]);
 
@@ -194,7 +194,7 @@ const updatePost = asyncHandler(async (req, res) => {
 
       // Add the new photos
       const q1 =
-        "INSERT INTO `db_lalucha`.`posts_photos` (`photo`, `idposts`) VALUES (?, ?)";
+        "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idposts`) VALUES (?, ?)";
       photos.forEach(async (photo) => {
         const resultHeader = await pool.query(q1, [photo.filename, id]);
       });
@@ -217,21 +217,15 @@ const updatePost = asyncHandler(async (req, res) => {
 const deletePostPhoto = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const q = "DELETE FROM posts_photos WHERE idphotos = ?";
+    const q = "DELETE FROM uploaded_photos WHERE idphoto = ?";
     const photo = await pool.query(
-      "SELECT photo FROM posts_photos WHERE idphotos = ? ",
+      "SELECT photo FROM uploaded_photos WHERE idphoto = ? ",
       [id]
     );
     const resultHeader = await pool.query(q, [id]);
 
     if (resultHeader.affectedRows > 0) {
-      const oldPath = path.join(
-        __dirname,
-        "..",
-        "uploads",
-        "posts",
-        photo[0].photo
-      );
+      const oldPath = path.join(__dirname, "..", "uploads", photo[0].photo);
 
       if (fs.existsSync(oldPath)) {
         fs.unlink(oldPath, (err) => {

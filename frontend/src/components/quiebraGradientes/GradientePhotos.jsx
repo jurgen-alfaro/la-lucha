@@ -16,7 +16,7 @@ function GradientePhotos({ photo }) {
         <img
           className='w-full h-full object-cover'
           alt='Proyect image'
-          src={`http://localhost:5000/gradientes/${photo.photo}`}
+          src={`http://localhost:5000/${photo.photo}`}
         />
 
         <button

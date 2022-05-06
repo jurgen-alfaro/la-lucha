@@ -1,16 +1,21 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../context/users/UserContext";
 import { toast } from "react-toastify";
 
 function UserAdd() {
-  const { addUser, isLoading, getUsers } = useContext(UserContext);
+  const { addUser, isLoading, getUsers, setIsLoading } =
+    useContext(UserContext);
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

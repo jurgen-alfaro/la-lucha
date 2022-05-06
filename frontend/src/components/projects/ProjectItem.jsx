@@ -159,16 +159,16 @@ function ProjectItem() {
             <div className='w-full px-3'>
               <label
                 className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-                htmlFor='grid-desc'
+                htmlFor='grid-pdesc'
               >
                 Descripción
               </label>
               <textarea
                 className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-                id='grid-desc'
+                id='grid-pdesc'
                 type='text'
                 required
-                name='desc'
+                name='pdesc'
                 placeholder='Descripción del proyecto'
                 defaultValue={pdesc}
                 onChange={(e) => setNewDesc(e.target.value)}

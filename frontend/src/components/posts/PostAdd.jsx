@@ -1,20 +1,25 @@
-import { useContext, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PostContext from "../../context/posts/PostContext";
 
 function PostAdd() {
-  const { getPosts, addPost, isLoading } = useContext(PostContext);
+  const { getPosts, addPost, isLoading, setIsLoading } =
+    useContext(PostContext);
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [postType, setPostType] = useState("Anuncios");
   const [photos, setPhotos] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
 
   const titleChange = (e) => setTitle(e.target.value);
   const descChange = (e) => setDesc(e.target.value);
   const postTypeChange = (e) => setPostType(e.target.value);
   const onFilesChange = (e) => setPhotos(Array.from(e.target.files));
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   const formReset = () => {
     setTitle("");
@@ -36,6 +41,7 @@ function PostAdd() {
     await getPosts();
     formReset();
   };
+
   return (
     <div className='rounded-lg shadow-lg card bg-base-100'>
       <div className='card-body'>
@@ -158,7 +164,10 @@ function PostAdd() {
             <div className='divider'></div>
 
             <div className='card-actions justify-start'>
-              <button type='submit' className={`btn btn-primary `}>
+              <button
+                type='submit'
+                className={`btn btn-primary ${isLoading ? "loading" : ""}`}
+              >
                 Agregar
               </button>
             </div>

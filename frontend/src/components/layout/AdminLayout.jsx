@@ -12,6 +12,8 @@ import { TanksProvider } from "../../context/tanks/TanksContext";
 import { QuiebraGradientesProvider } from "../../context/quiebraGradientes/QuiebraGradientesContext";
 import { ReglamentosProvider } from "../../context/reglamentos/ReglamentosContext";
 import { InformesProvider } from "../../context/informes/InformesContext";
+import { TransparenciaProvider } from "../../context/transparencia/TransparenciaContext";
+import { AsadaProvider } from "../../context/asada/asadaContext";
 
 import UserLogin from "../users/UserLogin";
 import logo from "../../assets/logo2.png";
@@ -143,7 +145,11 @@ function AdminLayout() {
                         <QuiebraGradientesProvider>
                           <ReglamentosProvider>
                             <InformesProvider>
-                              <Outlet />
+                              <TransparenciaProvider>
+                                <AsadaProvider>
+                                  <Outlet />
+                                </AsadaProvider>
+                              </TransparenciaProvider>
                             </InformesProvider>
                           </ReglamentosProvider>
                         </QuiebraGradientesProvider>

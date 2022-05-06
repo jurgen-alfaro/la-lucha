@@ -31,7 +31,7 @@ function FormItem() {
       if (fname !== newFname || fdesc !== newFdesc) setBtnDisabled(false);
       else setBtnDisabled(true);
 
-      if (newFname == "" || newFdesc === "") {
+      if (newFname === "" || newFdesc === "") {
         setBtnDisabled(true);
         setNewFname(fname);
         setNewFdesc(fdesc);

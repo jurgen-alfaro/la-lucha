@@ -178,6 +178,7 @@ export const InformesProvider = ({ children }) => {
         informes,
         informe,
         isLoading,
+        setIsLoading,
         setInforme,
         addInforme,
         getInforme,

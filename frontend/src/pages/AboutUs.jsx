@@ -31,7 +31,7 @@ function AboutUs() {
       <AboutUsHero />
       <AboutUsMV />
       <AboutUsJuntaDirectiva />
-      <AboutUsInformes />
+
       <AboutUsSiteMap />
       <AboutUsPhotoGallery />
     </motion.div>

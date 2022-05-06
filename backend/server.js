@@ -32,5 +32,7 @@ app.use("/api/waterTanks", require("./routes/waterTankRoutes"));
 app.use("/api/quiebraGradientes", require("./routes/quiebraGradientesRoutes"));
 app.use("/api/reglamentos", require("./routes/reglamentoRoutes"));
 app.use("/api/informes", require("./routes/informeRoutes"));
+app.use("/api/transparencias", require("./routes/transparenciaRoutes"));
+app.use("/api/photos", require("./routes/photosRoutes"));
 
 app.use = app.listen(port, () => console.log(`Server started on port ${port}`));

@@ -2,9 +2,10 @@ import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
 import Map from "../components/maps/Map";
+import SuggestionContext from "../context/suggestions/SuggestionContext";
+import AsadaContext from "../context/asada/asadaContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; //React-Toastify CSS
-import SuggestionContext from "../context/suggestions/SuggestionContext";
 import { motion } from "framer-motion";
 
 // Framer motion variants
@@ -21,6 +22,8 @@ const pageTransition = {
 };
 
 function Contact() {
+  const { asada, getAsada, isLoading } = useContext(AsadaContext);
+
   const { addSuggestion } = useContext(SuggestionContext);
 
   const [formData, setFormData] = useState({
@@ -32,8 +35,11 @@ function Contact() {
   });
 
   const { name, last_name, email, subject, message } = formData;
+  const { address, schedule } = asada;
 
   useEffect(() => {
+    const fetchAsada = async () => await getAsada();
+    fetchAsada();
     window.scrollTo(0, 0);
   }, []);
 
@@ -242,12 +248,14 @@ function Contact() {
             <div className='right'>
               <div className='address'>
                 <h2 className='text-2xl py-2'>Dirección</h2>
-                <address className='py-2 max-w-lg'>
-                  25m Sur, 200m Este de algun lugar en la comunidad de la Tigra.
-                  La Tigra de la Vega de San Carlos
-                </address>
+                <address className='py-2 max-w-lg'>{address}</address>
+              </div>
+              <div className='address'>
+                <h2 className='text-2xl py-2'>Horario de Atención</h2>
+                <p className='py-2 max-w-lg'>{schedule}</p>
               </div>
               <div className='info mt-6'>
+                <h2 className='text-2xl py-2'>Contactos</h2>
                 <span className='flex py-1 cursor-pointer'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -309,7 +317,22 @@ function Contact() {
               </div>
               <div className='recruitment mt-12'>
                 <h2 className='text-2xl py-2'>
-                  <svg
+                  <motion.svg
+                    initial='hidden'
+                    whileInView='visible'
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                    variants={{
+                      visible: {
+                        opacity: 1,
+                        scale: 1,
+                        transition: {
+                          delay: 2.2,
+                          duration: 0.7,
+                        },
+                      },
+                      hidden: { opacity: 0, scale: 0 },
+                    }}
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-7 w-7 inline'
                     viewBox='0 0 20 20'
@@ -321,32 +344,86 @@ function Contact() {
                       clipRule='evenodd'
                     />
                     <path d='M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z' />
-                  </svg>
-                  &nbsp;¿Te gustaría trabajar con nosotros?
+                  </motion.svg>
+                  &nbsp;
+                  <motion.span
+                    initial='hidden'
+                    whileInView='visible'
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                    variants={{
+                      visible: {
+                        opacity: 1,
+                        scale: 1,
+                        transition: {
+                          delay: 1.5,
+                          duration: 0.7,
+                        },
+                      },
+                      hidden: { opacity: 0, scale: 0 },
+                    }}
+                  >
+                    ¿Te gustaría trabajar con nosotros?
+                  </motion.span>
                 </h2>
-                <p className='max-w-lg my-4'>
+                <motion.p
+                  initial='hidden'
+                  whileInView='visible'
+                  viewport={{ once: true }}
+                  transition={{ duration: 1 }}
+                  variants={{
+                    visible: {
+                      opacity: 1,
+
+                      transition: {
+                        delay: 2.5,
+                        duration: 0.7,
+                      },
+                    },
+                    hidden: { opacity: 0 },
+                  }}
+                  className='max-w-lg my-4'
+                >
                   Si estás interesado en formar parte de un excelente grupo de
                   trabajo y ayudar a nuestra comunidad, por favor déjanos tu
                   información en la siguiente sección:
-                </p>
-                <Link
-                  to='jobs'
-                  className='btn btn-secondary btn-outline btn-sm mt-1 hover:scale-105'
+                </motion.p>
+                <motion.button
+                  initial='hidden'
+                  whileInView='visible'
+                  viewport={{ once: true }}
+                  transition={{ duration: 1 }}
+                  variants={{
+                    visible: {
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        delay: 3,
+                        duration: 1,
+                      },
+                    },
+                    hidden: { opacity: 0, x: 400 },
+                  }}
                 >
-                  Me interesa&nbsp;
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-5 w-5'
-                    viewBox='0 0 20 20'
-                    fill='currentColor'
+                  <Link
+                    to='jobs'
+                    className='btn btn-secondary btn-outline btn-sm mt-1 hover:scale-105'
                   >
-                    <path
-                      fillRule='evenodd'
-                      d='M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z'
-                      clipRule='evenodd'
-                    />
-                  </svg>
-                </Link>
+                    Me interesa&nbsp;
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-5 w-5'
+                      viewBox='0 0 20 20'
+                      fill='currentColor'
+                    >
+                      <path
+                        fillRule='evenodd'
+                        d='M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z'
+                        clipRule='evenodd'
+                      />
+                    </svg>
+                  </Link>
+                </motion.button>
               </div>
             </div>
           </div>

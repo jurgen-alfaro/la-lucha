@@ -8,11 +8,25 @@ const pool = require("../config/database");
 // @access Public
 const getProjects = asyncHandler(async (req, res) => {
   try {
-    const projects = await pool.query("SELECT * FROM projects");
+    const q = "SELECT * FROM projects ORDER BY created_at DESC";
+    const projects = await pool.query(q);
 
-    res.status(200).json({
-      projects: projects,
+    if (!projects)
+      return res
+        .status(400)
+        .json({ error: "An error occurred trying to get projects" });
+
+    const photos = await pool.query("SELECT * FROM uploaded_photos");
+
+    projects.forEach((project) => {
+      // Add property 'photos' to the projects
+      project.photos = [];
+      photos.forEach((photo) => {
+        if (project.idproject === photo.idproject) project.photos.push(photo);
+      });
     });
+
+    res.status(200).json({ projects });
   } catch (error) {
     throw new Error("An error occured on the GET request", error);
   }
@@ -25,7 +39,7 @@ const getProject = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const q1 = "SELECT * FROM projects WHERE idproject = ?";
-    const q2 = "SELECT * FROM projects_photos WHERE idproject = ?";
+    const q2 = "SELECT * FROM uploaded_photos WHERE idproject = ?";
     const projectOutput = await pool.query(q1, [id]);
     const photos = await pool.query(q2, [id]);
 
@@ -54,13 +68,14 @@ const getProject = asyncHandler(async (req, res) => {
 const addProject = asyncHandler(async (req, res) => {
   try {
     // total_cost can be null
-    const { title, desc, total_cost, estimated_cost } = req.body;
+    const { title, pdesc, total_cost, estimated_cost } = req.body;
     const photos = req.files || [];
 
-    if (!title || !desc || !estimated_cost) {
+    console.log(title, pdesc);
+    if (!title || !pdesc || !estimated_cost) {
       res.status(400);
       throw new Error(
-        "Please enter all the required fields [title, desc, estimated_cost]"
+        "Please enter all the required fields [title, pdesc, estimated_cost]"
       );
     }
     if (photos.length === 0)
@@ -72,17 +87,17 @@ const addProject = asyncHandler(async (req, res) => {
     let resultHeaders = null;
     if (total_cost) {
       q =
-        "INSERT INTO `db_lalucha`.`projects` (`title`, `desc`, `total_cost`, `estimated_cost`) VALUES (?, ?, ?, ?);";
+        "INSERT INTO `db_lalucha`.`projects` (`title`, `pdesc`, `total_cost`, `estimated_cost`) VALUES (?, ?, ?, ?);";
       resultHeaders = await pool.query(q, [
         title,
-        desc,
+        pdesc,
         total_cost,
         estimated_cost,
       ]);
     } else {
       q =
-        "INSERT INTO `db_lalucha`.`projects` (`title`, `desc`, `estimated_cost`) VALUES (?, ?,  ?);";
-      resultHeaders = await pool.query(q, [title, desc, estimated_cost]);
+        "INSERT INTO `db_lalucha`.`projects` (`title`, `pdesc`, `estimated_cost`) VALUES (?, ?,  ?);";
+      resultHeaders = await pool.query(q, [title, pdesc, estimated_cost]);
     }
 
     // If insert failed
@@ -90,18 +105,18 @@ const addProject = asyncHandler(async (req, res) => {
       throw new Error("Unable to insert data in projects table");
 
     const q2 =
-      "INSERT INTO `db_lalucha`.`projects_photos` (`photo`, `idproject`) VALUES (?, ?);";
+      "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idproject`) VALUES (?, ?);";
 
     if (photos.length > 0)
       for (let i = 0; i < photos.length; i++)
-        await pool.query(q2, [photos[i].originalname, resultHeaders.insertId]);
+        await pool.query(q2, [photos[i].filename, resultHeaders.insertId]);
 
     const project = await pool.query(
       "SELECT * FROM projects WHERE idproject = ?",
       [resultHeaders.insertId]
     );
     const projectPhotos = await pool.query(
-      "SELECT * FROM projects_photos WHERE idproject = ?",
+      "SELECT * FROM uploaded_photos WHERE idproject = ?",
       [resultHeaders.insertId]
     );
 
@@ -125,9 +140,6 @@ const updateProject = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const { title, pdesc, total_cost, estimated_cost, is_pending } = req.body;
-
-    console.log(req.body);
-
     let photos = []; // <--- empty in case there's no update to the photos
 
     if (req.files !== undefined)
@@ -166,7 +178,7 @@ const updateProject = asyncHandler(async (req, res) => {
 
       // Add the new photos
       const q1 =
-        "INSERT INTO `db_lalucha`.`projects_photos` (`photo`, `idproject`) VALUES (?, ?)";
+        "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idproject`) VALUES (?, ?)";
       photos.forEach(
         async (photo) => await pool.query(q1, [photo.filename, id])
       );
@@ -194,8 +206,11 @@ const deleteProject = asyncHandler(async (req, res) => {
 
     await pool.query("DELETE FROM projects WHERE idproject = ?", [id]);
 
+    // When the project is deleted, all the related photos should be deleted as well.
+    await pool.query("DELETE FROM uploaded_photos WHERE idproject = ?", [id]);
+
     res.status(200).json({
-      message: "Project deleted successfully",
+      message: "Project and its photos deleted successfully",
     });
   } catch (error) {
     res.status(400);
@@ -203,27 +218,21 @@ const deleteProject = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Delete tank photo
-// @route   DELETE /api/waterTanks/:id
+// @desc    Delete project photo
+// @route   DELETE /api/projects/:id
 // @access  Private
 const deleteProjectPhoto = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const q = "DELETE FROM projects_photos WHERE idphoto = ?";
+    const q = "DELETE FROM uploaded_photos WHERE idphoto = ?";
     const photo = await pool.query(
-      "SELECT photo FROM projects_photos WHERE idphoto = ? ",
+      "SELECT photo FROM uploaded_photos WHERE idphoto = ? ",
       [id]
     );
     const resultHeader = await pool.query(q, [id]);
 
     if (resultHeader.affectedRows > 0) {
-      const oldPath = path.join(
-        __dirname,
-        "..",
-        "uploads",
-        "projects",
-        photo[0].photo
-      );
+      const oldPath = path.join(__dirname, "..", "uploads", photo[0].photo);
 
       if (fs.existsSync(oldPath)) {
         fs.unlink(oldPath, (err) => {

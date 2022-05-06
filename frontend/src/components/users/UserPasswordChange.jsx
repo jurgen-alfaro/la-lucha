@@ -5,7 +5,7 @@ import Spinner from "../shared/Spinner";
 import { toast } from "react-toastify";
 
 function UserPasswordChange() {
-  const { changePassword, isCurrentPassword, isLoading } =
+  const { changePassword, isCurrentPassword, isLoading, setIsLoading } =
     useContext(UserContext);
 
   const [currentPassword, setCurrentPassword] = useState("");
@@ -74,6 +74,10 @@ function UserPasswordChange() {
     }
   };
 
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
     <>
       <h2 className='text-2xl my-4 font-bold card-title'>
@@ -106,7 +110,7 @@ function UserPasswordChange() {
               Contraseña actual
             </label>
             <input
-              className='appearance-none block w-full cursor-not-allowed bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+              className='appearance-none block w-full  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
               id='grid-currentPassword'
               type='password'
               required
@@ -122,7 +126,7 @@ function UserPasswordChange() {
               Contraseña nueva
             </label>
             <input
-              className='appearance-none block w-full cursor-not-allowed bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+              className='appearance-none block w-full  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
               id='grid-newPassword'
               type='password'
               required
@@ -138,7 +142,7 @@ function UserPasswordChange() {
               Confirmar contraseña nueva
             </label>
             <input
-              className='appearance-none block w-full cursor-not-allowed bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+              className='appearance-none block w-full  bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
               id='grid-confirmNewPassword'
               type='password'
               required

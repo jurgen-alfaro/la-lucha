@@ -94,6 +94,21 @@ export const ReglamentosProvider = ({ children }) => {
     window.open(fileURL);
   };
 
+  // Display/show reglamento in client view in different tab
+  const displayReglamentoClient = async (id) => {
+    const response = await axios.get(`/api/reglamentos/${id}/display`, {
+      method: "GET",
+      responseType: "blob",
+    });
+
+    const file = new Blob([response.data], {
+      type: "application/pdf",
+    });
+
+    const fileURL = URL.createObjectURL(file);
+    window.open(fileURL);
+  };
+
   // Add reglamento
   const addReglamento = async (newReglamento) => {
     try {
@@ -190,6 +205,7 @@ export const ReglamentosProvider = ({ children }) => {
         reglamentos,
         isLoading,
         setReglamento,
+        displayReglamentoClient,
       }}
     >
       {children}

@@ -2,7 +2,9 @@ function AboutUsMV() {
   return (
     <section className='about-us-mv md:h-screen grid grid-cols-1 md:grid-cols-2'>
       <div className='mission-container  h-full flex flex-col justify-center px-12'>
-        <h1 className='lg:text-7xl text-3xl text-center '>Misión</h1>
+        <h1 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-4xl  text-center '>
+          Misión
+        </h1>
         <div className='divider'></div>
         <p className='sm:text-lg text-center '>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -15,7 +17,9 @@ function AboutUsMV() {
         style={{ backgroundColor: "var(--asada-lemonade-green)" }}
         className='vision-container  h-full flex flex-col justify-center px-12'
       >
-        <h1 className='lg:text-7xl text-3xl text-white text-center'>Visión</h1>
+        <h1 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-4xl  text-white text-center'>
+          Visión
+        </h1>
         <div className='divider'></div>
         <p className='sm:text-lg text-center text-white'>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit.

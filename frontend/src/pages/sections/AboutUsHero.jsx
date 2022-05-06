@@ -7,7 +7,7 @@ function AboutUsHero() {
       </div>
       <div className='hero-content grid items-center justify-center '>
         <div className='p-5 '>
-          <h1 className='hero-history_title text-center my-12 xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-3xl '>
+          <h1 className='hero-history_title text-center my-12 xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-4xl '>
             Nuestra Historia
           </h1>
           <p className='hero-history_description sm:text-lg max-h-min text-center'>

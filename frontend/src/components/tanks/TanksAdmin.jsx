@@ -5,7 +5,7 @@ import TankTable from "./TankTable";
 import Spinner from "../shared/Spinner";
 
 function TanksAdmin() {
-  const { isLoading, tanks, getTanks } = useContext(TanksContext);
+  const { isLoading, getTanks } = useContext(TanksContext);
 
   useEffect(() => {
     const fetchTanks = async () => await getTanks();

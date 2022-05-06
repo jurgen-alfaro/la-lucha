@@ -30,17 +30,17 @@ const addTank = asyncHandler(async (req, res) => {
       throw new Error("Unable to insert data in 'tanks' table");
 
     const q2 =
-      "INSERT INTO `db_lalucha`.`tanks_photos` (`photo`, `idtanks`) VALUES (?, ?);";
+      "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idtanks`) VALUES (?, ?);";
 
     if (photos.length > 0)
       for (let i = 0; i < photos.length; i++)
-        await pool.query(q2, [photos[i].originalname, resultHeaders.insertId]);
+        await pool.query(q2, [photos[i].filename, resultHeaders.insertId]);
 
     const tank = await pool.query("SELECT * FROM tanks WHERE idtanks = ?", [
       resultHeaders.insertId,
     ]);
     const tankPhotos = await pool.query(
-      "SELECT * FROM tanks_photos WHERE idtanks = ?",
+      "SELECT * FROM uploaded_photos WHERE idtanks = ?",
       [resultHeaders.insertId]
     );
 
@@ -69,7 +69,7 @@ const getTanks = asyncHandler(async (req, res) => {
         .status(400)
         .json({ error: "An error occurred trying to get posts" });
 
-    const photos = await pool.query("SELECT * FROM tanks_photos");
+    const photos = await pool.query("SELECT * FROM uploaded_photos");
 
     tanks.forEach((tank) => {
       // Add property 'photos' to the tanks
@@ -93,7 +93,7 @@ const getTank = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const q1 = "SELECT * FROM tanks WHERE idtanks = ?";
-    const q2 = "SELECT * FROM tanks_photos WHERE idtanks = ?";
+    const q2 = "SELECT * FROM uploaded_photos WHERE idtanks = ?";
     const tankOutput = await pool.query(q1, [id]);
     const photos = await pool.query(q2, [id]);
 
@@ -161,7 +161,7 @@ const updateTank = asyncHandler(async (req, res) => {
 
       // Add the new photos
       const q1 =
-        "INSERT INTO `db_lalucha`.`tanks_photos` (`photo`, `idtanks`) VALUES (?, ?)";
+        "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idtanks`) VALUES (?, ?)";
       photos.forEach(async (photo) => {
         const resultHeader = await pool.query(q1, [photo.filename, id]);
       });
@@ -184,21 +184,15 @@ const updateTank = asyncHandler(async (req, res) => {
 const deleteTankPhoto = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const q = "DELETE FROM tanks_photos WHERE idphoto = ?";
+    const q = "DELETE FROM uploaded_photos WHERE idphoto = ?";
     const photo = await pool.query(
-      "SELECT photo FROM tanks_photos WHERE idphoto = ? ",
+      "SELECT photo FROM uploaded_photos WHERE idphoto = ? ",
       [id]
     );
     const resultHeader = await pool.query(q, [id]);
 
     if (resultHeader.affectedRows > 0) {
-      const oldPath = path.join(
-        __dirname,
-        "..",
-        "uploads",
-        "tanks",
-        photo[0].photo
-      );
+      const oldPath = path.join(__dirname, "..", "uploads", photo[0].photo);
 
       if (fs.existsSync(oldPath)) {
         fs.unlink(oldPath, (err) => {

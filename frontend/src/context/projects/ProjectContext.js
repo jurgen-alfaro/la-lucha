@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import LoginContext from "../login/LoginContext";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -14,6 +14,7 @@ export const ProjectProvider = ({ children }) => {
   const [project, setProject] = useState({});
 
   const params = useParams();
+  const navigate = useNavigate();
 
   // Get all projects
   const getProjects = async () => {
@@ -32,6 +33,15 @@ export const ProjectProvider = ({ children }) => {
   const getProject = async (id) => {
     setIsLoading(true);
     const response = await axios.get(`/api/projects/${id}`);
+    const data = await response.data;
+    setProject(data);
+    setIsLoading(false);
+  };
+
+  // Get project photo by Id
+  const getPhoto = async (id) => {
+    setIsLoading(true);
+    const response = await axios.get(`/api/projects/photo/${id}`);
     const data = await response.data;
     setProject(data);
     setIsLoading(false);
@@ -144,18 +154,54 @@ export const ProjectProvider = ({ children }) => {
     }
   };
 
+  // Delete project
+  const deleteProject = async () => {
+    try {
+      setIsLoading(true);
+      const { id } = params;
+      const response = await axios.delete(`/api/projects/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      await getProjects();
+
+      setIsLoading(false);
+      toast.info(
+        `Se ha borrado el registro del proyecto y las fotos asociadas`,
+        {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      throw new Error(`Error al borrar el proyecto: ${project.title}`);
+    }
+  };
+
   return (
     <ProjectContext.Provider
       value={{
         getProjects,
         getProject,
         isLoading,
+        setIsLoading,
         setProject,
         project,
         projects,
         addProject,
         deleteProjectPhoto,
         updateProject,
+        getPhoto,
+        deleteProject,
       }}
     >
       {children}

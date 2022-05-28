@@ -160,7 +160,7 @@ function PostsClient() {
           <div className='bg py-12'>
             <div className='container mx-auto grid place-items-center'>
               <div className='grid grid-cols-1 gap-12'>
-                <div className='flex flex-start w-full'>
+                <div className='flex justify-center md:justify-start flex-wrap w-full px-4 gap-3'>
                   <button
                     className='btn btn-ghost btn-sm text-white focus:outline'
                     onClick={filterPosts}
@@ -186,16 +186,16 @@ function PostsClient() {
                   <button
                     className='btn btn-ghost btn-sm text-white focus:outline'
                     onClick={filterPosts}
-                    value='financieros'
+                    value='noticias'
                   >
-                    Financieros
+                    Noticias
                   </button>
                   <button
                     className='btn btn-ghost btn-sm text-white focus:outline'
                     onClick={filterPosts}
-                    value='noticias'
+                    value='financieros'
                   >
-                    Noticias
+                    Financieros
                   </button>
                 </div>
                 {/* Card */}
@@ -203,7 +203,7 @@ function PostsClient() {
                 {!isLoading && filteredPosts.length !== 0 ? (
                   filteredPosts.map((post, i) => {
                     return (
-                      <AnimatePresence>
+                      <AnimatePresence key={i}>
                         <motion.div
                           key={post.idposts}
                           idx={i}
@@ -287,7 +287,7 @@ function PostsClient() {
                                   </motion.span>
                                 </small>
                               </motion.div>
-                              <div className=' h-full'>
+                              <div className='h-full'>
                                 <motion.h2
                                   className='font-medium text-3xl mt-7'
                                   initial='hidden'
@@ -309,7 +309,7 @@ function PostsClient() {
                                   {post.title}
                                 </motion.h2>
                                 <motion.p
-                                  className='text-sm mt-6'
+                                  className='text-sm mt-6 whitespace-pre-line'
                                   initial='hidden'
                                   whileInView='visible'
                                   viewport={{ once: true }}

@@ -217,10 +217,56 @@ const deleteGradientePhoto = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete quiebra gradientes by Id
+// @route   DELETE /api/quiebraGradientes/:id
+// @access  Private
+const deleteGradiente = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const q = "DELETE FROM gradientes WHERE idgradientes = ?";
+    // Get old document
+    const oldDocs = await pool.query(
+      "SELECT photo FROM uploaded_photos WHERE idgradientes = ?",
+      [id]
+    );
+
+    const resultHeader = await pool.query(q, [id]);
+
+    oldDocs.forEach((item) => {
+      // Check if oldDoc exists in server and delete it
+      if (item) {
+        const oldPath = path.join(__dirname, "..", "uploads", item.photo); // ---> backend\uploads\[photo].<png|jpg|jpeg>
+
+        if (fs.existsSync(oldPath)) {
+          fs.unlink(oldPath, (err) => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+            console.log(`Photo deleted from server: ${item.photo}`);
+          });
+        }
+      }
+    });
+
+    if (resultHeader.affectedRows > 0)
+      return res.status(200).json({ resultHeader: resultHeader });
+    else
+      return res.status(200).json({
+        error: "No se ha podido eliminar el registro del quiebra gradientes",
+      });
+  } catch (error) {
+    console.log(error);
+    if (error) return res.status(400).json({ error: error });
+  }
+});
+
 module.exports = {
   getGradientes,
   getGradiente,
   addGradiente,
   deleteGradientePhoto,
   updateGradiente,
+  deleteGradiente,
 };

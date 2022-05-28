@@ -189,6 +189,7 @@ function JuntaDirectivaItem() {
                     <option value={"Vice Presidente"}>Vice Presidente</option>
                     <option value={"Secretario(a)"}>Secretario(a)</option>
                     <option value={"Tesorero(a)"}>Tesorero(a)</option>
+                    <option value={"Fiscal"}>Fiscal</option>
                     <option value={"Vocal 1"}>Vocal 1</option>
                     <option value={"Vocal 2"}>Vocal 2</option>
                   </select>

@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginContext from "../login/LoginContext";
 import FileDownload from "js-file-download";
@@ -16,6 +16,7 @@ export const TransparenciaProvider = ({ children }) => {
   const [documento, setDocumento] = useState({});
 
   const params = useParams();
+  const navigate = useNavigate();
 
   // Get all documentos
   const getDocumentos = async () => {
@@ -189,6 +190,38 @@ export const TransparenciaProvider = ({ children }) => {
     }
   };
 
+  // Delete form
+  const deleteDocumento = async () => {
+    try {
+      setIsLoading(true);
+      const { id } = params;
+      const response = await axios.delete(`/api/transparencias/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      await getDocumentos();
+
+      setIsLoading(false);
+      toast.info(`Se ha borrado el registro del documento de transparencia`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      throw new Error(
+        `Error al borrar documento de transparencia: ${documento.dname}`
+      );
+    }
+  };
+
   return (
     <TransparenciaContext.Provider
       value={{
@@ -205,6 +238,7 @@ export const TransparenciaProvider = ({ children }) => {
         downloadTransparenciaDocumentClient,
         displayDocumento,
         displayDocumentoClient,
+        deleteDocumento,
       }}
     >
       {children}

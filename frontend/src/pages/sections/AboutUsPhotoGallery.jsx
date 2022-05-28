@@ -29,7 +29,7 @@ function AboutUsPhotoGallery() {
         </h1>
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-flow-row-dense py-0 px-[4px]'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 py-0 px-[4px]'>
         {images.length !== 0 &&
           images.map((img, i) => {
             return (

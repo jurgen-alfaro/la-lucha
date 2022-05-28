@@ -1,5 +1,10 @@
 import { NavLink } from "react-router-dom";
-import pImg1 from "../../assets/water-card-1.jpg";
+import homegallery1 from "../../assets/homegallery1.jpg";
+import homegallery2 from "../../assets/homegallery2.jpg";
+import homegallery3 from "../../assets/homegallery3.jpg";
+import homegallery4 from "../../assets/homegallery4.jpg";
+import homegallery5 from "../../assets/homegallery5.jpg";
+import homegallery6 from "../../assets/homegallery6.jpeg";
 
 function HomePhotoGallery() {
   return (
@@ -10,7 +15,7 @@ function HomePhotoGallery() {
       <div className='divider my-12 px-12'></div>
       <div className='container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-3 gap-3'>
         <div className='portfolio-box cursor-pointer'>
-          <img src={pImg1} alt='' title='portfolio 1 picture' />
+          <img src={homegallery3} alt='' title='portfolio 1 picture' />
           <div className='portfolio-info'>
             <div className='caption'>
               <h4>project name goes here 1</h4>
@@ -19,7 +24,7 @@ function HomePhotoGallery() {
           </div>
         </div>
         <div className='portfolio-box cursor-pointer'>
-          <img src={pImg1} alt='' title='portfolio 1 picture' />
+          <img src={homegallery2} alt='' title='portfolio 1 picture' />
           <div className='portfolio-info'>
             <div className='caption'>
               <h4>Nombre o Título de Imagen</h4>
@@ -28,7 +33,7 @@ function HomePhotoGallery() {
           </div>
         </div>
         <div className='portfolio-box cursor-pointer '>
-          <img src={pImg1} alt='' title='portfolio 1 picture' />
+          <img src={homegallery1} alt='' title='portfolio 1 picture' />
           <div className='portfolio-info'>
             <div className='caption'>
               <h4>project name goes here 1</h4>
@@ -37,7 +42,7 @@ function HomePhotoGallery() {
           </div>
         </div>
         <div className='portfolio-box cursor-pointer'>
-          <img src={pImg1} alt='' title='portfolio 1 picture' />
+          <img src={homegallery4} alt='' title='portfolio 1 picture' />
           <div className='portfolio-info'>
             <div className='caption'>
               <h4>project name goes here 1</h4>
@@ -46,7 +51,7 @@ function HomePhotoGallery() {
           </div>
         </div>
         <div className='portfolio-box cursor-pointer'>
-          <img src={pImg1} alt='' title='portfolio 1 picture' />
+          <img src={homegallery5} alt='' title='portfolio 1 picture' />
           <div className='portfolio-info'>
             <div className='caption'>
               <h4>project name goes here 1</h4>
@@ -55,7 +60,7 @@ function HomePhotoGallery() {
           </div>
         </div>
         <div className='portfolio-box cursor-pointer'>
-          <img src={pImg1} alt='' title='portfolio 1 picture' />
+          <img src={homegallery6} alt='' title='portfolio 1 picture' />
           <div className='portfolio-info'>
             <div className='caption'>
               <h4>project name goes here 1</h4>

@@ -245,6 +245,53 @@ const displayReglamento = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete reglamento by Id
+// @route   DELETE /api/reglamentos/:id
+// @access  Private
+const deleteReglamento = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const q = "DELETE FROM reglamentos WHERE idreglamento = ?";
+    // Get old document
+    const oldDoc = await pool.query(
+      "SELECT rdoc FROM reglamentos WHERE idreglamento = ?",
+      [id]
+    );
+    const resultHeader = await pool.query(q, [id]);
+
+    // Check if oldDoc exists in server and delete it
+    if (oldDoc) {
+      const oldPath = path.join(
+        __dirname,
+        "..",
+        "uploads",
+        "reglamentos",
+        oldDoc[0].rdoc
+      ); // ---> backend\uploads\reglamentos\[filename].pdf
+
+      if (fs.existsSync(oldPath)) {
+        fs.unlink(oldPath, (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          console.log(`Old reglamento deleted from server: ${oldDoc[0].rdoc}`);
+        });
+      }
+    }
+
+    if (resultHeader.affectedRows > 0)
+      return res.status(200).json({ resultHeader: resultHeader });
+    else
+      return res
+        .status(200)
+        .json({ error: "No se ha podido eliminar el registro del reglamento" });
+  } catch (error) {
+    console.log(error);
+    if (error) return res.status(400).json({ error: error });
+  }
+});
+
 module.exports = {
   addReglamentos,
   getReglamento,
@@ -253,4 +300,5 @@ module.exports = {
   downloadReglamentoDocument,
   downloadReglamentoDocumentClient,
   displayReglamento,
+  deleteReglamento,
 };

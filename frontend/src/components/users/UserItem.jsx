@@ -98,17 +98,37 @@ function UserItem() {
             <div className='card-actions justify-start'>
               <button
                 type='submit'
-                className='btn btn-primary'
+                className={`btn btn-primary ${isLoading ? "loading" : ""}`}
                 defaultValue={false}
               >
-                Guardar cambios
+                {!isLoading ? (
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-6 w-6'
+                    viewBox='0 0 20 20'
+                    fill='currentColor'
+                  >
+                    <path d='M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z' />
+                  </svg>
+                ) : (
+                  <></>
+                )}
+                &nbsp;Guardar cambios
               </button>
               <Link
                 to='changePassword'
                 className='btn btn-primary btn-outline'
                 defaultValue={false}
               >
-                Cambiar contraseña
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  class='h-5 w-5'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'
+                >
+                  <path d='M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z' />
+                </svg>
+                &nbsp;Cambiar contraseña
               </Link>
             </div>
           </form>

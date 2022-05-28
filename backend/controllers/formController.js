@@ -246,6 +246,54 @@ const displayForm = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete form by Id
+// @route   DELETE /api/forms/:id
+// @access  Private
+const deleteForm = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const q = "DELETE FROM forms WHERE idforms = ?";
+    // Get old document
+    const oldDoc = await pool.query(
+      "SELECT fdoc FROM forms WHERE idforms = ?",
+      [id]
+    );
+
+    const resultHeader = await pool.query(q, [id]);
+
+    // Check if oldDoc exists in server and delete it
+    if (oldDoc) {
+      const oldPath = path.join(
+        __dirname,
+        "..",
+        "uploads",
+        "forms",
+        oldDoc[0].fdoc
+      ); // ---> backend\uploads\forms\[filename].pdf
+
+      if (fs.existsSync(oldPath)) {
+        fs.unlink(oldPath, (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          console.log(`Old document deleted from server: ${oldDoc[0].fdoc}`);
+        });
+      }
+    }
+
+    if (resultHeader.affectedRows > 0)
+      return res.status(200).json({ resultHeader: resultHeader });
+    else
+      return res
+        .status(200)
+        .json({ error: "No se ha podido eliminar el registro del formulario" });
+  } catch (error) {
+    console.log(error);
+    if (error) return res.status(400).json({ error: error });
+  }
+});
+
 module.exports = {
   addForm,
   getForms,
@@ -254,4 +302,5 @@ module.exports = {
   downloadFormDocument,
   downloadFormDocumentClient,
   displayForm,
+  deleteForm,
 };

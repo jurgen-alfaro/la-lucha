@@ -32,6 +32,27 @@ const getProjects = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Get project photo
+// @route GET /api/projects/photo/:id
+// @access Public
+
+const getProjectPhoto = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const q1 = "SELECT * FROM uploaded_photos WHERE idphoto = ?";
+    const photo = await pool.query(q1, [id]);
+    if (!photo)
+      return res.status(400).json({
+        message: "Failed to fetch project photo from 'uploaded_photos' table",
+      });
+
+    return res.status(200).json(photo[0]);
+  } catch (error) {
+    console.log(error);
+    if (error) return res.status(400).json({ error });
+  }
+});
+
 // @desc    Get project by Id
 // @route   GET /api/projects/:id
 // @access  Public
@@ -197,24 +218,47 @@ const updateProject = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Delete a project
-// @route DELETE /api/projects/:id
-// @access Private
+// @desc    Delete project by Id
+// @route   DELETE /api/projects/:id
+// @access  Private
 const deleteProject = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
+    const q = "DELETE FROM projects WHERE idproject = ?";
+    // Get old document
+    const oldDocs = await pool.query(
+      "SELECT photo FROM uploaded_photos WHERE idproject = ?",
+      [id]
+    );
 
-    await pool.query("DELETE FROM projects WHERE idproject = ?", [id]);
+    const resultHeader = await pool.query(q, [id]);
 
-    // When the project is deleted, all the related photos should be deleted as well.
-    await pool.query("DELETE FROM uploaded_photos WHERE idproject = ?", [id]);
+    oldDocs.forEach((item) => {
+      // Check if oldDoc exists in server and delete it
+      if (item) {
+        const oldPath = path.join(__dirname, "..", "uploads", item.photo); // ---> backend\uploads\[photo].<png|jpg|jpeg>
 
-    res.status(200).json({
-      message: "Project and its photos deleted successfully",
+        if (fs.existsSync(oldPath)) {
+          fs.unlink(oldPath, (err) => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+            console.log(`Photo deleted from server: ${item.photo}`);
+          });
+        }
+      }
     });
+
+    if (resultHeader.affectedRows > 0)
+      return res.status(200).json({ resultHeader: resultHeader });
+    else
+      return res.status(200).json({
+        error: "No se ha podido eliminar el registro del proyecto",
+      });
   } catch (error) {
-    res.status(400);
-    throw new Error("Delete request failed", error);
+    console.log(error);
+    if (error) return res.status(400).json({ error: error });
   }
 });
 
@@ -261,4 +305,5 @@ module.exports = {
   updateProject,
   deleteProject,
   deleteProjectPhoto,
+  getProjectPhoto,
 };

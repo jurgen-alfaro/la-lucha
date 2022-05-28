@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import ProjectContext from "../context/projects/ProjectContext";
 import ProjectPhotosClient from "../components/projects/ProjectPhotosClient";
-import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import Moment from "react-moment";
 import "slick-carousel/slick/slick.css";
@@ -166,7 +165,7 @@ function Projects() {
           <div className='bg py-12'>
             <div className='container mx-auto grid place-items-center'>
               <div className='grid grid-cols-1 gap-12'>
-                <div className='flex flex-start w-full'>
+                <div className='flex md:justify-start justify-center  w-full gap-3 px-3'>
                   <button
                     className='btn btn-ghost btn-sm text-white focus:outline'
                     onClick={filterProjects}
@@ -218,7 +217,7 @@ function Projects() {
                             },
                           }}
                         >
-                          <div className='card-body my-6 px-8 overflow-y-scroll overflow-x-hidden md:overflow-hidden'>
+                          <div className='card-body my-6 px-8 overflow-y-auto overflow-x-hidden md:overflow-y-auto'>
                             <FadeInWhenVisible>
                               <motion.div
                                 className='flex flex-col gap-1 justify-between '
@@ -254,7 +253,10 @@ function Projects() {
                                   <motion.span>
                                     {" "}
                                     Fecha de inicio:&nbsp;
-                                    <Moment format='MMM DD, YYYY'>
+                                    <Moment
+                                      format='MMM DD, YYYY'
+                                      className='font-bold'
+                                    >
                                       {project.created_at}
                                     </Moment>{" "}
                                   </motion.span>
@@ -262,13 +264,17 @@ function Projects() {
                                 <small className='text-xs pl-1'>
                                   <motion.span>
                                     Coste estimado:&nbsp;
-                                    {formatter.format(project.estimated_cost)}
+                                    <span className='font-bold'>
+                                      {formatter.format(project.estimated_cost)}
+                                    </span>
                                   </motion.span>
                                 </small>
                                 <small className='text-xs pl-1'>
                                   <motion.span>
                                     Coste total:&nbsp;
-                                    {formatter.format(project.total_cost)}
+                                    <span className='font-bold'>
+                                      {formatter.format(project.total_cost)}
+                                    </span>
                                   </motion.span>
                                 </small>
                               </motion.div>
@@ -294,7 +300,7 @@ function Projects() {
                                   {project.title}
                                 </motion.h2>
                                 <motion.p
-                                  className='text-sm mt-6'
+                                  className='text-sm mt-6 whitespace-pre-line'
                                   initial='hidden'
                                   whileInView='visible'
                                   viewport={{ once: true }}

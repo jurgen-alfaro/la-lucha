@@ -60,7 +60,6 @@ function FadeInWhenVisible({ children }) {
       initial='hidden'
       whileInView='visible'
       viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
       variants={{
         visible: {
           opacity: 1,
@@ -124,7 +123,7 @@ function TanksClient() {
                         <motion.div
                           key={tank.idtanks}
                           idx={i}
-                          className='card md:max-h-[360px] max-h-[360px] mx-6 bg-base-100 shadow-xl w-[360px] '
+                          className='card md:max-h-[380px] max-h-[380px] mx-6 bg-base-100 shadow-xl md:w-[360px]'
                           initial='hidden'
                           whileInView='visible'
                           exit='hidden'
@@ -143,10 +142,8 @@ function TanksClient() {
                             },
                           }}
                         >
-                          <div className='photos-container relative '>
-                            <div
-                              className={`w-full h-full hover:opacity-[0.9] transition duration-150`}
-                            >
+                          <div className='photos-container relative'>
+                            <div className={`w-full h-full`}>
                               <Slider {...settings}>
                                 {!isLoading && tank.photos ? (
                                   tank.photos.map((photo, i) => {
@@ -164,7 +161,7 @@ function TanksClient() {
                               </Slider>
                             </div>
                           </div>
-                          <div className='card-body pb-4 pt-2 px-4 '>
+                          <div className='card-body pb-4 pt-2 px-4 overflow-y-auto'>
                             <FadeInWhenVisible>
                               <motion.h2
                                 className='font-medium text-3xl '
@@ -191,7 +188,6 @@ function TanksClient() {
                                 initial='hidden'
                                 whileInView='visible'
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.8 }}
                                 variants={{
                                   visible: {
                                     opacity: 1,
@@ -203,7 +199,11 @@ function TanksClient() {
                                 }}
                               >
                                 <small>
-                                  &nbsp;Capacidad: {tank.capacity} litros.
+                                  &nbsp;
+                                  <span className='font-bold'>
+                                    Capacidad:
+                                  </span>{" "}
+                                  {tank.capacity} litros.
                                 </small>
                               </motion.div>
                               <motion.div
@@ -221,7 +221,13 @@ function TanksClient() {
                                   hidden: { opacity: 0 },
                                 }}
                               >
-                                <small>&nbsp;Ubicación: {tank.location}</small>
+                                <small>
+                                  &nbsp;
+                                  <span className='font-bold'>
+                                    Ubicación:
+                                  </span>{" "}
+                                  {tank.location}
+                                </small>
                               </motion.div>
                             </FadeInWhenVisible>
                           </div>

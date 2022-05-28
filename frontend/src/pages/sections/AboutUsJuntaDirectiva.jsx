@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import peopleImg from "../../assets/about-us_junta-directiva-img.jpg";
 import JuntaDirectivaContext from "../../context/juntaDirectiva/JuntaDirectivaContext";
 import Moment from "react-moment";
+import { motion } from "framer-motion";
 
 function AboutUsJuntaDirectiva() {
   const { members, getMembers, isLoading } = useContext(JuntaDirectivaContext);
@@ -16,7 +17,7 @@ function AboutUsJuntaDirectiva() {
   return (
     <section
       id='junta-directiva'
-      className='about-us-junta-directiva flex justify-center px-2'
+      className='about-us-junta-directiva flex justify-center px-2 h-full'
     >
       <div className='container my-12'>
         <div className='junta-directiva-title my-12 px-12 justify-center'>
@@ -30,7 +31,23 @@ function AboutUsJuntaDirectiva() {
               const { name, last_name, position, vigency, photo } = member;
 
               return (
-                <div
+                <motion.div
+                  initial='hidden'
+                  whileInView='visible'
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  variants={{
+                    visible: {
+                      opacity: 1,
+                      y: "0",
+                      skew: "0deg",
+                      transition: {
+                        delay: 0.3,
+                        duration: 1,
+                      },
+                    },
+                    hidden: { opacity: 0, skew: "3deg" },
+                  }}
                   className='card lg:card-side bg-base-100 shadow-xl mt-5'
                   key={member.idmember}
                 >
@@ -55,7 +72,7 @@ function AboutUsJuntaDirectiva() {
                       </p>
                     </article>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
         </div>

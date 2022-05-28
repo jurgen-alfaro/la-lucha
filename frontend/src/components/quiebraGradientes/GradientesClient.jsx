@@ -126,7 +126,7 @@ function GradientesClient() {
                         <motion.div
                           key={gradiente.idgradientes}
                           idx={i}
-                          className='card md:max-h-[360px] max-h-[360px] mx-6 bg-base-100 shadow-xl w-[360px] '
+                          className='card md:max-h-[360px] max-h-[360px] mx-6 bg-base-100 shadow-xl md:w-[360px] '
                           initial='hidden'
                           whileInView='visible'
                           exit='hidden'
@@ -146,9 +146,7 @@ function GradientesClient() {
                           }}
                         >
                           <div className='photos-container relative '>
-                            <div
-                              className={`w-full h-full hover:opacity-[0.9] transition duration-150`}
-                            >
+                            <div className={`w-full h-full`}>
                               <Slider {...settings}>
                                 {!isLoading && gradiente.photos ? (
                                   gradiente.photos.map((photo, i) => {

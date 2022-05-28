@@ -1,7 +1,7 @@
 import { Parallax } from "react-parallax";
 import { NavLink } from "react-router-dom";
 import useWindowDimensions from "../../components/hooks/useWindowDimensions";
-import image1 from "../../assets/timber.jpg";
+import image1 from "../../assets/projectmain.jpg";
 
 function HomeProjects() {
   const { width } = useWindowDimensions();

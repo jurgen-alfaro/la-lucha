@@ -4,16 +4,17 @@ import AsadaContext from "../context/asada/asadaContext";
 import HomeServicesHome from "./sections/HomeServicesHome";
 import HomeProjects from "./sections/HomeProjects";
 import HomePhotoGallery from "./sections/HomePhotoGallery";
+import HomePayments from "./sections/HomePayments";
 import { motion } from "framer-motion";
 
 /* MEDIA */
 import bgVideo from "../assets/pexels-ambientnature-atmosphere.mov";
-import cardBg1 from "../assets/water-card-1.jpg";
-import cardBg2 from "../assets/water-card-2.jpg";
-import cardBg3 from "../assets/water-card-3.jpg";
-import cardBg4 from "../assets/water-card-1.jpg";
-import tankImg from "../assets/tank_image_home.jpg";
-import riverImg from "../assets/river.jpg";
+import cardBg1 from "../assets/homecard1.jpg";
+import cardBg2 from "../assets/homecard2.jpg";
+import cardBg3 from "../assets/homecard3.jpg";
+import cardBg4 from "../assets/homecard4.jpg";
+import tankImg from "../assets/tanque.jpg";
+import riverImg from "../assets/gradiente1.jpg";
 
 // Framer motion variants
 const pageVariants = {
@@ -73,10 +74,10 @@ function Home() {
         </div>
       </div>
       <section className='general-info my-12  py-8'>
-        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 place-items-center mt-2 gap-3 mx-1 px-12 h-full'>
-          <div className='card w-96 h-96 lg:w-full  bg-base-100 shadow-xl image-full bg-opacity-90'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 place-items-center mt-2 gap-3 mx-1 px-6 h-full'>
+          <div className='card md:w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full bg-opacity-90 min-w-xl'>
             <figure>
-              <img src={cardBg1} alt='Pour water in glass' />
+              <img src={cardBg1} alt='Home card image 1' />
             </figure>
             <div className='card-body max-h-min text-center flex justify-center '>
               <div className='shadow stats h-50 bg-opacity-30 '>
@@ -87,9 +88,9 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className='card w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full'>
+          <div className='card md:w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full'>
             <figure>
-              <img src={cardBg2} alt='Leaf with water drops' />
+              <img src={cardBg2} alt='Home card image 2' />
             </figure>
             <div className='card-body max-h-min text-center flex justify-center'>
               <div className='shadow stats h-50 bg-opacity-30 '>
@@ -100,9 +101,9 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className='card w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full'>
+          <div className='card md:w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full'>
             <figure>
-              <img src={cardBg3} alt='Another leaf' />
+              <img src={cardBg3} alt='Home card image 3' />
             </figure>
             <div className='card-body max-h-min text-center flex justify-center'>
               <div className='shadow stats h-50 bg-opacity-30'>
@@ -116,7 +117,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className='card w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full'>
+          <div className='card md:w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full'>
             <figure>
               <img src={cardBg4} />
             </figure>
@@ -131,7 +132,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className='storage-tanks h-full '>
+      <section className='storage-tanks h-full'>
         <div className='storage-tanks-wrapper grid grid-cols-1 md:grid-cols-2'>
           <div className='storage-tanks-info flex flex-col justify-center items-center mb-5 md:mb-0'>
             <h2 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-3xl text-center px-3 xl:px-5 break-words max-w-full'>
@@ -203,6 +204,7 @@ function Home() {
         </div>
       </section>
       <HomeServicesHome />
+      <HomePayments />
       <HomeProjects />
       <HomePhotoGallery />
     </motion.div>

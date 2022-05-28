@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import LoginContext from "../login/LoginContext";
 
 import axios from "axios";
@@ -11,6 +11,7 @@ const PostContext = createContext();
 export const PostProvider = ({ children }) => {
   const { user } = useContext(LoginContext);
   const params = useParams();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState({});
@@ -142,6 +143,39 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  // Delete post
+  const deletePost = async () => {
+    try {
+      setIsLoading(true);
+      const { id } = params;
+      const response = await axios.delete(`/api/posts/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      await getPosts();
+
+      setIsLoading(false);
+      toast.info(
+        `Se ha borrado el registro de la publicación y las fotos asociadas`,
+        {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      throw new Error(`Error al borrar formulario: ${post.title}`);
+    }
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -155,6 +189,7 @@ export const PostProvider = ({ children }) => {
         addPost,
         updatePost,
         deletePostPhoto,
+        deletePost,
       }}
     >
       {children}

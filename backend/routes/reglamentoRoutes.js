@@ -8,6 +8,7 @@ const {
   downloadReglamentoDocument,
   downloadReglamentoDocumentClient,
   displayReglamento,
+  deleteReglamento,
 } = require("../controllers/reglamentoController");
 const { protect } = require("../middleware/authMiddleware");
 const uploadForReglamentos = require("../middleware/multerForReglamentos");
@@ -20,7 +21,8 @@ router
 router
   .route("/:id")
   .get(getReglamento)
-  .put(protect, uploadForReglamentos, updateReglamento);
+  .put(protect, uploadForReglamentos, updateReglamento)
+  .delete(protect, deleteReglamento);
 router
   .route("/:id/download")
   .get(downloadReglamentoDocument)

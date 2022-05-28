@@ -8,6 +8,7 @@ const {
   downloadInformeDocument,
   downloadInformeDocumentClient,
   displayInforme,
+  deleteInforme,
 } = require("../controllers/informeController");
 const { protect } = require("../middleware/authMiddleware");
 const uploadForInformes = require("../middleware/multerForInformes");
@@ -17,7 +18,8 @@ router.route("/").post(protect, uploadForInformes, addInforme).get(getInformes);
 router
   .route("/:id")
   .get(getInforme)
-  .put(protect, uploadForInformes, updateInforme);
+  .put(protect, uploadForInformes, updateInforme)
+  .delete(protect, deleteInforme);
 router
   .route("/:id/download")
   .get(downloadInformeDocument)

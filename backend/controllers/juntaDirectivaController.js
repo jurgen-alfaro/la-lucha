@@ -138,8 +138,6 @@ const updateMember = asyncHandler(async (req, res) => {
           prevPhoto[0].photo
         ); // ---> backend\uploads\junta\[filename].[jpg, jpeg, png]
 
-        console.log(oldPath);
-
         if (fs.existsSync(oldPath)) {
           fs.unlink(oldPath, (err) => {
             if (err) {

@@ -252,7 +252,7 @@ function Contact() {
               </div>
               <div className='address'>
                 <h2 className='text-2xl py-2'>Horario de Atención</h2>
-                <p className='py-2 max-w-lg'>{schedule}</p>
+                <p className='py-2 max-w-lg whitespace-pre'>{schedule}</p>
               </div>
               <div className='info mt-6'>
                 <h2 className='text-2xl py-2'>Contactos</h2>
@@ -275,20 +275,6 @@ function Contact() {
                   </a>
                 </span>
                 <span className='flex py-1 cursor-pointer'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-6 w-6 '
-                    viewBox='0 0 20 20'
-                    fill='currentColor'
-                  >
-                    <path d='M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z' />
-                  </svg>
-                  &nbsp;
-                  <a href='tel:+50624688981' className='cursor-pointer'>
-                    (+506) 2468-8981
-                  </a>
-                </span>
-                <span className='flex py-1 cursor-pointer'>
                   <SocialIcon
                     url='https://www.facebook.com/people/Asada-La-Lucha-La-Vega/100006408049102/'
                     style={{ width: "1.5rem", height: "1.5rem" }}
@@ -305,6 +291,7 @@ function Contact() {
                     Asada La Lucha La Vega, San Carlos
                   </a>
                 </span>
+
                 <span className='flex py-1 cursor-pointer'>
                   <SocialIcon
                     url='https://web.whatsapp.com/'
@@ -313,6 +300,34 @@ function Contact() {
                     bgColor='#333C4D'
                   />
                   &nbsp;(+506) 8709-4950
+                </span>
+                <span className='flex py-1 cursor-pointer'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-6 w-6 '
+                    viewBox='0 0 20 20'
+                    fill='currentColor'
+                  >
+                    <path d='M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z' />
+                  </svg>
+                  &nbsp;
+                  <a href='tel:+50685410886' className='cursor-pointer'>
+                    (+506) 8541-0886 (Emergencias y Días Feriados)
+                  </a>
+                </span>
+                <span className='flex py-1 cursor-pointer'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-6 w-6 '
+                    viewBox='0 0 20 20'
+                    fill='currentColor'
+                  >
+                    <path d='M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z' />
+                  </svg>
+                  &nbsp;
+                  <a href='tel:+50689810536' className='cursor-pointer'>
+                    (+506) 8981-0536 (Averías, Quejas y Sugerencias)
+                  </a>
                 </span>
               </div>
               <div className='recruitment mt-12'>

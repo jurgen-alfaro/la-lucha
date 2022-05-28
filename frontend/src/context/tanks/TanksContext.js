@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import LoginContext from "../login/LoginContext";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -14,6 +14,7 @@ export const TanksProvider = ({ children }) => {
   const [tank, setTank] = useState({});
 
   const params = useParams();
+  const navigate = useNavigate();
 
   // Get all water tanks
   const getTanks = async () => {
@@ -120,7 +121,7 @@ export const TanksProvider = ({ children }) => {
     try {
       setIsLoading(true);
 
-      const response = await axios.delete(`/api/waterTanks/${photoId}`, {
+      const response = await axios.delete(`/api/waterTanks/photo/${photoId}`, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${user.token}`,
@@ -147,6 +148,36 @@ export const TanksProvider = ({ children }) => {
     }
   };
 
+  // Delete tank
+  const deleteTank = async () => {
+    try {
+      setIsLoading(true);
+      const { id } = params;
+      const response = await axios.delete(`/api/waterTanks/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      await getTanks();
+
+      setIsLoading(false);
+      toast.info(`Se ha borrado el registro del tanque de almacenamiento`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      throw new Error(`Error al borrar tanque de almacenamiento: ${tank.name}`);
+    }
+  };
+
   return (
     <TanksContext.Provider
       value={{
@@ -160,6 +191,7 @@ export const TanksProvider = ({ children }) => {
         setTank,
         updateTank,
         deleteTankPhoto,
+        deleteTank,
       }}
     >
       {children}

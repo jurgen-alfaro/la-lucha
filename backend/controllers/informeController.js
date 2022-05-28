@@ -154,7 +154,6 @@ const updateInforme = asyncHandler(async (req, res) => {
         }
       }
     }
-
     const updatedInforme = await pool.query(
       "SELECT * FROM informes WHERE idinforme = ?",
       [id]
@@ -163,6 +162,54 @@ const updateInforme = asyncHandler(async (req, res) => {
     res
       .status(200)
       .json({ message: "Informe updated successfully", updatedInforme });
+  } catch (error) {
+    console.log(error);
+    if (error) return res.status(400).json({ error: error });
+  }
+});
+
+// @desc    Delete informe by Id
+// @route   DELETE /api/informes/:id
+// @access  Private
+const deleteInforme = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const q = "DELETE FROM informes WHERE idinforme = ?";
+    // Get old informe doc
+    const oldDoc = await pool.query(
+      "SELECT idoc FROM informes WHERE idinforme = ?",
+      [id]
+    );
+    const resultHeader = await pool.query(q, [id]);
+    // Check if oldDoc exists in server and delete it
+    if (oldDoc) {
+      const oldPath = path.join(
+        __dirname,
+        "..",
+        "uploads",
+        "informes",
+        oldDoc[0].idoc
+      ); // ---> backend\uploads\informes\[filename].pdf
+
+      if (fs.existsSync(oldPath)) {
+        fs.unlink(oldPath, (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          console.log(
+            `Old informe document deleted from server: ${oldDoc[0].idoc}`
+          );
+        });
+      }
+    }
+
+    if (resultHeader.affectedRows > 0)
+      return res.status(200).json({ resultHeader: resultHeader });
+    else
+      return res.status(200).json({
+        error: "No se ha podido eliminar el registro del informe",
+      });
   } catch (error) {
     console.log(error);
     if (error) return res.status(400).json({ error: error });
@@ -232,6 +279,7 @@ const displayInforme = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
+    console.log(id);
     const q = `SELECT idoc FROM informes WHERE idinforme = ?`;
     const doc = await pool.query(q, [id]);
 
@@ -255,4 +303,5 @@ module.exports = {
   downloadInformeDocument,
   downloadInformeDocumentClient,
   displayInforme,
+  deleteInforme,
 };

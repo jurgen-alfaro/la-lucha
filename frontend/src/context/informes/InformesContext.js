@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginContext from "../login/LoginContext";
 import FileDownload from "js-file-download";
@@ -16,6 +16,7 @@ export const InformesProvider = ({ children }) => {
   const [informe, setInforme] = useState({});
 
   const params = useParams();
+  const navigate = useNavigate();
 
   // Get all informes
   const getInformes = async () => {
@@ -52,9 +53,13 @@ export const InformesProvider = ({ children }) => {
     const { id } = params,
       download = await axios.get(`/api/informes/${id}/download`, {
         responseType: "blob",
-      }),
-      response = await axios.get(`/api/informes/${id}`),
-      file = await response.data.rdoc,
+      });
+    const response = await axios.get(`/api/informes/${id}`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    const file = await response.data.idoc,
       fileName = file.split("-")[0],
       fileExt = file.split(".")[1];
 
@@ -63,14 +68,14 @@ export const InformesProvider = ({ children }) => {
   };
 
   // Download informe
-  const downloadReglamentoDocumentClient = async (id) => {
+  const downloadInformeDocumentClient = async (id) => {
     setIsLoading(true);
 
     const download = await axios.get(`/api/informes/${id}/download`, {
       responseType: "blob",
     });
     const response = await axios.get(`/api/informes/${id}`);
-    const file = await response.data.rdoc;
+    const file = await response.data.idoc;
     const fileName = file.split("-")[0];
     const fileExt = file.split(".")[1];
 
@@ -81,6 +86,22 @@ export const InformesProvider = ({ children }) => {
   // Display/show informe in different tab
   const displayInforme = async () => {
     const { id } = params;
+
+    const response = await axios.get(`/api/informes/${id}/display`, {
+      method: "GET",
+      responseType: "blob",
+    });
+
+    const file = new Blob([response.data], {
+      type: "application/pdf",
+    });
+
+    const fileURL = URL.createObjectURL(file);
+    window.open(fileURL);
+  };
+
+  // Display/show informe in different tab
+  const displayInformeClient = async (id) => {
     const response = await axios.get(`/api/informes/${id}/display`, {
       method: "GET",
       responseType: "blob",
@@ -172,6 +193,36 @@ export const InformesProvider = ({ children }) => {
     }
   };
 
+  // Delete informe
+  const deleteInforme = async () => {
+    try {
+      setIsLoading(true);
+      const { id } = params;
+      const response = await axios.delete(`/api/informes/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      await getInformes();
+
+      setIsLoading(false);
+      toast.info(`Se ha borrado el registro del informe`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      throw new Error(`Error al borrar informe: ${informe.iname}`);
+    }
+  };
+
   return (
     <InformesContext.Provider
       value={{
@@ -185,8 +236,10 @@ export const InformesProvider = ({ children }) => {
         getInformes,
         updateInforme,
         downloadInformeDocument,
-        downloadReglamentoDocumentClient,
+        downloadInformeDocumentClient,
         displayInforme,
+        displayInformeClient,
+        deleteInforme,
       }}
     >
       {children}

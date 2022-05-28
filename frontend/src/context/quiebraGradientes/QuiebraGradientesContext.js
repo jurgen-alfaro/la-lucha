@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import LoginContext from "../login/LoginContext";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -14,6 +14,7 @@ export const QuiebraGradientesProvider = ({ children }) => {
   const [gradiente, setGradiente] = useState({});
 
   const params = useParams();
+  const navigate = useNavigate();
 
   // Get all quiebra gradientes
   const getGradientes = async () => {
@@ -125,12 +126,15 @@ export const QuiebraGradientesProvider = ({ children }) => {
     try {
       setIsLoading(true);
 
-      const response = await axios.delete(`/api/quiebraGradientes/${photoId}`, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const response = await axios.delete(
+        `/api/quiebraGradientes/photo/${photoId}`,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       const { id } = params;
       await getGradientes();
       await getGradiente(id);
@@ -152,6 +156,39 @@ export const QuiebraGradientesProvider = ({ children }) => {
     }
   };
 
+  // Delete quiebra gradientes
+  const deleteGradiente = async () => {
+    try {
+      setIsLoading(true);
+      const { id } = params;
+      const response = await axios.delete(`/api/quiebraGradientes/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      await getGradientes();
+
+      setIsLoading(false);
+      toast.info(
+        `Se ha borrado el registro del quiebra gradientes y las fotos asociadas`,
+        {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      throw new Error(`Error al borrar quiebra gradientes: ${gradiente.name}`);
+    }
+  };
+
   return (
     <QuiebraGradientesContext.Provider
       value={{
@@ -165,6 +202,7 @@ export const QuiebraGradientesProvider = ({ children }) => {
         getGradiente,
         setGradiente,
         deleteGradientePhoto,
+        deleteGradiente,
       }}
     >
       {children}

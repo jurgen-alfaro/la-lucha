@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginContext from "../login/LoginContext";
 import FileDownload from "js-file-download";
@@ -16,6 +16,7 @@ export const ReglamentosProvider = ({ children }) => {
   const [reglamento, setReglamento] = useState({});
 
   const params = useParams();
+  const navigate = useNavigate();
 
   // Get all reglamentos
   const getReglamentos = async () => {
@@ -191,6 +192,35 @@ export const ReglamentosProvider = ({ children }) => {
     }
   };
 
+  const deleteReglamento = async () => {
+    try {
+      setIsLoading(true);
+      const { id } = params;
+      const response = await axios.delete(`/api/reglamentos/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      await getReglamentos();
+
+      setIsLoading(false);
+      toast.info(`Se ha borrado el registro del reglamento`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      throw new Error(`Error al borrar reglamento: ${reglamento.rname}`);
+    }
+  };
+
   return (
     <ReglamentosContext.Provider
       value={{
@@ -204,8 +234,10 @@ export const ReglamentosProvider = ({ children }) => {
         reglamento,
         reglamentos,
         isLoading,
+        setIsLoading,
         setReglamento,
         displayReglamentoClient,
+        deleteReglamento,
       }}
     >
       {children}

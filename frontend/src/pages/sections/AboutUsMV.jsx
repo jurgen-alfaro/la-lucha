@@ -1,32 +1,92 @@
-function AboutUsMV() {
+import { motion } from "framer-motion";
+
+function AboutUsMV({ mision, vision }) {
   return (
-    <section className='about-us-mv md:h-screen grid grid-cols-1 md:grid-cols-2'>
-      <div className='mission-container  h-full flex flex-col justify-center px-12'>
-        <h1 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-4xl  text-center '>
+    <section className='about-us-mv grid grid-cols-1 md:grid-cols-2 md:h-[50vh] '>
+      <div className=' flex flex-col justify-center items-center px-12 my-12 md:my-0'>
+        <motion.h1
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true }}
+          variants={{
+            visible: {
+              x: "0",
+              opacity: 1,
+              transition: {
+                delay: 0.3,
+                duration: 0.4,
+              },
+            },
+            hidden: { opacity: 0, x: "-200px" },
+          }}
+          className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-center '
+        >
           Misión
-        </h1>
+        </motion.h1>
         <div className='divider'></div>
-        <p className='sm:text-lg text-center '>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Necessitatibus doloremque molestiae excepturi error inventore itaque,
-          dolor molestias earum sint dolorem omnis delectus, expedita accusamus?
-          Quam!
-        </p>
+        <motion.p
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true }}
+          variants={{
+            visible: {
+              y: "0",
+              opacity: 1,
+              transition: {
+                delay: 0.3,
+                duration: 0.7,
+              },
+            },
+            hidden: { opacity: 0, y: "100px" },
+          }}
+          className='sm:text-lg text-center '
+        >
+          {mision}
+        </motion.p>
       </div>
       <div
         style={{ backgroundColor: "var(--asada-lemonade-green)" }}
-        className='vision-container  h-full flex flex-col justify-center px-12'
+        className='h-full flex flex-col justify-center items-center px-12 my-12 md:my-0'
       >
-        <h1 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-4xl  text-white text-center'>
+        <motion.h1
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true }}
+          variants={{
+            visible: {
+              x: "0",
+              opacity: 1,
+              transition: {
+                delay: 0.3,
+                duration: 0.4,
+              },
+            },
+            hidden: { opacity: 0, x: "200px" },
+          }}
+          className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-base-300 text-center'
+        >
           Visión
-        </h1>
+        </motion.h1>
         <div className='divider'></div>
-        <p className='sm:text-lg text-center text-white'>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Necessitatibus doloremque molestiae excepturi error inventore itaque,
-          dolor molestias earum sint dolorem omnis delectus, expedita accusamus?
-          Quam!
-        </p>
+        <motion.p
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true }}
+          variants={{
+            visible: {
+              y: "0",
+              opacity: 1,
+              transition: {
+                delay: 0.3,
+                duration: 0.7,
+              },
+            },
+            hidden: { opacity: 0, y: "100px" },
+          }}
+          className='sm:text-lg text-center text-base-300'
+        >
+          {vision}
+        </motion.p>
       </div>
     </section>
   );

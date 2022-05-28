@@ -8,6 +8,7 @@ const {
   downloadDocumento,
   downloadDocumentoClient,
   displayDocumento,
+  deleteDocumento,
 } = require("../controllers/transparenciaController");
 const { protect } = require("../middleware/authMiddleware");
 const uploadForDocumentos = require("../middleware/multerForTransparencia");
@@ -20,7 +21,8 @@ router
 router
   .route("/:id")
   .get(getDocumento)
-  .put(protect, uploadForDocumentos, updateDocumento);
+  .put(protect, uploadForDocumentos, updateDocumento)
+  .delete(deleteDocumento);
 router
   .route("/:id/download")
   .get(downloadDocumento)

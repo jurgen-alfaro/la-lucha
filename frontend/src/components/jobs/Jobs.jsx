@@ -101,14 +101,15 @@ function Jobs() {
       initial='out'
       variants={pageVariants}
       transition={pageTransition}
+      className='container mx-auto'
     >
       <section>
-        <div className='container mx-auto px-2'>
+        <div className='px-2'>
           <div className='title text-center py-6 text-3xl lg:text-7xl'>
             <h1 className='border-b pb-5'>Trabaja con Nosotros</h1>
           </div>
 
-          <div className='job-form grid place-items-center my-12'>
+          <div className='grid place-items-center my-12'>
             <form
               className='w-full max-w-lg'
               autoComplete='off'
@@ -206,31 +207,56 @@ function Jobs() {
                 </div>
               </div>
 
-              <div className='flex flex-wrap -mx-3 mb-4'>
-                <div className='w-full px-3 '>
-                  <button
-                    href={`mailto:acueductolalucha@gmail.com`}
-                    type='submit'
-                    className='  
+              <div className='flex flex-wrap gap-1 mb-4'>
+                <button
+                  href={`mailto:acueductolalucha@gmail.com`}
+                  type='submit'
+                  className='  
                         w-full
                         btn
                         btn-primary
                         hover:bg-secondary
                         hover:scale-105
                         md:btn-md '
+                >
+                  {" "}
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-6 w-6'
+                    viewBox='0 0 20 20'
+                    fill='currentColor'
                   >
-                    Enviar &nbsp;
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-6 w-6'
-                      viewBox='0 0 20 20'
-                      fill='currentColor'
-                    >
-                      <path d='M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z' />
-                      <path d='M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z' />
-                    </svg>
-                  </button>
-                </div>
+                    <path d='M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z' />
+                    <path d='M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z' />
+                  </svg>
+                  &nbsp;Enviar
+                </button>
+                <button
+                  type='button'
+                  className='  
+                        w-full
+                        btn
+                        btn-secondary
+                        btn-outline
+                        hover:bg-secondary
+                        hover:scale-105
+                        btn-md'
+                  onClick={() => navigate(-1)}
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-6 w-6'
+                    viewBox='0 0 20 20'
+                    fill='currentColor'
+                  >
+                    <path
+                      fillRule='evenodd'
+                      d='M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z'
+                      clipRule='evenodd'
+                    />
+                  </svg>{" "}
+                  &nbsp; Volver a Contacto
+                </button>
               </div>
             </form>
           </div>

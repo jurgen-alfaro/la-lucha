@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 function NavFooter({ to, text }) {
   return (
-    <div className='container h-24 mx-auto grid place-items-center '>
-      <div className='flex'>
+    <div className='container mx-auto grid place-items-center '>
+      <div className='flex flex-col md:flex-row gap-1 py-2'>
         <Link to='/' className='btn btn-secondary btn-outline'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -15,7 +15,7 @@ function NavFooter({ to, text }) {
           </svg>
           &nbsp;Volver al inicio
         </Link>
-        &nbsp;
+
         <Link to={`/${to}`} className='btn btn-secondary btn-outline'>
           Ver&nbsp;
           {text}&nbsp;
@@ -32,7 +32,6 @@ function NavFooter({ to, text }) {
             />
           </svg>
         </Link>
-        &nbsp;
       </div>
     </div>
   );

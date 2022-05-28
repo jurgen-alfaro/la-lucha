@@ -6,6 +6,7 @@ const {
   getTank,
   updateTank,
   deleteTankPhoto,
+  deleteTank,
 } = require("../controllers/waterTankController");
 const uploadForTanks = require("../middleware/multerForWaterTanks");
 const { protect } = require("../middleware/authMiddleware");
@@ -15,7 +16,8 @@ router
   .route("/:id")
   .get(getTank)
   .put(protect, uploadForTanks, updateTank)
-  .delete(protect, deleteTankPhoto);
-// router.route("/:id/photos").get(getPostPhotos);
+  .delete(protect, deleteTank);
+
+router.route("/photo/:id").delete(protect, deleteTankPhoto);
 
 module.exports = router;

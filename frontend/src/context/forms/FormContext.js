@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginContext from "../login/LoginContext";
 import FileDownload from "js-file-download";
@@ -16,6 +16,7 @@ export const FormProvider = ({ children }) => {
   const [form, setForm] = useState({});
 
   const params = useParams();
+  const navigate = useNavigate();
   // Get all forms
   const getForms = async () => {
     setIsLoading(true);
@@ -83,6 +84,22 @@ export const FormProvider = ({ children }) => {
 
   // Display/show form in different tab
   const displayForm = async (id) => {
+    const response = await axios.get(`/api/forms/${id}/display`, {
+      method: "GET",
+      responseType: "blob",
+    });
+
+    const file = new Blob([response.data], {
+      type: "application/pdf",
+    });
+
+    const fileURL = URL.createObjectURL(file);
+    window.open(fileURL);
+  };
+
+  // Display/show reglamento in client view in different tab
+  const displayFormClient = async () => {
+    const { id } = params;
     const response = await axios.get(`/api/forms/${id}/display`, {
       method: "GET",
       responseType: "blob",
@@ -174,6 +191,36 @@ export const FormProvider = ({ children }) => {
     }
   };
 
+  // Delete form
+  const deleteForm = async () => {
+    try {
+      setIsLoading(true);
+      const { id } = params;
+      const response = await axios.delete(`/api/forms/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      await getForms();
+
+      setIsLoading(false);
+      toast.info(`Se ha borrado el registro del formulario`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      throw new Error(`Error al borrar formulario: ${form.fname}`);
+    }
+  };
+
   return (
     <FormContext.Provider
       value={{
@@ -181,6 +228,7 @@ export const FormProvider = ({ children }) => {
         getForm,
         addForm,
         isLoading,
+        setIsLoading,
         forms,
         form,
         setForm,
@@ -188,6 +236,8 @@ export const FormProvider = ({ children }) => {
         updateForm,
         downloadFormDocumentClient,
         displayForm,
+        displayFormClient,
+        deleteForm,
       }}
     >
       {children}

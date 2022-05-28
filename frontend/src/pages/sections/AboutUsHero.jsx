@@ -1,23 +1,32 @@
-import HeroImg from "../../assets/our-history.jpg";
+import { Link } from "react-router-dom";
+import HeroImg from "../../assets/asada.jpg";
+
 function AboutUsHero() {
   return (
-    <section className='about-us-hero md:h-screen grid grid-cols-1 sm:grid-cols-2 justify-center'>
+    <section className='grid grid-cols-1 md:grid-cols-2 justify-center'>
       <div className='hero-image'>
-        <img src={HeroImg} alt='People at work' />
+        <img src={HeroImg} alt='People at work' className='object-cover' />
       </div>
-      <div className='hero-content grid items-center justify-center '>
+      <div className='grid items-center justify-center '>
         <div className='p-5 '>
           <h1 className='hero-history_title text-center my-12 xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-4xl '>
             Nuestra Historia
           </h1>
-          <p className='hero-history_description sm:text-lg max-h-min text-center'>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero,
-            iusto beatae voluptatibus laboriosam cupiditate voluptates.
-            Adipisci, et ducimus. Provident officia quia ducimus aliquam. Esse
-            recusandae temporibus, optio maxime porro deleniti ipsam, quasi
-            perspiciatis alias voluptatum voluptatem facilis, adipisci quia
-            sequi.
+          <p className='sm:text-lg max-h-min text-center'>
+            Todo gran proyecto empieza con un sueño; y el sueño de esta
+            comunidad se ha vuelto realidad gracias al esfuerzo de todos y cada
+            uno de los involucrados que han aportado su granito de arena hacia
+            un bien común.
           </p>
+          <br />
+          <p className='sm:text-lg max-h-min text-center'>
+            ¿Quieres saber cómo comenzó todo?
+          </p>
+          <div className='flex justify-center'>
+            <Link to='/historia' className='btn btn-primary text-center mt-6'>
+              Ver Historia
+            </Link>
+          </div>
         </div>
       </div>
     </section>

@@ -13,6 +13,7 @@ import { ProjectProvider } from "../../context/projects/ProjectContext";
 import { TanksProvider } from "../../context/tanks/TanksContext";
 import { QuiebraGradientesProvider } from "../../context/quiebraGradientes/QuiebraGradientesContext";
 import { AsadaProvider } from "../../context/asada/asadaContext";
+import { InformesProvider } from "../../context/informes/InformesContext";
 
 function ClientLayout() {
   return (
@@ -22,22 +23,23 @@ function ClientLayout() {
           <FormProvider>
             <JuntaDirectivaProvider>
               <TransparenciaProvider>
-                <ReglamentosProvider>
-                  <ProjectProvider>
-                    <TanksProvider>
-                      <QuiebraGradientesProvider>
-                        <AsadaProvider>
-                          <Navbar />
-                          <main className='mx-auto'>
-                            <Outlet />
-                          </main>
-
-                          <Footer />
-                        </AsadaProvider>
-                      </QuiebraGradientesProvider>
-                    </TanksProvider>
-                  </ProjectProvider>
-                </ReglamentosProvider>
+                <InformesProvider>
+                  <ReglamentosProvider>
+                    <ProjectProvider>
+                      <TanksProvider>
+                        <QuiebraGradientesProvider>
+                          <AsadaProvider>
+                            <Navbar />
+                            <main className='mx-auto'>
+                              <Outlet />
+                            </main>
+                            <Footer />
+                          </AsadaProvider>
+                        </QuiebraGradientesProvider>
+                      </TanksProvider>
+                    </ProjectProvider>
+                  </ReglamentosProvider>
+                </InformesProvider>
               </TransparenciaProvider>
             </JuntaDirectivaProvider>
           </FormProvider>

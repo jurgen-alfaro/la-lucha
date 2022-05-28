@@ -7,6 +7,7 @@ const {
   deleteProject,
   updateProject,
   deleteProjectPhoto,
+  getProjectPhoto,
 } = require("../controllers/projectController");
 const { protect } = require("../middleware/authMiddleware");
 const uploadForProjects = require("../middleware/multerForProjects");
@@ -14,10 +15,10 @@ const uploadForProjects = require("../middleware/multerForProjects");
 router.route("/").get(getProjects).post(protect, uploadForProjects, addProject);
 router
   .route("/:id")
-  .delete(deleteProject)
+  .delete(protect, deleteProject)
   .put(protect, uploadForProjects, updateProject)
   .get(getProject);
 
-router.route("/photo/:id").delete(deleteProjectPhoto);
+router.route("/photo/:id").delete(deleteProjectPhoto).get(getProjectPhoto);
 
 module.exports = router;

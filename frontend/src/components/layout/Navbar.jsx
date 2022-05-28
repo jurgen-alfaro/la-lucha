@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo2.png";
 
 function Navbar() {
@@ -87,7 +87,7 @@ function Navbar() {
             <li className='dropdown dropdown-hover'>
               <NavLink
                 tabIndex='0'
-                to='/about-us'
+                to='/nosotros'
                 className='block py-2.5 pr-4 pl-3 border-b border-gray-100 hover:bg-base-300 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
                 style={({ isActive }) =>
                   isActive
@@ -114,22 +114,53 @@ function Navbar() {
                 className='p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52'
               >
                 <li>
-                  <NavLink to='/about-us'>Historia</NavLink>
+                  <Link
+                    to='/nosotros#historia'
+                    className='focus:bg-primary focus:text-base-200'
+                  >
+                    Historia
+                  </Link>
                 </li>
                 <li>
-                  <a>Misión y Visión</a>
+                  <Link
+                    to='/nosotros#mv'
+                    className='focus:bg-primary focus:text-base-200'
+                  >
+                    Misión y Visión
+                  </Link>
                 </li>
                 <li>
-                  <a>Junta Directiva</a>
+                  <Link
+                    to='/nosotros#valores'
+                    className='focus:bg-primary focus:text-base-200'
+                  >
+                    Valores
+                  </Link>
                 </li>
                 <li>
-                  <a>Informes</a>
+                  <Link
+                    to='/nosotros#junta'
+                    className='focus:bg-primary focus:text-base-200'
+                  >
+                    Junta Directiva
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    to='/nosotros#mapa'
+                    className='focus:bg-primary focus:text-base-200'
+                  >
+                    Mapa de Sitio
+                  </Link>
                 </li>
                 <li>
-                  <Link to='/about-us'>Mapa de Sitio</Link>
-                </li>
-                <li>
-                  <a>Galería</a>
+                  <Link
+                    to='/nosotros#galeria'
+                    className='focus:bg-primary focus:text-base-200'
+                  >
+                    Galería
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -189,20 +220,59 @@ function Navbar() {
                 Proyectos
               </NavLink>
             </li>
-            <li>
+            <li className='dropdown dropdown-hover'>
               <NavLink
-                to='documentation'
+                to='/documentacion'
                 className='block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
-                style={({ isActive }) =>
-                  isActive
-                    ? {
-                        color: "#79b9d6",
-                      }
-                    : { color: "#545e6f" }
-                }
               >
                 Documentación
+                <svg
+                  className='fill-current inline'
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='20'
+                  height='20'
+                  viewBox='0 0 24 24'
+                >
+                  <path d='M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z' />
+                </svg>
               </NavLink>
+              <ul
+                tabIndex='0'
+                className='p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52'
+              >
+                <li>
+                  <Link
+                    to='/documentacion#transparencia'
+                    className='focus:bg-primary focus:text-base-200'
+                  >
+                    Transparencia
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to='/documentacion#formularios'
+                    className='focus:bg-primary focus:text-base-200'
+                  >
+                    Formularios
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to='/documentacion#informes'
+                    className='focus:bg-primary focus:text-base-200'
+                  >
+                    Informes
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to='/documentacion#reglamentos'
+                    className='focus:bg-primary focus:text-base-200'
+                  >
+                    Reglamentos
+                  </Link>
+                </li>
+              </ul>
             </li>
 
             <li>

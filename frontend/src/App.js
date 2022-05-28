@@ -54,6 +54,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import TransparenciaList from "./components/transparencia/TransparenciaList";
 import TransparenciaAdd from "./components/transparencia/TransparenciaAdd";
 import TransparenciaItem from "./components/transparencia/TransparenciaItem";
+import History from "./pages/sections/History";
 
 function App() {
   const location = useLocation();
@@ -75,13 +76,14 @@ function App() {
         <Routes location={location} key={location.pathname}>
           <Route path='/' element={<ClientLayout />}>
             <Route index element={<Home />} />
-            <Route path='about-us' element={<AboutUs />} />
+            <Route path='nosotros' element={<AboutUs />} />
+            <Route path='historia' element={<History />} />
             <Route path='posts' element={<PostsClient />} />
             <Route path='projects' element={<Projects />} />
             <Route path='services' element={<Services />} />
             <Route path='contact' element={<Contact />} />
             <Route path='contact/jobs' element={<Jobs />} />
-            <Route path='documentation' element={<Documentation />} />
+            <Route path='documentacion' element={<Documentation />} />
             <Route path='tanques' element={<TanksClient />} />
             <Route path='quiebraGradientes' element={<GradientesClient />} />
           </Route>

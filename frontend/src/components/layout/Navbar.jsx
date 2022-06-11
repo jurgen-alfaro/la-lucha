@@ -156,7 +156,7 @@ function Navbar() {
                 </li>
                 <li>
                   <Link
-                    to='/nosotros#galeria'
+                    to='/galeria'
                     className='focus:bg-primary focus:text-base-200'
                   >
                     Galería
@@ -166,7 +166,7 @@ function Navbar() {
             </li>
             <li className='dropdown dropdown-hover'>
               <NavLink
-                to='/services'
+                to='/servicios'
                 className='block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
                 style={({ isActive }) =>
                   isActive
@@ -207,7 +207,7 @@ function Navbar() {
             </li>
             <li>
               <NavLink
-                to='projects'
+                to='proyectos'
                 className='block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
                 style={({ isActive }) =>
                   isActive
@@ -218,6 +218,21 @@ function Navbar() {
                 }
               >
                 Proyectos
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='galeria'
+                className='block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
+                style={({ isActive }) =>
+                  isActive
+                    ? {
+                        color: "#79b9d6",
+                      }
+                    : { color: "#545e6f" }
+                }
+              >
+                Galería
               </NavLink>
             </li>
             <li className='dropdown dropdown-hover'>
@@ -277,7 +292,7 @@ function Navbar() {
 
             <li>
               <NavLink
-                to='/contact'
+                to='/contacto'
                 className='block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
                 style={({ isActive }) =>
                   isActive

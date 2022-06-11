@@ -8,7 +8,7 @@ import homegallery6 from "../../assets/homegallery6.jpeg";
 
 function HomePhotoGallery() {
   return (
-    <section className='photo-gallery pb-12'>
+    <section className='photo-gallery pb-12 '>
       <h1 className='text-center text-3xl sm:"text-4xl md:text-5xl lg:text-7xl pt-11 mb-12'>
         Galería
       </h1>
@@ -71,7 +71,7 @@ function HomePhotoGallery() {
       </div>
       <div className='btn-container'>
         <NavLink
-          to='photo-gallery'
+          to='galeria'
           className='btn btn-primary hover:bg-secondary hover:scale-105  btn-lg my-12'
         >
           Ver más fotos

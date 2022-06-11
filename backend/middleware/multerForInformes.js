@@ -13,7 +13,14 @@ const fileStorageEngine = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype == "application/pdf") {
+  console.log(file);
+  if (
+    file.mimetype == "application/pdf" ||
+    file.mimetype == "application/ppt" ||
+    file.mimetype == "application/pptx" ||
+    file.mimetype ==
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+  ) {
     cb(null, true);
   } else {
     cb(null, false);
@@ -29,3 +36,9 @@ const uploadForInformes = multer({
 });
 
 module.exports = uploadForInformes.single("idoc");
+
+/*  
+Prueba con presentacion de Power Point
+Descripcion para prueba de Power Point
+
+*/

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function PostPhotosClient({ photo }) {
   const [photoId, setPhotoId] = useState(photo.idphotos);
@@ -13,10 +14,12 @@ function PostPhotosClient({ photo }) {
     <div
       className={`w-full relative md:h-[600px] h-[300px] transition duration-150 ease-out`}
     >
-      <img
+      <LazyLoadImage
+        width='100%'
+        height='100%'
+        src={`${process.env.REACT_APP_BASE_URL}/${photo.photo}`}
         className='object-cover w-full h-full'
         alt='Proyect image'
-        src={`http://localhost:5000/${photo.photo}`}
         id={photoId}
       />
       <button

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 function GradientePhotosClient({ photo }) {
   const [photoId, setPhotoId] = useState(photo.idphotos);
@@ -29,10 +31,11 @@ function GradientePhotosClient({ photo }) {
           />
         </svg>
       </button>
-      <img
-        className='object-cover w-full h-full cursor-pointer'
-        alt='Quiebra gradientes'
-        src={`http://localhost:5000/${photo.photo}`}
+      <LazyLoadImage
+        effect='blur'
+        width='100%'
+        height='100%'
+        src={`${process.env.REACT_APP_BASE_URL}/${photo.photo}`}
         id={photoId}
       />
     </div>

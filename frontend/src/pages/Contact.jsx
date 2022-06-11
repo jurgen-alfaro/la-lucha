@@ -417,11 +417,11 @@ function Contact() {
                         duration: 1,
                       },
                     },
-                    hidden: { opacity: 0, x: 400 },
+                    hidden: { opacity: 0, x: 150 },
                   }}
                 >
                   <Link
-                    to='jobs'
+                    to='curriculum'
                     className='btn btn-secondary btn-outline btn-sm mt-1 hover:scale-105'
                   >
                     Me interesa&nbsp;

@@ -92,9 +92,19 @@ export const InformesProvider = ({ children }) => {
       responseType: "blob",
     });
 
-    const file = new Blob([response.data], {
-      type: "application/pdf",
-    });
+    let file;
+    const ext = response.data.type.split("/")[1];
+    if (ext === "pptx" || ext === "ppt") {
+      file = new Blob([response.data], {
+        type: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      });
+    }
+
+    if (ext === "pdf") {
+      file = new Blob([response.data], {
+        type: "application/pdf",
+      });
+    }
 
     const fileURL = URL.createObjectURL(file);
     window.open(fileURL);
@@ -107,9 +117,19 @@ export const InformesProvider = ({ children }) => {
       responseType: "blob",
     });
 
-    const file = new Blob([response.data], {
-      type: "application/pdf",
-    });
+    let file;
+    const ext = response.data.type.split("/")[1];
+    if (ext === "pptx" || ext === "ppt") {
+      file = new Blob([response.data], {
+        type: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      });
+    }
+
+    if (ext === "pdf") {
+      file = new Blob([response.data], {
+        type: "application/pdf",
+      });
+    }
 
     const fileURL = URL.createObjectURL(file);
     window.open(fileURL);

@@ -32,8 +32,8 @@ function AboutUs() {
   const valoresRef = useRef();
   const juntaRef = useRef();
   const mapaRef = useRef();
-  const galeriaRef = useRef();
-
+  /*   const galeriaRef = useRef();
+   */
   useEffect(() => {
     const fetchAsada = async () => await getAsada();
     fetchAsada();
@@ -59,9 +59,9 @@ function AboutUs() {
       case "#mapa":
         mapaRef.current.scrollIntoView();
         break;
-      case "#galeria":
+      /*      case "#galeria":
         galeriaRef.current.scrollIntoView();
-        break;
+        break; */
       default:
         window.scrollTo(0, 0);
         break;
@@ -92,9 +92,9 @@ function AboutUs() {
       <div ref={mapaRef}>
         <AboutUsSiteMap />
       </div>
-      <div ref={galeriaRef}>
+      {/*   <div ref={galeriaRef}>
         <AboutUsPhotoGallery />
-      </div>
+      </div> */}
     </motion.div>
   );
 }

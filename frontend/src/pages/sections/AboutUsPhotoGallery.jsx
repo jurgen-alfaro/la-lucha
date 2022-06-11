@@ -6,14 +6,14 @@ function AboutUsPhotoGallery() {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const res = await fetch("/api/photos", {
+      await fetch("/api/photos", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-      });
-      const data = await res.json();
-      setImages(data);
+      }).then((res) => setImages(res.json()));
+      // const data = await res.json();
+      // setImages(data);
     };
 
     fetchImages();

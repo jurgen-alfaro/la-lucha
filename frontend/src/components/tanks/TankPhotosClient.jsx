@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 function TankPhotosClient({ photo }) {
   const [photoId, setPhotoId] = useState(photo.idphotos);
@@ -30,10 +32,12 @@ function TankPhotosClient({ photo }) {
         </svg>
       </button>
 
-      <img
+      <LazyLoadImage
+        width='100%'
+        height='100%'
         className='w-full h-full object-cover'
         alt='Proyect image'
-        src={`http://localhost:5000/${photo.photo}`}
+        src={`${process.env.REACT_APP_BASE_URL}/${photo.photo}`}
         id={photoId}
       />
     </div>

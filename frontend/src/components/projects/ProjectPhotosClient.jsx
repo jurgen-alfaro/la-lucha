@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 function ProjectPhotosClient({ photo }) {
   const [photoId, setPhotoId] = useState(photo.idphotos);
@@ -12,10 +14,12 @@ function ProjectPhotosClient({ photo }) {
     <div
       className={`w-full block md:h-[600px] h-[300px] transition duration-150 ease-out`}
     >
-      <img
+      <LazyLoadImage
+        width='100%'
+        height='100%'
+        src={`${process.env.REACT_APP_BASE_URL}/${photo.photo}`}
         className='object-cover w-full h-full'
         alt='Proyect image'
-        src={`http://localhost:5000/${photo.photo}`}
         id={photoId}
       />
       <button

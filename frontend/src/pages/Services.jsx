@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import img from "../assets/seo.png";
+import { useEffect, useContext } from "react";
+import AsadaContext from "../context/asada/asadaContext";
 import { motion } from "framer-motion";
 
 // Framer motion variants
@@ -16,7 +16,14 @@ const pageTransition = {
 };
 
 function Services() {
+  const { getEmpresas } = useContext(AsadaContext);
+
   useEffect(() => {
+    const fetchWebService = async () => {
+      await getEmpresas();
+    };
+
+    fetchWebService();
     window.scrollTo(0, 0);
   }, []);
 
@@ -34,18 +41,33 @@ function Services() {
             <h1 className='border-b pb-5'>Servicios</h1>
           </div>
         </div>
-        <div className='flex flex-col md:flex-row justify-center items-center gap-6 md:h-[50vh] py-12 px-4'>
-          <div className='text-center md:text-right'>
-            <h2 className='text-5xl'>Al alcance de un clic</h2>
-            <p className='mt-4 max-w-lg justify-center'>
+        <div className='flex flex-col  justify-center items-center gap-6 md:h-[50vh] py-12 px-4'>
+          <div className='text-center '>
+            <h2 className='text-5xl '>Consulta de recibos en línea</h2>
+            <p className='mt-4 max-w-lg justify-center mx-auto'>
               Consulte sus recibos pendientes con sólo ingresar el número de
               NIS, de abonado o de medidor.
             </p>
           </div>
           <form className='w-full max-w-lg' autoComplete='off'>
             <div className='flex flex-wrap -mx-3 mb-1'>
+              <div className='w-full px-3 flex flex-col'>
+                <label htmlFor='numero '>
+                  <small>Seleccione su ASADA</small>
+                </label>
+                <select className='select select-bordered w-full'>
+                  <option defaultValue>Normal</option>
+                  <option>Normal Apple</option>
+                  <option>Normal Orange</option>
+                  <option>Normal Tomato</option>
+                </select>
+              </div>
+            </div>
+            <div className='flex flex-wrap -mx-3 mb-1 mt-4'>
               <div className='w-full px-3'>
-                <label htmlFor='numero '>NIS, # de abonado o de medidor</label>
+                <label htmlFor='numero '>
+                  <small> NIS, # de abonado o de medidor</small>
+                </label>
                 <input
                   className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
                   id='grid-numero'

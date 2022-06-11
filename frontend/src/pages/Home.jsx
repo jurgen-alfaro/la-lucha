@@ -119,7 +119,7 @@ function Home() {
           </div>
           <div className='card md:w-96 h-96 lg:w-full bg-base-100 shadow-xl image-full'>
             <figure>
-              <img src={cardBg4} />
+              <img src={cardBg4} alt='Tanque de almacenamiento' />
             </figure>
             <div className='card-body max-h-min text-center flex justify-center'>
               <div className='shadow stats h-50 bg-opacity-30'>
@@ -163,7 +163,7 @@ function Home() {
             </NavLink>
           </div>
           <div className='storage-tanks-image-container'>
-            <img src={tankImg} alt='Water storage tank ' />
+            <img src={tankImg} alt='Tanque de almacenamiento' />
           </div>
         </div>
       </section>
@@ -171,7 +171,7 @@ function Home() {
       <section className='quiebra-gradientes h-full '>
         <div className='quiebra-gradientes-wrapper grid grid-cols-1 md:grid-cols-2 '>
           <div className='quiebra-gradientes-image-container'>
-            <img src={riverImg} alt='Water storage tank' />
+            <img src={riverImg} alt='Quiebra gradientes' />
           </div>
           <div className='quiebra-gradientes-info flex flex-col justify-center items-center'>
             <h2 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-3xl mt-5 text-center px-3 xl:px-5 break-words max-w-full'>

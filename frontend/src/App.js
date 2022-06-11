@@ -55,6 +55,7 @@ import TransparenciaList from "./components/transparencia/TransparenciaList";
 import TransparenciaAdd from "./components/transparencia/TransparenciaAdd";
 import TransparenciaItem from "./components/transparencia/TransparenciaItem";
 import History from "./pages/sections/History";
+import Gallery from "./pages/Gallery";
 
 function App() {
   const location = useLocation();
@@ -79,13 +80,14 @@ function App() {
             <Route path='nosotros' element={<AboutUs />} />
             <Route path='historia' element={<History />} />
             <Route path='posts' element={<PostsClient />} />
-            <Route path='projects' element={<Projects />} />
-            <Route path='services' element={<Services />} />
-            <Route path='contact' element={<Contact />} />
-            <Route path='contact/jobs' element={<Jobs />} />
+            <Route path='proyectos' element={<Projects />} />
+            <Route path='servicios' element={<Services />} />
+            <Route path='contacto' element={<Contact />} />
+            <Route path='contacto/curriculum' element={<Jobs />} />
             <Route path='documentacion' element={<Documentation />} />
             <Route path='tanques' element={<TanksClient />} />
             <Route path='quiebraGradientes' element={<GradientesClient />} />
+            <Route path='galeria' element={<Gallery />} />
           </Route>
           <Route path='/admin' element={<AdminLayout />}>
             <Route path='dashboard' element={<Dashboard />}>

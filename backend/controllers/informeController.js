@@ -279,14 +279,24 @@ const displayInforme = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
-    console.log(id);
     const q = `SELECT idoc FROM informes WHERE idinforme = ?`;
     const doc = await pool.query(q, [id]);
 
     const fileName = doc[0].idoc;
 
-    res.setHeader("Content-Type", "application/pdf");
-    res.sendFile(fileName, { root: filesPath }, (err) => {
+    const fileExt = doc[0].idoc.split(".")[1];
+    console.log(fileExt);
+
+    if (fileExt === "pdf") {
+      res.setHeader("Content-Type", "application/pdf");
+    }
+
+    if (fileExt === "ppt" || fileExt === "pptx" || fileExt === "ppta") {
+      console.log("Aqui");
+      res.setHeader("Content-Type", "application/pptx");
+    }
+
+    return res.sendFile(fileName, { root: filesPath }, (err) => {
       if (err) console.log(err);
       else console.log("Sent: ", fileName);
     });

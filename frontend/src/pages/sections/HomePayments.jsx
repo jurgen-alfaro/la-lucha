@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function HomePayments() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,10 +46,10 @@ function HomePayments() {
             </button>
             <div className={`modal ${isModalOpen ? "modal-open" : ""}  px-3`}>
               <div className='modal-box '>
-                <span className='cursor-pointer'>
+                <span className='cursor-pointer flex justify-end mb-2'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
-                    className='h-9 w-9 z-50'
+                    className='h-10 w-10 z-50'
                     viewBox='0 0 20 20'
                     fill='currentColor'
                     onClick={closeModal}
@@ -71,36 +72,243 @@ function HomePayments() {
                   <div className='grid grid-cols-2'>
                     <div>
                       <ul className='list-disc px-3 text-left'>
-                        <li>Banco Nacional</li>
-                        <li>Banco Popular</li>
-                        <li>Banco Promerica</li>
-                        <li>BN Servicios</li>
-                        <li>Caja de Ande</li>
-                        <li>Coocique</li>
-                        <li>Coopeamistad</li>
-                        <li>Coopeande #1</li>
-                        <li>Coopejudicial </li>
-                        <li>Coopeservidores</li>
-                        <li>Correos de Costa Rica</li>
-                        <li>Cruz Roja</li>
-                        <li>Gente Más Gente</li>
+                        <li>
+                          <a
+                            href='https://www.bncr.fi.cr/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full p-1 px-2'
+                          >
+                            Banco Nacional
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.bancopopular.fi.cr/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Banco Popular
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.promerica.fi.cr/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Banco Promerica
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://bnservicios.bncr.fi.cr/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            BN Servicios
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.cajadeande.fi.cr/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Caja de ANDE
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://coocique.fi.cr/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Coocique
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://coopeamistadrl.com/servicios/pago-servicios-publicos/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            CoopeAmistad
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.coopeande1.com/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            CoopeAnde #1
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.coopejudicial.fi.cr/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            CoopeJudicial
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.coopeservidores.fi.cr/es/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            CoopeServidores
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://correos.go.cr/personas/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Correos de Costa Rica
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.cruzroja.or.cr/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Cruz Roja
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.gente.sv/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Gente
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.gollotienda.com/golloservicios'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Gollo
+                          </a>
+                        </li>
                       </ul>
                     </div>
                     <div>
                       <ul className='list-disc px-3 text-left'>
-                        <li>Gollo</li>
-                        <li>Grupo Mutual Alajuela</li>
-                        <li>Grupo Tecnológico Gamma</li>
-                        <li>Internet Banking</li>
-                        <li>Pago Automático de Recibo</li>
-                        <li>Pago Bots</li>
-                        <li>Payser</li>
-                        <li>Qpago</li>
-                        <li>Scotiabank</li>
-                        <li>Servimas</li>
-                        <li>Teledolar</li>
-                        <li>Tiendas Ekono</li>
-                        <li>ASADA La Lucha</li>
+                        <li>
+                          <a
+                            href='https://www.grupomutual.fi.cr/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Grupo Mutual Alajuela
+                          </a>
+                        </li>
+                        <li className='hover:bg-slate-50 rounded-full py-1 px-2'>
+                          <a
+                            href='https://payweb.grupotecnologicocr.net/'
+                            target='_blank'
+                          >
+                            Grupo Tecnológico Gamma
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.bncr.fi.cr/banca-en-linea'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Internet Banking
+                          </a>
+                        </li>
+
+                        <li className='hover:bg-slate-50 rounded-full py-1 px-2'>
+                          <a
+                            href='https://www.baccredomatic.com/es-cr/personas/pagos-automaticos'
+                            target='_blank'
+                          >
+                            Pago Automático de Recibo
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.facebook.com/Pagobotscr/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            PagoBots
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.facebook.com/PayserCR'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Payser
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='http://www.qpago.com/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Qpago
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.scotiabankcr.com/acerca/canales/pago-servicios-publicos.aspx'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Scotiabank
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.coopeservidores.fi.cr/uploads/CMS/Reglamento/aed7b69e72b6e831f879457fe5e88dfeb173e187.pdf'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Servimás
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://teledolar.com/'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Teledora
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href='https://www.tiendasekono.com/pague-servicios'
+                            target='_blank'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                          >
+                            Tiendas Ekono
+                          </a>
+                        </li>
+                        <li>
+                          <Link
+                            to='/contacto'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            onClick={closeModal}
+                          >
+                            ASADA La Lucha
+                          </Link>
+                        </li>
                       </ul>
                     </div>
                   </div>

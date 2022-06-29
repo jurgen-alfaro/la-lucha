@@ -134,7 +134,7 @@ function Home() {
       </section>
       <section className='storage-tanks h-full'>
         <div className='storage-tanks-wrapper grid grid-cols-1 md:grid-cols-2'>
-          <div className='storage-tanks-info flex flex-col justify-center items-center mb-5 md:mb-0'>
+          <div className='storage-tanks-info flex flex-col justify-center items-center mb-28 md:mb-0'>
             <h2 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-3xl text-center px-3 xl:px-5 break-words max-w-full'>
               Tanques de Almacenamiento
             </h2>
@@ -173,7 +173,7 @@ function Home() {
           <div className='quiebra-gradientes-image-container'>
             <img src={riverImg} alt='Quiebra gradientes' />
           </div>
-          <div className='quiebra-gradientes-info flex flex-col justify-center items-center'>
+          <div className='quiebra-gradientes-info flex flex-col justify-center items-center my-6 md:mb-0'>
             <h2 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-3xl mt-5 text-center px-3 xl:px-5 break-words max-w-full'>
               Quiebra Gradientes
             </h2>

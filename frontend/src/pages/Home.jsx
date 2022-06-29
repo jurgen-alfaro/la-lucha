@@ -168,7 +168,7 @@ function Home() {
         </div>
       </section>
       {/* Quiebra gradientes */}
-      <section className='quiebra-gradientes h-full '>
+      <section className='quiebra-gradientes h-full mt-6 md:mt-0'>
         <div className='quiebra-gradientes-wrapper grid grid-cols-1 md:grid-cols-2 '>
           <div className='quiebra-gradientes-image-container'>
             <img src={riverImg} alt='Quiebra gradientes' />

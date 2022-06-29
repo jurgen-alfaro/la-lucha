@@ -86,7 +86,7 @@ function Contact() {
       variants={pageVariants}
       transition={pageTransition}
     >
-      <section className='contact-section'>
+      <section className='contact-section mb-20'>
         <div className='container mx-auto'>
           <div className='title text-center py-6 text-3xl lg:text-7xl'>
             <h1 className='border-b pb-5'>Contacto</h1>
@@ -97,10 +97,11 @@ function Contact() {
           <div className='info-container grid grid-cols-1 md:grid-cols-2 px-3 gap-3 w-full h-full '>
             <div className='left'>
               <div className='inquiries'>
-                <h2 className='text-2xl py-2'>Consultas</h2>
+                <h2 className='text-2xl py-2'>Buzón de Sugerencias</h2>
                 <p className='py-2 max-w-lg'>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Provident ipsam delectus fugiat maiores iure.
+                  En esta sección puede dejarnos cualquier comentario,
+                  sugerencia o solicitud que requiera de nuestra atención. Nos
+                  pondremos en contacto a la mayor brevedad posible.
                 </p>
               </div>
               <div className='contact-us mt-3'>

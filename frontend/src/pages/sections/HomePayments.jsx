@@ -70,7 +70,7 @@ function HomePayments() {
                   </p>
                   <div className='grid grid-cols-2'>
                     <div>
-                      <ul className='list-disc px-3'>
+                      <ul className='list-disc px-3 text-left'>
                         <li>Banco Nacional</li>
                         <li>Banco Popular</li>
                         <li>Banco Promerica</li>
@@ -87,7 +87,7 @@ function HomePayments() {
                       </ul>
                     </div>
                     <div>
-                      <ul className='list-disc px-3'>
+                      <ul className='list-disc px-3 text-left'>
                         <li>Gollo</li>
                         <li>Grupo Mutual Alajuela</li>
                         <li>Grupo Tecnológico Gamma</li>

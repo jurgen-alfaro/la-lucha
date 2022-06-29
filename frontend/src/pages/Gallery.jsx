@@ -56,7 +56,7 @@ function Gallery() {
       variants={pageVariants}
       transition={pageTransition}
     >
-      <section>
+      <section className='mb-20'>
         <div
           className='fixed right-5 bottom-5 rounded-full bg-primary text-white z-50 p-4 hover:scale-125 hover:bg-secondary duration-150 cursor-pointer active:scale-110'
           onClick={handleScrollToTop}

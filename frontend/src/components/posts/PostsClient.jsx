@@ -152,7 +152,7 @@ function PostsClient() {
       variants={pageVariants}
       transition={pageTransition}
     >
-      <section>
+      <section className='mb-20'>
         <div className='text-center pb-16 pt-6 text-3xl lg:text-7xl'>
           <h1 className='border-b pb-5'>Publicaciones</h1>
         </div>

@@ -16,7 +16,7 @@ import { TransparenciaProvider } from "../../context/transparencia/Transparencia
 import { AsadaProvider } from "../../context/asada/asadaContext";
 
 import UserLogin from "../users/UserLogin";
-import logo from "../../assets/logo2.png";
+import logo from "../../assets/logo.jpeg";
 
 function AdminLayout() {
   const { user } = useContext(LoginContext);

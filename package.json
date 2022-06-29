@@ -1,7 +1,7 @@
 {
   "name": "la-lucha",
   "version": "1.0.0",
-  "description": "Página informacional para la ASADA La Lucha, La Tigra, San Carlos. ",
+  "description": "Página informacional para la ASADA La Lucha, San Carlos.",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo2.png";
+import logo from "../../assets/logo.jpeg";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -222,7 +222,7 @@ function Navbar() {
             </li>
             <li>
               <NavLink
-                to='galeria'
+                to='posts'
                 className='block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
                 style={({ isActive }) =>
                   isActive
@@ -232,7 +232,7 @@ function Navbar() {
                     : { color: "#545e6f" }
                 }
               >
-                Galería
+                Publicaciones
               </NavLink>
             </li>
             <li className='dropdown dropdown-hover'>

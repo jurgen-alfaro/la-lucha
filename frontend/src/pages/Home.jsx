@@ -81,7 +81,7 @@ function Home() {
             </figure>
             <div className='card-body max-h-min text-center flex justify-center '>
               <div className='shadow stats h-50 bg-opacity-30 '>
-                <div className='stat font-black text-white'>
+                <div className='stat font-black text-white tracking-wider'>
                   <h3 className='stat-title text-xl'>Extensión</h3>
                   <p className='stat-title text-xl'>{extension}</p>
                 </div>
@@ -94,7 +94,7 @@ function Home() {
             </figure>
             <div className='card-body max-h-min text-center flex justify-center'>
               <div className='shadow stats h-50 bg-opacity-30 '>
-                <div className='stat font-black text-white'>
+                <div className='stat font-black text-white tracking-wider'>
                   <h3 className='stat-title text-xl'>Usuarios Abastecidos</h3>
                   <p className='stat-title text-xl'>{users}</p>
                 </div>
@@ -107,7 +107,7 @@ function Home() {
             </figure>
             <div className='card-body max-h-min text-center flex justify-center'>
               <div className='shadow stats h-50 bg-opacity-30'>
-                <div className='stat font-black text-white'>
+                <div className='stat font-black text-white tracking-wider'>
                   <h3 className='stat-title text-xl'>
                     Tanques de <br />
                     Almacenamiento
@@ -123,7 +123,7 @@ function Home() {
             </figure>
             <div className='card-body max-h-min text-center flex justify-center'>
               <div className='shadow stats h-50 bg-opacity-30'>
-                <div className='stat font-black text-white'>
+                <div className='stat font-black text-white tracking-wider'>
                   <div className='stat-title text-xl'>Quiebra Gradientes</div>
                   <div className='stat-title text-xl'>{gradientes}</div>
                 </div>

@@ -38,7 +38,7 @@ function HomeProjects() {
           <h2 className='lg:text-7xl md:text-4xl text-3xl text-white px-5'>
             Nuestros Proyectos
           </h2>
-          <p className='text-lg px-5 py-6 text-white'>
+          <p className='text-lg px-5 py-6 text-white text-justify'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. At error
             repudiandae adipisci nesciunt commodi dolore nemo cumque esse amet
             debitis autem neque, id quos. Mollitia qui quos inventore sed dolor,

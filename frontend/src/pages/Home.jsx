@@ -65,7 +65,7 @@ function Home() {
             </p>
             <Link
               to='/posts'
-              className='btn btn-primary lg:btn-lg hover:bg-secondary hover:scale-105 anim-opacity-fade-in'
+              className='btn btn-primary lg:btn-lg hover:bg-secondary duration-500 hover:scale-105 anim-opacity-fade-in'
               id='id02'
             >
               Ver publicaciones más recientes

@@ -19,7 +19,7 @@ function HomePayments() {
           Métodos de Pago
         </h1>
 
-        <p className='sm:text-lg text-center max-w-xl mx-auto my-6'>
+        <p className='sm:text-lg text-center max-w-xl mx-auto my-6 tracking-wide md:tracking-normal'>
           Actualmente la ASADA tiene a su disposición diferentes medios de pago
           que pueden ser utilizados para realizar la cancelación de sus recibos.
         </p>

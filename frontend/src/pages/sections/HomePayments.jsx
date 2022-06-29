@@ -35,7 +35,7 @@ function HomePayments() {
               </span>
               &nbsp; Recaudadores Autorizados
             </h2>
-            <p>
+            <p className='text-justify mb-4'>
               Realice el pago de su factura de forma sencilla por medio de las
               plataformas digitales disponibles o cancele de forma presencial en
               cualquiera de nuestras entidades autorizadas.{" "}
@@ -120,7 +120,7 @@ function HomePayments() {
               </span>
               &nbsp; Pago en Efectivo
             </h2>
-            <p>
+            <p className='text-justify'>
               Visite nuestras oficinas ubicadas 25m Sur, 200m Este de algun
               lugar en la comunidad de la Tigra. La Tigra de la Vega de San
               Carlos, en donde estaremos encantados de ayudarle con cualquier

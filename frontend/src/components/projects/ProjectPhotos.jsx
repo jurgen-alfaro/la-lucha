@@ -12,7 +12,7 @@ function ProjectPhotos({ photo, onClick }) {
 
   const handleOpenPhotoClick = (e) => {
     e.preventDefault();
-    const url = `http://localhost:5000/${photo.photo}`;
+    const url = `${process.env.REACT_APP_BASE_URL}/${photo.photo}`;
     window.open(url, "_blank");
   };
 
@@ -22,7 +22,7 @@ function ProjectPhotos({ photo, onClick }) {
         <img
           className='w-full h-full object-cover z-10'
           alt='Proyect image'
-          src={`http://localhost:5000/${photo.photo}`}
+          src={`${process.env.REACT_APP_BASE_URL}/${photo.photo}`}
           id={photoId}
         />
         <button

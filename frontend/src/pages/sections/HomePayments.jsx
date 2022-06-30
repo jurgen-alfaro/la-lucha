@@ -71,7 +71,7 @@ function HomePayments() {
                   </p>
                   <div className='grid grid-cols-2'>
                     <div>
-                      <ul className='list-disc px-3 text-left'>
+                      <ul className='list-disc px-3 text-left gap-6'>
                         <li>
                           <a
                             href='https://www.bncr.fi.cr/'

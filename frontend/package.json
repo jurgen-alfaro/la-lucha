@@ -1,9 +1,9 @@
 {
   "name": "la-lucha",
-  "homepage": "http://jurgen-testing.com",
+  "homepage": "https://www.shlcisa.com",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:5050",
   "dependencies": {
     "@headlessui/react": "^1.4.3",
     "@testing-library/jest-dom": "^5.16.2",

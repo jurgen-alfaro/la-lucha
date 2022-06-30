@@ -5,7 +5,7 @@ import AboutUsHero from "./sections/AboutUsHero";
 import AboutUsMV from "./sections/AboutUsMV";
 import AboutUsJuntaDirectiva from "./sections/AboutUsJuntaDirectiva";
 import AboutUsSiteMap from "./sections/AboutUsSiteMap";
-import AboutUsPhotoGallery from "./sections/AboutUsPhotoGallery";
+// import AboutUsPhotoGallery from "./sections/AboutUsPhotoGallery";
 import { motion } from "framer-motion";
 import AboutUsValues from "./sections/AboutUsValues";
 // Framer motion variants
@@ -24,7 +24,7 @@ const pageTransition = {
 
 function AboutUs() {
   const { asada, getAsada } = useContext(AsadaContext);
-  const { mision, vision, historia } = asada;
+  const { mision, vision } = asada;
 
   const { hash } = useLocation();
   const historiaRef = useRef();

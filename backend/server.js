@@ -37,8 +37,9 @@ app.use("/api/photos", require("./routes/photosRoutes"));
 
 // Serve frontend
 if (process.env.NODE_ENV === "production") {
-  console.log("Yes, NODE_ENV is set to production");
   app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+  console.log(path.join(__dirname, "../frontend/build"));
 
   app.get("*", (req, res) =>
     res.sendFile(

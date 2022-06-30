@@ -17,7 +17,7 @@ function PostPhotos({ photo }) {
       <img
         className='w-full h-full object-cover'
         alt='Post image'
-        src={`http://localhost:5000/${photo.photo}`}
+        src={`${process.env.REACT_APP_BASE_URL}/${photo.photo}`}
         id={photoId}
       />
       <button

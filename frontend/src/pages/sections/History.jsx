@@ -316,7 +316,7 @@ function History() {
         </Link>
       </div>
 
-      <div className='divider'></div>
+      <div className='divider mb-20'></div>
     </motion.div>
   );
 }

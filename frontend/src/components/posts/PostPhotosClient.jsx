@@ -6,7 +6,7 @@ function PostPhotosClient({ photo }) {
 
   const handleOpenPhotoClick = (e) => {
     e.preventDefault();
-    const url = `http://localhost:5000/${photo.photo}`;
+    const url = `${process.env.REACT_APP_BASE_URL}/${photo.photo}`;
     window.open(url, "_blank");
   };
 

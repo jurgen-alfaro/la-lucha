@@ -21,8 +21,8 @@ function Map({ center, zoom }) {
 
 Map.defaultProps = {
   center: {
-    lat: 10.33920824873509,
-    lng: -84.57982841098577,
+    lat: 10.354780077752705,
+    lng: -84.57022487006816,
   },
   zoom: 14,
 };

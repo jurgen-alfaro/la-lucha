@@ -5,7 +5,7 @@ import Moment from "react-moment";
 import { motion } from "framer-motion";
 
 function AboutUsJuntaDirectiva() {
-  const { members, getMembers, isLoading } = useContext(JuntaDirectivaContext);
+  const { members, getMembers } = useContext(JuntaDirectivaContext);
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -53,14 +53,14 @@ function AboutUsJuntaDirectiva() {
                 >
                   <figure className='w-100 h-100'>
                     <img
-                      src={`http://localhost:5000/junta/${photo}`}
-                      alt='Album'
+                      src={`${process.env.REACT_APP_BASE_URL}/junta/${photo}`}
+                      alt='Miembro junta directiva'
                       className='w-full h-full object-fill'
                     />
                   </figure>
                   <div className='card-body '>
                     <h2 className='card-title text-2xl'>
-                      {name + " " + last_name}&nbsp;{}
+                      {name + " " + last_name}&nbsp;
                     </h2>
                     <article>
                       <p>

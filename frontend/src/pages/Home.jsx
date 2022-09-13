@@ -58,17 +58,24 @@ function Home() {
             <h1 className='mb-5 lg:text-8xl md:text-6xl font-bold text-4xl anim-opacity-fade-in'>
               Acueducto La Lucha
             </h1>
-            <p className='mb-5 lg:text-xl anim-opacity-fade-in' id='id01'>
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+            <blockquote className='mb-5 lg:text-2xl anim-opacity-fade-in italic'>
+              "Todo el agua que habrá jamás, la tenemos ahora mismo." <br />
+              National Geographic
+            </blockquote>
             <Link
-              to='/posts'
+              to='/servicios'
               className='btn btn-primary lg:btn-lg hover:bg-secondary duration-500 hover:scale-105 anim-opacity-fade-in'
               id='id02'
             >
-              Ver publicaciones más recientes
+              Consultar Recibos&nbsp;
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                height='24'
+                width='24'
+                fill='#fff'
+              >
+                <path d='M2.8 22.325V1.7l1.55 1.55 1.5-1.55L7.4 3.25 8.925 1.7l1.55 1.55L12 1.7l1.525 1.55 1.55-1.55L16.6 3.25l1.55-1.55 1.525 1.55L21.2 1.7v20.625L19.675 20.8l-1.525 1.525L16.6 20.8l-1.525 1.525-1.55-1.525L12 22.325 10.475 20.8l-1.55 1.525L7.4 20.8l-1.55 1.525L4.325 20.8Zm3.275-5.275h11.85v-2.1H6.075Zm0-4h11.85v-2.1H6.075Zm0-4h11.85v-2.1H6.075Z' />
+              </svg>
             </Link>
           </div>
         </div>

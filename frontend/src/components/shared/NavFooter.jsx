@@ -16,7 +16,10 @@ function NavFooter({ to, text }) {
           &nbsp;Volver al inicio
         </Link>
 
-        <Link to={`/${to}`} className='btn btn-secondary btn-outline'>
+        <Link
+          to={`/${to}`}
+          className='btn btn-secondary btn-outline mt-2 md:mt-0'
+        >
           Ver&nbsp;
           {text}&nbsp;
           <svg

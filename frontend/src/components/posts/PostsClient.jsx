@@ -1,4 +1,10 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useLayoutEffect,
+} from "react";
 import PostContext from "../../context/posts/PostContext";
 import PostPhotosClient from "./PostPhotosClient";
 import Spinner from "../shared/Spinner";
@@ -88,32 +94,45 @@ const childVariants = {
   },
 };
 
+// Options for the carouse Slider
+const settings = {
+  infinite: true,
+  speed: 500,
+  fade: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
+};
+
 function PostsClient() {
-  const { posts, getPosts, isLoading, post } = useContext(PostContext);
+  const { posts, getPosts, isLoading, setPost } = useContext(PostContext);
 
   const [filteredPosts, setFilteredPosts] = useState(posts);
 
   const todo = useRef();
 
-  // Options for the carouse Slider
-  const settings = {
-    infinite: true,
-    speed: 500,
-    fade: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-  };
-
   useEffect(() => {
     if (posts.length === 0) {
       const fetchPosts = async () => await getPosts();
 
-      fetchPosts();
-      setFilteredPosts(posts.reverse()); // This will order the array backwards, to display from the earliest to the latest.
+      fetchPosts().then(() => {
+        setFilteredPosts(posts.reverse()); // This will order the array backwards, to display from the earliest to the latest.
+      });
     }
-  }, [filteredPosts]);
+  }, []);
+
+  // This is like 'componentWillUnmount'
+  /* 
+    INFO: useLayoutEffect() avoids a bug in production. 
+    When the webpage is refreshed clicking the browser refresh button
+    the app crashes and displays a blank page. 
+  */
+  useLayoutEffect(() => {
+    return () => {
+      setPost({});
+    };
+  }, []);
 
   const filterPosts = (e) => {
     const val = e.target.value;

@@ -81,7 +81,9 @@ const addGradiente = asyncHandler(async (req, res) => {
       });
 
     const q =
-      "INSERT INTO `db_lalucha`.`gradientes` (`name`, `location`, `capacity`) VALUES (?, ?, ?);";
+      "INSERT INTO `" +
+      process.env.MYSQL_DATABASE +
+      "`.`gradientes` (`name`, `location`, `capacity`) VALUES (?, ?, ?);";
     const resultHeaders = await pool.query(q, [name, location, capacity]);
 
     // If insert failed
@@ -89,7 +91,9 @@ const addGradiente = asyncHandler(async (req, res) => {
       throw new Error("Unable to insert data in 'tanks' table");
 
     const q2 =
-      "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idgradientes`) VALUES (?, ?);";
+      "INSERT INTO `" +
+      process.env.MYSQL_DATABASE +
+      "`.`uploaded_photos` (`photo`, `idgradientes`) VALUES (?, ?);";
 
     if (photos.length > 0)
       for (let i = 0; i < photos.length; i++)
@@ -161,7 +165,9 @@ const updateGradiente = asyncHandler(async (req, res) => {
 
       // Add the new photos
       const q1 =
-        "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idgradientes`) VALUES (?, ?)";
+        "INSERT INTO `" +
+        process.env.MYSQL_DATABASE +
+        "`.`uploaded_photos` (`photo`, `idgradientes`) VALUES (?, ?)";
       photos.forEach(async (photo) => {
         const resultHeader = await pool.query(q1, [photo.filename, id]);
       });
@@ -195,7 +201,7 @@ const deleteGradientePhoto = asyncHandler(async (req, res) => {
     const resultHeader = await pool.query(q, [id]);
 
     if (resultHeader.affectedRows > 0) {
-      const oldPath = path.join(__dirname, "..", "uploads", photo[0].photo);
+      const oldPath = path.join(__dirname, "../uploads", photo[0].photo);
 
       if (fs.existsSync(oldPath)) {
         fs.unlink(oldPath, (err) => {
@@ -223,8 +229,8 @@ const deleteGradientePhoto = asyncHandler(async (req, res) => {
 const deleteGradiente = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const q = "DELETE FROM gradientes WHERE idgradientes = ?";
+    const q2 = "DELETE FROM uploaded_photos WHERE idgradientes = ?";
     // Get old document
     const oldDocs = await pool.query(
       "SELECT photo FROM uploaded_photos WHERE idgradientes = ?",
@@ -232,11 +238,12 @@ const deleteGradiente = asyncHandler(async (req, res) => {
     );
 
     const resultHeader = await pool.query(q, [id]);
+    pool.query(q2, [id]); // Delete the photo entries in db
 
     oldDocs.forEach((item) => {
       // Check if oldDoc exists in server and delete it
       if (item) {
-        const oldPath = path.join(__dirname, "..", "uploads", item.photo); // ---> backend\uploads\[photo].<png|jpg|jpeg>
+        const oldPath = path.join(__dirname, "../uploads", item.photo); // ---> uploads\[photo].<png|jpg|jpeg>
 
         if (fs.existsSync(oldPath)) {
           fs.unlink(oldPath, (err) => {

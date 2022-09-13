@@ -18,7 +18,9 @@ const addMember = asyncHandler(async (req, res) => {
     }
 
     const q =
-      "INSERT INTO `db_lalucha`.`junta_directiva` (`name`, `last_name`, `position`, `vigency`, `photo`) VALUES (?, ?, ?, ?, ?)";
+      "INSERT INTO `" +
+      process.env.MYSQL_DATABASE +
+      "`.`junta_directiva` (`name`, `last_name`, `position`, `vigency`, `photo`) VALUES (?, ?, ?, ?, ?)";
     const resultHeader = await pool.query(q, [
       name,
       last_name,
@@ -104,7 +106,7 @@ const updateMember = asyncHandler(async (req, res) => {
           "Please enter all the fields (name, last_name, position, vigency)",
       });
 
-    // Get previous photo document
+    // Get previous photo
     const prevPhoto = await pool.query(
       "SELECT photo FROM junta_directiva WHERE idmember = ?",
       [id]
@@ -132,11 +134,10 @@ const updateMember = asyncHandler(async (req, res) => {
       // Check if prevPhoto exists in server and delete it
       if (prevPhoto) {
         const oldPath = path.join(
-          "backend",
-          "uploads",
-          "junta",
+          __dirname,
+          "../uploads/junta",
           prevPhoto[0].photo
-        ); // ---> backend\uploads\junta\[filename].[jpg, jpeg, png]
+        ); // ---> uploads\junta\[filename].[jpg, jpeg, png]
 
         if (fs.existsSync(oldPath)) {
           fs.unlink(oldPath, (err) => {
@@ -171,14 +172,42 @@ const deleteMember = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const q = "DELETE FROM junta_directiva WHERE idmember = ?";
+
+    // Get previous photo
+    const prevPhoto = await pool.query(
+      "SELECT photo FROM junta_directiva WHERE idmember = ?",
+      [id]
+    );
+
     const resultHeader = await pool.query(q, [id]);
 
-    if (resultHeader.affectedRows > 0)
-      return res.status(200).json({ resultHeader: resultHeader });
-    else
+    if (resultHeader.affectedRows <= 0) {
       return res
         .status(200)
         .json({ error: "No se ha podido eliminar el registro del miembro" });
+    } else {
+      // Check if prevPhoto exists in server and delete it
+      if (prevPhoto) {
+        const oldPath = path.join(
+          __dirname,
+          "../uploads/junta",
+          prevPhoto[0].photo
+        ); // ---> uploads\junta\[filename].[jpg, jpeg, png]
+
+        if (fs.existsSync(oldPath)) {
+          fs.unlink(oldPath, (err) => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+            console.log(
+              `Previous photo deleted from server: ${prevPhoto[0].photo}`
+            );
+          });
+        }
+      }
+      return res.status(200).json({ resultHeader: resultHeader });
+    }
   } catch (error) {
     console.log(error);
     if (error) return res.status(400).json({ error: error });

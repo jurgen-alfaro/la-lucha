@@ -57,99 +57,95 @@ export const AsadaProvider = ({ children }) => {
   };
 
   const getCISABuscarRecibosPendientes = async (abonado) => {
-    try {
-      setIsLoading(true);
-      let xmls = `<?xml version="1.0" encoding="utf-8"?>
-      <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-        <soap12:Body>
+    let xmls = `<?xml version="1.0" encoding="utf-8"?>
+    <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
           <Consulta_BuscarRecibosPendientes xmlns="https://www.cisaweb.com/AcueductosRecibos">
             <token>${sessionStorage.getItem("cisaToken")}</token>
             <empresa>8053</empresa>
             <abonado>${abonado}</abonado>
           </Consulta_BuscarRecibosPendientes>
-        </soap12:Body>
-      </soap12:Envelope>`;
+        </soap:Body>
+      </soap:Envelope>`;
 
-      const url =
-        "https://shlcisa.com/wsAcueductosRecibos/WSAcueductosRecibos.asmx?op=Consulta_BuscarRecibosPendientes";
-
-      await fetch(url, {
+    const url =
+      "https://www.cisaweb.com/WSAcueductosRecibos/WSAcueductosRecibos.asmx?op=Consulta_BuscarRecibosPendientes";
+    try {
+      setIsLoading(true);
+      const response = await fetch(url, {
         body: xmls,
         method: "POST",
         mode: "cors",
         headers: {
-          "Content-Type": "application/soap+xml; charset=UTF-8",
+          "Content-Type": "text/xml; charset=UTF-8",
         },
-      })
-        .then((response) => response.text())
-        .then((data) => {
-          let parser = new DOMParser();
-          let xmlDoc = parser.parseFromString(data, "application/xml");
-          const textContent = xmlDoc.getElementsByTagName(
-            "Consulta_BuscarRecibosPendientesResponse"
-          )[0].textContent;
+      });
 
-          if (textContent === "" || textContent.length === 0) {
-            setIsLoading(false);
-            setFacturas([]);
-          } else {
-            const facturas = Array.from(
-              xmlDoc.getElementsByTagName("NewDataSet")[0].children
-            ).map((item) => item.children);
+      const text = await response.text();
 
-            const facturasJSON = _fromHtmlCollectionToArray(facturas);
-            setIsLoading(false);
-            setFacturas(facturasJSON);
-          }
-        })
-        .catch((error) => console.log(error));
+      let parser = new DOMParser();
+      let xmlDoc = parser.parseFromString(text, "application/xml");
+      const textContent = xmlDoc.getElementsByTagName(
+        "Consulta_BuscarRecibosPendientesResponse"
+      )[0].textContent;
+
+      if (textContent === "" || textContent.length === 0) {
+        setIsLoading(false);
+        setFacturas([]);
+      } else {
+        const facturas = Array.from(
+          xmlDoc.getElementsByTagName("NewDataSet")[0].children
+        ).map((item) => item.children);
+
+        const facturasJSON = _fromHtmlCollectionToArray(facturas);
+
+        setFacturas(facturasJSON);
+        setIsLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
   const getCISANombreAbonado = async (abonado) => {
-    try {
-      setIsLoading(true);
-      let xmls = `<?xml version="1.0" encoding="utf-8"?>
-      <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-        <soap12:Body>
+    setIsLoading(true);
+    let xmls = `<?xml version="1.0" encoding="utf-8"?>
+      <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
           <Consulta_ObtenerNombre xmlns="https://www.cisaweb.com/AcueductosRecibos">
             <token>${sessionStorage.getItem("cisaToken")}</token>
             <empresa>8053</empresa>
             <abonado>${abonado}</abonado>
           </Consulta_ObtenerNombre>
-        </soap12:Body>
-      </soap12:Envelope>`;
+        </soap:Body>
+      </soap:Envelope>`;
 
-      const url =
-        "https://shlcisa.com/wsAcueductosRecibos/WSAcueductosRecibos.asmx?op=Consulta_ObtenerNombre";
+    const url =
+      "https://www.cisaweb.com/WSAcueductosRecibos/WSAcueductosRecibos.asmx?op=Consulta_ObtenerNombre";
 
-      await fetch(url, {
-        body: xmls,
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/soap+xml; charset=UTF-8",
-        },
-      })
-        .then((response) => response.text())
-        .then((data) => {
-          let parser = new DOMParser();
-          let xmlDoc = parser.parseFromString(data, "application/xml");
-          const textContent = xmlDoc.getElementsByTagName(
-            "Consulta_ObtenerNombreResult"
-          )[0].textContent;
+    const response = await fetch(url, {
+      body: xmls,
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "text/xml; charset=utf-8",
+      },
+    });
+    const text = await response.text();
+    let parser = new DOMParser();
+    try {
+      let xmlDoc = parser.parseFromString(text, "application/xml");
+      const textContent = xmlDoc.getElementsByTagName(
+        "Consulta_ObtenerNombreResult"
+      )[0].textContent;
 
-          if (textContent === "" || textContent.length === 0) {
-            setIsLoading(false);
-            setNombreAbonado("Sin nombre");
-          } else {
-            setNombreAbonado(textContent);
-            setIsLoading(false);
-          }
-        })
-        .catch((error) => console.log(error));
+      if (textContent === "" || textContent.length === 0) {
+        setIsLoading(false);
+        setNombreAbonado("Sin nombre");
+      } else {
+        setNombreAbonado(textContent);
+        setIsLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -162,87 +158,92 @@ export const AsadaProvider = ({ children }) => {
 
   const getCISAReciboDetalle = async (abonado, factura) => {
     let xmls = `<?xml version="1.0" encoding="utf-8"?>
-    <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-      <soap12:Body>
+    <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+      <soap:Body>
         <Consulta_Pendientes_Detalle xmlns="https://www.cisaweb.com/AcueductosRecibos">
           <token>${sessionStorage.getItem("cisaToken")}</token>
           <empresa>8053</empresa>
           <abonado>${abonado}</abonado>
           <factura>${factura}</factura>
         </Consulta_Pendientes_Detalle>
-      </soap12:Body>
-    </soap12:Envelope> `;
+      </soap:Body>
+    </soap:Envelope>`;
 
     const url =
-      "https://shlcisa.com/wsAcueductosRecibos/WSAcueductosRecibos.asmx?op=Consulta_Pendientes_Detalle";
+      "https://www.cisaweb.com/WSAcueductosRecibos/WSAcueductosRecibos.asmx?op=Consulta_Pendientes_Detalle";
 
-    await fetch(url, {
+    const response = await fetch(url, {
       body: xmls,
       method: "POST",
       mode: "cors",
       headers: {
-        "Content-Type": "application/soap+xml; charset=UTF-8",
+        "Content-Type": "text/xml; charset=utf-8",
       },
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(data, "text/xml");
-        const detalles = Array.from(
-          xmlDoc.getElementsByTagName("NewDataSet")[0].children
-        )
-          .map((item) => item.children)
-          .map((item) => item);
+    });
 
-        const arr = [];
-        detalles.forEach((item) => {
-          arr.push({
-            rubro: item[0].textContent,
-            descripcion: item[1].textContent,
-            valor: item[2].textContent,
-            tipo: item[3].textContent,
-          });
+    const text = await response.text();
+    const parser = new DOMParser();
+    try {
+      const xmlDoc = parser.parseFromString(text, "text/xml");
+      const detalles = Array.from(
+        xmlDoc.getElementsByTagName("NewDataSet")[0].children
+      )
+        .map((item) => item.children)
+        .map((item) => item);
+
+      const arr = [];
+      detalles.forEach((item) => {
+        arr.push({
+          rubro: item[0].textContent,
+          descripcion: item[1].textContent,
+          valor: item[2].textContent,
+          tipo: item[3].textContent,
         });
+      });
 
-        setDetalles(arr);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
+      setDetalles(arr);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getCISAWebToken = async () => {
     let xmls = `<?xml version="1.0" encoding="utf-8"?>
-    <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-      <soap12:Body>
-        <Token_CrearToken xmlns="https://www.cisaweb.com/AcueductosRecibos">
-          <usuario>usuario_cisa</usuario>
-          <clave>F6DD8281-95D6-497A-9E8A-C631E5B1D215</clave>
-        </Token_CrearToken>
-      </soap12:Body>
-    </soap12:Envelope>`;
+      <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Body>
+          <Token_CrearToken xmlns="https://www.cisaweb.com/AcueductosRecibos">
+            <usuario>usuario_cisa</usuario>
+            <clave>F6DD8281-95D6-497A-9E8A-C631E5B1D215</clave>
+          </Token_CrearToken>
+        </soap:Body>
+      </soap:Envelope>`;
 
     const url =
-      "https://shlcisa.com/wsAcueductosRecibos/WSAcueductosRecibos.asmx?op=Token_CrearToken";
+      "https://www.cisaweb.com/WSAcueductosRecibos/WSAcueductosRecibos.asmx?op=Token_CrearToken";
 
-    await fetch(url, {
-      body: xmls,
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/soap+xml; charset=UTF-8",
-      },
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(data, "text/xml");
-        const token = xmlDoc.getElementsByTagName("Token_CrearTokenResult")[0]
-          .textContent;
+    try {
+      const response = await fetch(url, {
+        body: xmls,
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "text/xml; charset=utf-8",
+        },
+      });
 
-        // Save the token in session storage
-        sessionStorage.setItem("cisaToken", token);
-      })
-      .catch((error) => console.log(error));
+      const text = await response.text();
+
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(text, "text/xml");
+      const token = xmlDoc.getElementsByTagName("Token_CrearTokenResult")[0]
+        .textContent;
+
+      // Save the token in session storage
+      sessionStorage.setItem("cisaToken", token);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const _fromHtmlCollectionToArray = (arr) => {

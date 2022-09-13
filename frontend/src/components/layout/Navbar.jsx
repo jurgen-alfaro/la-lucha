@@ -164,7 +164,7 @@ function Navbar() {
                 </li>
               </ul>
             </li>
-            <li className='dropdown dropdown-hover'>
+            <li>
               <NavLink
                 to='/servicios'
                 className='block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
@@ -177,33 +177,7 @@ function Navbar() {
                 }
               >
                 Servicios
-                <svg
-                  className='fill-current inline'
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='20'
-                  height='20'
-                  viewBox='0 0 24 24'
-                >
-                  <path d='M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z' />
-                </svg>
               </NavLink>
-              <ul
-                tabIndex='0'
-                className='p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52'
-              >
-                <li>
-                  <a>Consulta de Recibos</a>
-                </li>
-                <li>
-                  <a>Consulta de Abonados CISA Web</a>
-                </li>
-                <li>
-                  <a>Solicitud de Afiliación</a>
-                </li>
-                <li>
-                  <a>Métodos de Pago</a>
-                </li>
-              </ul>
             </li>
             <li>
               <NavLink
@@ -222,7 +196,7 @@ function Navbar() {
             </li>
             <li>
               <NavLink
-                to='posts'
+                to='publicaciones'
                 className='block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 '
                 style={({ isActive }) =>
                   isActive

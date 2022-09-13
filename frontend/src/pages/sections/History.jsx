@@ -59,24 +59,44 @@ function History() {
       {/* FIRST SECTION */}
       <div className='flex flex-col items-center justify-center px-2 text-justify'>
         <h2
-          className='p-5 text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center my-6'
+          className='text-3xl md:text-4xl lg:text-5xl xl:text-7xl text-center font-bold mt-12'
           style={{ color: "var(--asada-lemonade-green)" }}
         >
-          1980 - Creación de una Comunidad
+          1980
         </h2>
+        <h3
+          className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-12'
+          style={{ color: "var(--asada-lemonade-green)" }}
+        >
+          Creación de una Comunidad
+        </h3>
+
         <p className='max-w-6xl px-2 md:px-0 text-xl'>
-          {historia ? historia.slice(0, 327) : ""}
+          Por los años que antecedieron a 1980, muchas comunidades tenían
+          limitaciones del servicio de agua. La Lucha y fuera de esta área
+          existían ya las comunidades de San Pedro, Javillos, El Molino, La
+          Vega, las cuales todas carecían del servicio de agua potable. Con la
+          consecuencia de grandes limitaciones en su desarrollo pleno.
         </p>
         <br />
         <p className='max-w-6xl px-2 md:px-0 text-xl'>
-          {historia ? historia.slice(327, 719) : ""}
+          Cualquier actividad a realizar sería un gran esfuerzo para superar el
+          no tener el preciado líquido, un pozo en la tierra. Algunas veces los
+          vecinos tomaban agua de una canoa expuesta en el campo abierto. El
+          chorro de agua que no todos lo tenían, aunque no fuera potable era
+          parte de la solución. Esto a la vez repercutía en enfermedades
+          estomacales en los adultos, especialmente en los niños.
         </p>
         <br />
         <div className=' max-w-6xl my-6'>
           <div className='grid grid-cols-1 md:grid-cols-2'>
             <div className='flex flex-col justify-center '>
               <p className='max-w-lg px-2 md:px-3 text-2xl font-semibold'>
-                {historia ? historia.slice(719, 977) : ""}
+                Mientras tanto los campesinos se integraban y gestionaban la
+                adquisición y distribución de parcelas con reuniones celebradas
+                en La Tigra, su gente lucha por adquirir parte de la tierra que
+                pertenecía a la familia Matamoros quien era el dueño de La
+                Hacienda.
               </p>
             </div>
             <div className='col-span-1 mt-4 md:mt-0'>
@@ -89,16 +109,28 @@ function History() {
           className='flex flex-col justify-center my-12 px-2 h-64 w-full opacity-[0.95]'
         >
           <p className='mx-auto text-center text-base-300 px-2 md:px-0 text-xl md:text-4xl max-w-6xl font-semibold'>
-            {historia ? historia.slice(977, 1192) : ""}
+            El gobierno adquirió 1015 manzanas de tierra, las distribuyó en 94
+            parceleros y se formó la comunidad de La Lucha, en la fecha 07 de
+            marzo de 1980, que fue cuando el presidente de Costa Rica entregó
+            estas parcelas.
           </p>
         </div>
         <br />
         <p className='max-w-6xl px-2 md:px-0 text-xl'>
-          {historia ? historia.slice(1192, 1620) : ""}
+          Dichas tierras antes de repartirlas habían sido muy trabajadas, pero
+          cuando las entregaron a los parceleros estaban en abandono, con
+          montaña, tacotales, caminos de tierra abandonados. Lo que existía eran
+          dos casas viejas deshabitadas. La hacienda se recibió con el
+          compromiso de reforestarla, y así se hizo, se plantaron 14 árboles de
+          corteza y danto amarillo. Para aprovecharlos en un futuro porque había
+          que hacer un pueblo.
         </p>
         <br />
         <p className='max-w-6xl px-2 md:px-0 text-xl'>
-          {historia ? historia.slice(1620, 1894) : ""}
+          Durante un año los parceleros se olvidaron que eran una comunidad y no
+          se organizaban, por lo tanto, no se contaba con ningún servicio. Lo
+          peor, la falta de agua potable en los ranchos de las familias que
+          habían construido en este lugar, los cuales eran sumamente humildes.
         </p>
         <div className='mx-auto max-w-6xl mt-5'>
           <div className='flex flex-col'>
@@ -132,17 +164,33 @@ function History() {
       {/* SECOND SECTION */}
       <div className='flex flex-col items-center justify-center px-2 text-justify'>
         <h2
-          className='p-5 text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center my-8'
+          className='text-3xl md:text-4xl lg:text-5xl xl:text-7xl text-center font-bold mt-12'
           style={{ color: "var(--asada-lemonade-green)" }}
         >
-          1981 - Comité de Gestión con Vecinos
+          1981
         </h2>
+        <h3
+          className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-12'
+          style={{ color: "var(--asada-lemonade-green)" }}
+        >
+          Comité de Gestión con Vecinos
+        </h3>
         <p className='max-w-6xl px-2 md:px-0 text-xl'>
-          {historia ? historia.slice(1894, 2430) : ""}
+          A partir de 1981 se gestionó con la Universidad de Costa Rica para
+          que, a través de la escuela Social, se lograra un diagnóstico sobre
+          cómo organizar una comunidad. Además, recomendara el qué hacer y cómo
+          organizar la situación para lograr obtener los servicios. Durante más
+          de dos años se contó con el apoyo de un grupo de trabajadores sociales
+          de la UCR. En el cual se realizó estudios de las necesidades y el
+          orden de las prioridades en las cuales era necesario trabajar y
+          gestionar. Es ahí donde comienza la historia del Acueducto.
         </p>
         <br />
         <p className='max-w-6xl px-2 md:px-0 text-xl'>
-          {historia ? historia.slice(2430, 2673) : ""}
+          La gente de las comunidades de San Pedro, Javillos, La Vega y El
+          Molino, se acercaron para hablar sobre el tema del agua potable. Se
+          estableció un Comité de Gestión con vecinos, quedando conformado con
+          personas de las diferentes comunidades.
         </p>
 
         <div
@@ -150,12 +198,26 @@ function History() {
           className='flex flex-col justify-center mb-6 mt-12 h-80 md:h-64 w-full mx-auto px-2 '
         >
           <p className='mx-auto  text-base-300 font-semibold px-2 md:px-0 text-xl md:text-2xl lg:text-3xl max-w-6xl'>
-            {historia ? historia.slice(2673, 3021) : ""}
+            Se visitó la oficina del AyA y la Casa Presidencial en San José,
+            para iniciar las gestiones del acueducto. El diagnóstico que brindó
+            la UCR estuvo listo para el año 1983, al mismo tiempo, las gestiones
+            para crear la organización local y solución a los demás proyectos.
+            Este plan para el agua potable era inicialmente para pocas previstas
+            de agua.
           </p>
         </div>
         <br />
         <p className='max-w-6xl px-2 md:px-0 text-xl '>
-          {historia ? historia.slice(3022, 3661) : ""}
+          El AyA aprobó el proyecto de tubería y solamente la comunidad de La
+          Lucha aportó 15 kilómetros de zanjeo aproximadamente, lo que significó
+          14.500 horas de trabajo a pico y pala. A cada dueño de prevista se le
+          asignó un aporte de 160 horas por familia. Se daban tareas de 10
+          metros equivalente a 10 horas de trabajo. Todas las comunidades de
+          igual forma realizaron el mismo aporte. Los diputados de esa época
+          donaron partidas específicas a la Asociación de Desarrollo de La
+          Lucha, la cual estaba recién constituida, además de los estudios
+          técnicos necesarios para traer el agua de la finca de Vitaliano
+          Vásquez de la zona alta de La Tigra.
         </p>
         <br />
         <div className='mx-auto max-w-6xl mt-2'>
@@ -165,7 +227,14 @@ function History() {
               style={{ borderColor: "var(--asada-lemonade-green)" }}
             >
               <p className='max-w-md mx-auto text-justify text-2xl font-semibold'>
-                {historia ? historia.slice(3661, 4174) : ""}
+                Don Vitaliano fue padre de 9 hijos, viudo muy joven, el cual era
+                dueño de la finca donde está el naciente de agua, es de rescatar
+                que él y su familia fueron y son protectores incansables de la
+                naturaleza. Actualmente, todavía son propietarios de una parte
+                de esa linda montaña, en ese entonces don Vitaliano con el mismo
+                carisma que lo representó tuvo la visión de que ese naciente
+                diera el agua a las familias que lo necesitaran, sin imaginar la
+                magnitud de importancia que llegaría a representar el acueducto.
               </p>
             </div>
             <div className='mt-4 md:mt-0 h-[25rem] w-full'>
@@ -182,15 +251,25 @@ function History() {
       {/* THIRD SECTION */}
       <div className='flex flex-col items-center justify-center px-2 mt-6 text-justify'>
         <h2
-          className='p-5 text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center my-8'
+          className='text-3xl md:text-4xl lg:text-5xl xl:text-7xl text-center font-bold mt-12'
           style={{ color: "var(--asada-lemonade-green)" }}
         >
-          1982 - 1983 Construcción del Acueducto
+          1982 - 1983
         </h2>
+        <h3
+          className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-12'
+          style={{ color: "var(--asada-lemonade-green)" }}
+        >
+          Construcción del Acueducto
+        </h3>
         <div className='mx-auto max-w-6xl mt-2 '>
           <div className='flex flex-col justify-center px-6'>
             <p className='max-w-6xl text-xl'>
-              {historia ? historia.slice(4174, 4461) : ""}
+              Desde 1982 que se inicia la construcción del acueducto, con la
+              ayuda de un maestro de obra según cuentan algunos adultos mayores
+              se llamaba Rodrigo López, quien resultó tener mucho conocimiento,
+              además con la colaboración de todos los parceleros y vecinos de
+              las comunidades mencionadas.
             </p>
           </div>
         </div>
@@ -199,7 +278,9 @@ function History() {
         <div>
           <div className='divider max-w-md mx-auto my-8'></div>
           <p className='max-w-2xl text-center font-semibold text-2xl'>
-            {historia ? historia.slice(4461, 4649) : ""}
+            Se logró que un día Sábado Santo del año 1983, llegara el agua a las
+            casas, lo cual provocó tanta alegría que hasta lágrimas hubo. El
+            agua llegó y con esto la vida para estas comunidades.
           </p>
           <div className='divider max-w-md mx-auto'></div>
         </div>
@@ -208,16 +289,35 @@ function History() {
       {/* FOURTH SECTION */}
       <div className='flex flex-col items-center justify-center px-2 mt-6 text-justify'>
         <h2
-          className='p-5 text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center my-3'
+          className='text-3xl md:text-4xl lg:text-5xl xl:text-7xl text-center font-bold mt-12'
           style={{ color: "var(--asada-lemonade-green)" }}
         >
-          1985 - Conformación de Comité Juramentado
+          1985
         </h2>
+        <h3
+          className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-12'
+          style={{ color: "var(--asada-lemonade-green)" }}
+        >
+          Conformación de Comité Juramentado
+        </h3>
         <div className='mx-auto max-w-6xl mt-2'>
           <div className='grid grid-cols-1 md:grid-cols-2'>
             <div className='flex flex-col justify-center px-6'>
               <p className='max-w-md mx-auto text-xl'>
-                {historia ? historia.slice(4649, 5043) : ""}
+                Luego en el año 1985 se conformó un Comité Juramentado por la
+                misma Asociación de Desarrollo para que fueran quienes
+                administraran el funcionamiento del acueducto, inicialmente este
+                comité fue conformado por:
+                <br />
+                Gerardo Rojas Vásquez - Presidente,
+                <br />
+                Antonio Vásquez Jiménez - Secretario,
+                <br />
+                Olger Reyner Jiménez Alvarado - Tesorero,
+                <br />
+                Armando Murillo Rodríguez - Fiscal,
+                <br />
+                Juan Luis Araya Zarate - Vocal.
               </p>
             </div>
             <div className='mt-4 md:mt-0 h-full  w-full'>
@@ -237,17 +337,32 @@ function History() {
       {/* FIFTH SECTION */}
       <div className='flex flex-col items-center justify-center px-2 mt-6 mb-16 '>
         <h2
-          className='p-5 text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center max-w-6xl my-6'
+          className='text-3xl md:text-4xl lg:text-5xl xl:text-7xl text-center font-bold mt-12'
           style={{ color: "var(--asada-lemonade-green)" }}
         >
-          1999 - Construcción de la Asociación <br />
-          de Acueducto Rural La Lucha La Vega
+          1999
         </h2>
+        <h3
+          className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center mb-12'
+          style={{ color: "var(--asada-lemonade-green)" }}
+        >
+          Construcción de la Asociación <br />
+          de Acueducto Rural La Lucha La Vega
+        </h3>
         <div className='mx-auto max-w-6xl mt-5'>
           <div className='flex flex-col'>
             <div className='flex px-6 mb-8'>
               <p className='mx-auto text-justify text-xl'>
-                {historia ? historia.slice(5043, 5653) : ""}
+                En el año 1999, luego de varios intentos por constituir una
+                Asociación lo cual resultó imposible pasar en el registro
+                público, a causa de que se intentó realizar con toda la
+                población, a través de una recomendación de un abogado se acordó
+                que se reunirían unos pocos abonados para poder constituir La
+                Asociación de Acueducto Rural La Lucha La Vega de San Carlos. Y
+                así para el año 2003 fue declarada por el Ministerio de Justicia
+                y Gracia de utilidad pública. También se inician gestiones para
+                realizar un estudio técnico con el objetivo de analizar el
+                estado actual del acueducto y las mejoras que requiere.
               </p>
             </div>
             <div className='w-full md:max-w-6xl mx-auto h-full md:h-[566px] px-6 my-6 sepia '>
@@ -272,18 +387,20 @@ function History() {
         <div className='card bg-base-100 shadow-2xl md:absolute md:top-36 rounded-none py-12 mx-6'>
           <div className='card-body'>
             <p className='text-2xl text-justify'>
-              {historia ? historia.slice(5969, 6085) : ""}
+              Al finalizar esta historia del acueducto quisiéramos referir un
+              pensamiento que nos regala el señor Antonio Vásquez,
             </p>
             <h2 className='card-title text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl justify-center p-4 my-6 leading-tight'>
-              {historia ? historia.slice(6085, 6133) : ""}
+              ¡Qué será de nosotros sin el preciado líquido!
             </h2>
             <p className='text-2xl text-justify'>
-              {historia ? historia.slice(6133, -1) : ""}
+              Nuestro reconocimiento a todas las personas que de una u otra
+              forma han colaborado en la construcción de este acueducto.
             </p>
           </div>
         </div>
       </div>
-      <div className='md:h-[25vh]'></div>
+      <div className='md:h-[30vh]'></div>
 
       {/* SEVENTH SECTION */}
 
@@ -316,7 +433,7 @@ function History() {
         </Link>
       </div>
 
-      <div className='divider mb-20'></div>
+      <div className='mb-28'></div>
     </motion.div>
   );
 }

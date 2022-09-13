@@ -15,58 +15,22 @@ function HomePhotoGallery() {
       <div className='divider my-12 px-12'></div>
       <div className='container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-3 gap-3'>
         <div className='portfolio-box cursor-pointer'>
-          <img src={homegallery3} alt='' title='portfolio 1 picture' />
-          <div className='portfolio-info'>
-            <div className='caption'>
-              <h4>project name goes here 1</h4>
-              <p>category project</p>
-            </div>
-          </div>
+          <img src={homegallery3} alt='HomeImg' />
         </div>
         <div className='portfolio-box cursor-pointer'>
-          <img src={homegallery2} alt='' title='portfolio 1 picture' />
-          <div className='portfolio-info'>
-            <div className='caption'>
-              <h4>Nombre o Título de Imagen</h4>
-              <p>Descripción</p>
-            </div>
-          </div>
+          <img src={homegallery2} alt='HomeImg' />
         </div>
         <div className='portfolio-box cursor-pointer '>
-          <img src={homegallery1} alt='' title='portfolio 1 picture' />
-          <div className='portfolio-info'>
-            <div className='caption'>
-              <h4>project name goes here 1</h4>
-              <p>category project</p>
-            </div>
-          </div>
+          <img src={homegallery1} alt='HomeImg' />
         </div>
         <div className='portfolio-box cursor-pointer'>
-          <img src={homegallery4} alt='' title='portfolio 1 picture' />
-          <div className='portfolio-info'>
-            <div className='caption'>
-              <h4>project name goes here 1</h4>
-              <p>category project</p>
-            </div>
-          </div>
+          <img src={homegallery4} alt='HomeImg' />
         </div>
         <div className='portfolio-box cursor-pointer'>
-          <img src={homegallery5} alt='' title='portfolio 1 picture' />
-          <div className='portfolio-info'>
-            <div className='caption'>
-              <h4>project name goes here 1</h4>
-              <p>category project</p>
-            </div>
-          </div>
+          <img src={homegallery5} alt='HomeImg' />
         </div>
         <div className='portfolio-box cursor-pointer'>
-          <img src={homegallery6} alt='' title='portfolio 1 picture' />
-          <div className='portfolio-info'>
-            <div className='caption'>
-              <h4>project name goes here 1</h4>
-              <p>category project</p>
-            </div>
-          </div>
+          <img src={homegallery6} alt='HomeImg' />
         </div>
       </div>
       <div className='btn-container'>

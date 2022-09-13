@@ -99,8 +99,7 @@ const formatter = new Intl.NumberFormat("es-CR", {
 });
 
 function Projects() {
-  const { projects, getProjects, isLoading, project } =
-    useContext(ProjectContext);
+  const { projects, getProjects, isLoading } = useContext(ProjectContext);
 
   const [filteredProjects, setFilteredProjects] = useState(projects);
 

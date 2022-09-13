@@ -172,7 +172,7 @@ function JuntaDirectivaItem() {
             </div>
             <div className='w-full px-3'>
               <label
-                className='block uppercase inline tracking-wide text-gray-700 text-xs font-bold mb-2'
+                className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
                 htmlFor='grid-message'
               >
                 Cargo&nbsp;
@@ -198,14 +198,14 @@ function JuntaDirectivaItem() {
             </div>
             <div className='px-3 '>
               <label
-                className='block uppercase inline tracking-wide text-gray-700 text-xs font-bold mb-2 '
+                className='block uppercase  tracking-wide text-gray-700 text-xs font-bold mb-2 '
                 htmlFor='grid-photos'
               >
                 Foto
               </label>
               <div className='p-2 mb-3 h-[380px]'>
                 <img
-                  src={`http://localhost:5000/junta/${photo}`}
+                  src={`${process.env.REACT_APP_BASE_URL}/uploads/junta/${photo}`}
                   alt='Member photo'
                   className='object-cover h-full w-full'
                 />

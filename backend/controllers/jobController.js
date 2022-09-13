@@ -2,15 +2,7 @@ const asyncHandler = require("express-async-handler");
 const pool = require("../config/database");
 const path = require("path");
 const fs = require("fs");
-const filesPath = path.join(
-  __dirname,
-  "..",
-  "resources",
-  "static",
-  "assets",
-  "uploads",
-  "cv"
-); // ----> ../resources/static/assets/uploads/cv
+const filesPath = path.join(__dirname, "../uploads/cv"); // ----> ../uploads/cv
 
 // @desc    Add new form
 // @route   POST /api/jobs
@@ -26,7 +18,9 @@ const addJob = asyncHandler(async (req, res) => {
       });
 
     const q =
-        "INSERT INTO `db_lalucha`.`jobs` (`name`, `last_name`, `email`, `phone_number`, `curriculum`) VALUES (?, ?, ?, ?, ?);",
+        "INSERT INTO `" +
+        process.env.MYSQL_DATABASE +
+        "`.`jobs` (`name`, `last_name`, `email`, `phone_number`, `curriculum`) VALUES (?, ?, ?, ?, ?);",
       resultHeader = await pool.query(q, [
         name,
         last_name,

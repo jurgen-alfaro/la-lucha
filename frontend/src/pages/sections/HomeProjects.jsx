@@ -19,7 +19,7 @@ function HomeProjects() {
             explicabo ipsum quae officia commodi aperiam ab sit adipisci ex
             temporibus excepturi!
           </p>
-          <NavLink to='projects' className='btn btn-secondary mt-5 btn-lg'>
+          <NavLink to='proyectos' className='btn btn-secondary mt-5 btn-lg'>
             Ver proyectos{" "}
           </NavLink>
         </div>

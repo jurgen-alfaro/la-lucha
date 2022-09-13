@@ -22,7 +22,9 @@ const addPost = asyncHandler(async (req, res) => {
       });
 
     const q =
-      "INSERT INTO `db_lalucha`.`posts` (`title`, `pdesc`, `post_type`) VALUES (?, ?, ?);";
+      "INSERT INTO `" +
+      process.env.MYSQL_DATABASE +
+      "`.`posts` (`title`, `pdesc`, `post_type`) VALUES (?, ?, ?);";
     const resultHeaders = await pool.query(q, [title, desc, post_type]);
 
     // If insert failed
@@ -30,7 +32,9 @@ const addPost = asyncHandler(async (req, res) => {
       throw new Error("Unable to insert data in posts table");
 
     const q2 =
-      "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idposts`) VALUES (?, ?);";
+      "INSERT INTO `" +
+      process.env.MYSQL_DATABASE +
+      "`.`uploaded_photos` (`photo`, `idposts`) VALUES (?, ?);";
 
     if (photos.length > 0)
       for (let i = 0; i < photos.length; i++)
@@ -101,8 +105,6 @@ const getPostPhotos = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const q = "SELECT * FROM uploaded_photos WHERE idposts = ?";
     const photos = await pool.query(q, [id]);
-
-    console.log("Photos", photos);
 
     req.files = photos;
 
@@ -194,7 +196,9 @@ const updatePost = asyncHandler(async (req, res) => {
 
       // Add the new photos
       const q1 =
-        "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idposts`) VALUES (?, ?)";
+        "INSERT INTO `" +
+        process.env.MYSQL_DATABASE +
+        "`.`uploaded_photos` (`photo`, `idposts`) VALUES (?, ?)";
       photos.forEach(async (photo) => {
         const resultHeader = await pool.query(q1, [photo.filename, id]);
       });
@@ -225,7 +229,7 @@ const deletePostPhoto = asyncHandler(async (req, res) => {
     const resultHeader = await pool.query(q, [id]);
 
     if (resultHeader.affectedRows > 0) {
-      const oldPath = path.join(__dirname, "..", "uploads", photo[0].photo);
+      const oldPath = path.join(__dirname, "../uploads", photo[0].photo);
 
       if (fs.existsSync(oldPath)) {
         fs.unlink(oldPath, (err) => {
@@ -235,6 +239,8 @@ const deletePostPhoto = asyncHandler(async (req, res) => {
           }
           console.log(`Photo deleted from server: ${photo[0].photo}`);
         });
+      } else {
+        console.log(`Could not find post photo path: ${oldPath}`);
       }
       return res.status(200).json({ resultHeader: resultHeader });
     } else
@@ -254,6 +260,7 @@ const deletePost = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const q = "DELETE FROM posts WHERE idposts = ?";
+    const q2 = "DELETE FROM uploaded_photos WHERE idposts = ?";
     // Get old document
     const oldDocs = await pool.query(
       "SELECT photo FROM uploaded_photos WHERE idposts = ?",
@@ -261,11 +268,12 @@ const deletePost = asyncHandler(async (req, res) => {
     );
 
     const resultHeader = await pool.query(q, [id]);
+    pool.query(q2, [id]); // Delete the photo entries in db
 
     oldDocs.forEach((item) => {
       // Check if oldDoc exists in server and delete it
       if (item) {
-        const oldPath = path.join(__dirname, "..", "uploads", item.photo); // ---> backend\uploads\[photo].<png|jpg|jpeg>
+        const oldPath = path.join(__dirname, "../uploads", item.photo); // ---> uploads\[photo].<png|jpg|jpeg>
 
         if (fs.existsSync(oldPath)) {
           fs.unlink(oldPath, (err) => {
@@ -282,11 +290,9 @@ const deletePost = asyncHandler(async (req, res) => {
     if (resultHeader.affectedRows > 0)
       return res.status(200).json({ resultHeader: resultHeader });
     else
-      return res
-        .status(200)
-        .json({
-          error: "No se ha podido eliminar el registro de la publicación",
-        });
+      return res.status(200).json({
+        error: "No se ha podido eliminar el registro de la publicación",
+      });
   } catch (error) {
     console.log(error);
     if (error) return res.status(400).json({ error: error });

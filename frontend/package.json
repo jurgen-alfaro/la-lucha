@@ -1,6 +1,6 @@
 {
   "name": "la-lucha",
-  "homepage": "https://www.shlcisa.com",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5050",

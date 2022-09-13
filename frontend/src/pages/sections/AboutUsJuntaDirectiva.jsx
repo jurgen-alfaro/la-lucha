@@ -53,7 +53,7 @@ function AboutUsJuntaDirectiva() {
                 >
                   <figure className='w-100 h-100'>
                     <img
-                      src={`${process.env.REACT_APP_BASE_URL}/junta/${photo}`}
+                      src={`${process.env.REACT_APP_BASE_URL}/uploads/junta/${photo}`}
                       alt='Miembro junta directiva'
                       className='w-full h-full object-fill'
                     />

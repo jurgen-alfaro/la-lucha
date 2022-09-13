@@ -30,7 +30,7 @@ const registerSuggestion = asyncHandler(async (req, res) => {
 
   if (newSuggestion) {
     res.status(201).json({
-      _id: newSuggestion[0].idsuggestions,
+      /* _id: newSuggestion[0].idsuggestions, */
       name: newSuggestion[0].name,
       last_name: newSuggestion[0].last_name,
       email: newSuggestion[0].email,

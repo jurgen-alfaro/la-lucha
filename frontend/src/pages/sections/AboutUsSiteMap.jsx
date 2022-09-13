@@ -18,8 +18,7 @@ function AboutUsSiteMap() {
 
   return (
     <section
-      className='about-us_site-map flex justify-center '
-      style={{ backgroundColor: "var(--asada-lemonade-green)" }}
+      className='about-us_site-map flex justify-center my-12'
       id='site-map'
     >
       <div className='container about-us_site-map-img px-4 py-8'>

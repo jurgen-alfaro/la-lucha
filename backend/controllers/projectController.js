@@ -108,7 +108,10 @@ const addProject = asyncHandler(async (req, res) => {
     let resultHeaders = null;
     if (total_cost) {
       q =
-        "INSERT INTO `db_lalucha`.`projects` (`title`, `pdesc`, `total_cost`, `estimated_cost`) VALUES (?, ?, ?, ?);";
+        "INSERT INTO `" +
+        process.env.MYSQL_DATABASE +
+        "`.`projects` (`title`, `pdesc`, `total_cost`, `estimated_cost`) VALUES (?, ?, ?, ?);";
+      console.log("Query to be executed: ", q);
       resultHeaders = await pool.query(q, [
         title,
         pdesc,
@@ -117,7 +120,9 @@ const addProject = asyncHandler(async (req, res) => {
       ]);
     } else {
       q =
-        "INSERT INTO `db_lalucha`.`projects` (`title`, `pdesc`, `estimated_cost`) VALUES (?, ?,  ?);";
+        "INSERT INTO `" +
+        process.env.MYSQL_DATABASE +
+        "`.`projects` (`title`, `pdesc`, `estimated_cost`) VALUES (?, ?,  ?);";
       resultHeaders = await pool.query(q, [title, pdesc, estimated_cost]);
     }
 
@@ -126,7 +131,9 @@ const addProject = asyncHandler(async (req, res) => {
       throw new Error("Unable to insert data in projects table");
 
     const q2 =
-      "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idproject`) VALUES (?, ?);";
+      "INSERT INTO `" +
+      process.env.MYSQL_DATABASE +
+      "`.`uploaded_photos` (`photo`, `idproject`) VALUES (?, ?);";
 
     if (photos.length > 0)
       for (let i = 0; i < photos.length; i++)
@@ -199,7 +206,9 @@ const updateProject = asyncHandler(async (req, res) => {
 
       // Add the new photos
       const q1 =
-        "INSERT INTO `db_lalucha`.`uploaded_photos` (`photo`, `idproject`) VALUES (?, ?)";
+        "INSERT INTO `" +
+        process.env.MYSQL_DATABASE +
+        "`.`uploaded_photos` (`photo`, `idproject`) VALUES (?, ?)";
       photos.forEach(
         async (photo) => await pool.query(q1, [photo.filename, id])
       );
@@ -225,6 +234,7 @@ const deleteProject = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
     const q = "DELETE FROM projects WHERE idproject = ?";
+    const q2 = "DELETE FROM uploaded_photos WHERE idproject = ?";
     // Get old document
     const oldDocs = await pool.query(
       "SELECT photo FROM uploaded_photos WHERE idproject = ?",
@@ -232,11 +242,12 @@ const deleteProject = asyncHandler(async (req, res) => {
     );
 
     const resultHeader = await pool.query(q, [id]);
+    pool.query(q2, [id]); // Delete the photo entries in db
 
     oldDocs.forEach((item) => {
       // Check if oldDoc exists in server and delete it
       if (item) {
-        const oldPath = path.join(__dirname, "..", "uploads", item.photo); // ---> backend\uploads\[photo].<png|jpg|jpeg>
+        const oldPath = path.join(__dirname, "../uploads", item.photo); // ---> backend\uploads\[photo].<png|jpg|jpeg>
 
         if (fs.existsSync(oldPath)) {
           fs.unlink(oldPath, (err) => {
@@ -276,7 +287,7 @@ const deleteProjectPhoto = asyncHandler(async (req, res) => {
     const resultHeader = await pool.query(q, [id]);
 
     if (resultHeader.affectedRows > 0) {
-      const oldPath = path.join(__dirname, "..", "uploads", photo[0].photo);
+      const oldPath = path.join(__dirname, "../uploads", photo[0].photo);
 
       if (fs.existsSync(oldPath)) {
         fs.unlink(oldPath, (err) => {

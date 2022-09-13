@@ -1,7 +1,7 @@
 const multer = require("multer");
 const path = require("path");
 
-const jsonPath = path.join("backend", "uploads", "transparencia"); // ----> ../uploads/
+const jsonPath = path.join(__dirname, "uploads", "transparencia"); // ----> ./uploads/transparencia
 
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {

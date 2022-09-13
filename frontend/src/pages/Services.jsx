@@ -24,14 +24,13 @@ function Services() {
     getCISAReciboDetalle,
     nombreAbonado,
     detalles,
-    setDetalles,
     facturas,
     setFacturas,
     isLoading,
   } = useContext(AsadaContext);
   const [abonado, setAbonado] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showDetails, setShowDetails] = useState(true);
+  const [showDetails, setShowDetails] = useState(false);
 
   const textRef = useRef();
 
@@ -46,14 +45,13 @@ function Services() {
   };
 
   useEffect(() => {
-    const fetchWebService = async () => {
-      await getCISAWebToken();
-    };
-
-    fetchWebService();
-
-    window.scrollTo(0, 0);
+    const fetchWebService = () => getCISAWebToken();
+    if (sessionStorage.getItem("cisaToken") === null) fetchWebService();
   }, [facturas]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,23 +61,7 @@ function Services() {
   };
 
   const handleShowDetails = async (abonado, factura) => {
-    const fetchDetails = async () =>
-      await getCISAReciboDetalle(abonado, factura);
-
-    if (showDetails) {
-      document
-        .getElementById(factura)
-        .classList.add(["flex", "justify-center"]);
-      document.getElementById(factura).classList.remove("hidden");
-      textRef.current = "Ver asd";
-    } else {
-      document
-        .getElementById(factura)
-        .classList.remove(["flex", "justify-center"]);
-      document.getElementById(factura).classList.add("hidden");
-      textRef.current = "Ocultar";
-    }
-    fetchDetails();
+    await getCISAReciboDetalle(abonado, factura);
   };
 
   return (
@@ -100,7 +82,7 @@ function Services() {
           <div className='text-center '>
             <h2 className='text-5xl '>Consulta de recibos en línea</h2>
             <p className='mt-4 max-w-lg justify-center mx-auto'>
-              Consulte sus recibos pendientes con sólo ingresar el número de
+              Consulte sus recibos pendientes con solo ingresar el número de
               NIS, de abonado o de medidor.
             </p>
           </div>
@@ -111,9 +93,6 @@ function Services() {
           >
             <div className='flex flex-wrap -mx-3 mb-1 mt-4'>
               <div className='w-full px-3'>
-                <label htmlFor='numero '>
-                  <small> NIS, # de abonado o de medidor</small>
-                </label>
                 <input
                   className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
                   id='grid-abonado'
@@ -161,7 +140,7 @@ function Services() {
 
         <div className={`modal ${isModalOpen ? "modal-open" : ""}  px-3`}>
           <div className='modal-box '>
-            <span className='cursor-pointer'>
+            <span className='cursor-pointer sticky top-5 left-5'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 className='h-9 w-9 z-50'
@@ -246,8 +225,24 @@ function Services() {
                           type='button'
                           className='btn btn-primary my-4'
                           onClick={() => {
-                            setShowDetails(!showDetails);
-                            handleShowDetails(abonado, item.factura);
+                            if (!showDetails) {
+                              handleShowDetails(abonado, item.factura);
+                              document
+                                .getElementById(item.factura)
+                                .classList.add(["flex", "justify-center"]);
+                              document
+                                .getElementById(item.factura)
+                                .classList.remove("hidden");
+                              setShowDetails(!showDetails);
+                            } else {
+                              document
+                                .getElementById(item.factura)
+                                .classList.remove(["flex", "justify-center"]);
+                              document
+                                .getElementById(item.factura)
+                                .classList.add("hidden");
+                              setShowDetails(!showDetails);
+                            }
                           }}
                         >
                           Detalles
@@ -257,7 +252,10 @@ function Services() {
                   ))}
                 </>
               ) : (
-                <Spinner />
+                <>
+                  <p className='text-lg'>Consultando recibos pendientes...</p>
+                  <Spinner />
+                </>
               )}
             </div>
           </div>

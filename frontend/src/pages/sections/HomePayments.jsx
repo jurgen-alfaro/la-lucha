@@ -77,6 +77,7 @@ function HomePayments() {
                             href='https://www.bncr.fi.cr/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full p-1 px-2'
+                            rel='noreferrer'
                           >
                             Banco Nacional
                           </a>
@@ -86,6 +87,7 @@ function HomePayments() {
                             href='https://www.bancopopular.fi.cr/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             Banco Popular
                           </a>
@@ -94,7 +96,8 @@ function HomePayments() {
                           <a
                             href='https://www.promerica.fi.cr/'
                             target='_blank'
-                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2 flex flex-nowrap'
+                            rel='noreferrer'
                           >
                             Banco Promerica
                           </a>
@@ -104,6 +107,7 @@ function HomePayments() {
                             href='https://bnservicios.bncr.fi.cr/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             BN Servicios
                           </a>
@@ -113,6 +117,7 @@ function HomePayments() {
                             href='https://www.cajadeande.fi.cr/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             Caja de ANDE
                           </a>
@@ -122,6 +127,7 @@ function HomePayments() {
                             href='https://coocique.fi.cr/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             Coocique
                           </a>
@@ -131,6 +137,7 @@ function HomePayments() {
                             href='https://coopeamistadrl.com/servicios/pago-servicios-publicos/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             CoopeAmistad
                           </a>
@@ -140,6 +147,7 @@ function HomePayments() {
                             href='https://www.coopeande1.com/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             CoopeAnde #1
                           </a>
@@ -149,6 +157,7 @@ function HomePayments() {
                             href='https://www.coopejudicial.fi.cr/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             CoopeJudicial
                           </a>
@@ -158,6 +167,7 @@ function HomePayments() {
                             href='https://www.coopeservidores.fi.cr/es/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             CoopeServidores
                           </a>
@@ -166,7 +176,8 @@ function HomePayments() {
                           <a
                             href='https://correos.go.cr/personas/'
                             target='_blank'
-                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2 flex flex-nowrap'
+                            rel='noreferrer'
                           >
                             Correos de Costa Rica
                           </a>
@@ -176,6 +187,7 @@ function HomePayments() {
                             href='https://www.cruzroja.or.cr/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             Cruz Roja
                           </a>
@@ -185,6 +197,7 @@ function HomePayments() {
                             href='https://www.gente.sv/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             Gente
                           </a>
@@ -194,6 +207,7 @@ function HomePayments() {
                             href='https://www.gollotienda.com/golloservicios'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             Gollo
                           </a>
@@ -206,7 +220,8 @@ function HomePayments() {
                           <a
                             href='https://www.grupomutual.fi.cr/'
                             target='_blank'
-                            className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            className='hover:bg-slate-50 rounded-full py-1 px-2 flex flex-nowrap'
+                            rel='noreferrer'
                           >
                             Grupo Mutual Alajuela
                           </a>
@@ -215,6 +230,7 @@ function HomePayments() {
                           <a
                             href='https://payweb.grupotecnologicocr.net/'
                             target='_blank'
+                            rel='noreferrer'
                           >
                             Grupo Tecnológico Gamma
                           </a>
@@ -224,6 +240,7 @@ function HomePayments() {
                             href='https://www.bncr.fi.cr/banca-en-linea'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             Internet Banking
                           </a>
@@ -233,6 +250,7 @@ function HomePayments() {
                           <a
                             href='https://www.baccredomatic.com/es-cr/personas/pagos-automaticos'
                             target='_blank'
+                            rel='noreferrer'
                           >
                             Pago Automático de Recibo
                           </a>
@@ -242,6 +260,7 @@ function HomePayments() {
                             href='https://www.facebook.com/Pagobotscr/'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             PagoBots
                           </a>
@@ -251,6 +270,7 @@ function HomePayments() {
                             href='https://www.facebook.com/PayserCR'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             Payser
                           </a>
@@ -259,6 +279,7 @@ function HomePayments() {
                           <a
                             href='http://www.qpago.com/'
                             target='_blank'
+                            rel='noreferrer'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
                           >
                             Qpago
@@ -269,6 +290,7 @@ function HomePayments() {
                             href='https://www.scotiabankcr.com/acerca/canales/pago-servicios-publicos.aspx'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             Scotiabank
                           </a>
@@ -277,6 +299,7 @@ function HomePayments() {
                           <a
                             href='https://www.coopeservidores.fi.cr/uploads/CMS/Reglamento/aed7b69e72b6e831f879457fe5e88dfeb173e187.pdf'
                             target='_blank'
+                            rel='noreferrer'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
                           >
                             Servimás
@@ -286,6 +309,7 @@ function HomePayments() {
                           <a
                             href='https://teledolar.com/'
                             target='_blank'
+                            rel='noreferrer'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
                           >
                             Teledora
@@ -296,6 +320,7 @@ function HomePayments() {
                             href='https://www.tiendasekono.com/pague-servicios'
                             target='_blank'
                             className='hover:bg-slate-50 rounded-full py-1 px-2'
+                            rel='noreferrer'
                           >
                             Tiendas Ekono
                           </a>

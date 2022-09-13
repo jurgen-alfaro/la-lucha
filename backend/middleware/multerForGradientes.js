@@ -1,22 +1,14 @@
 const multer = require("multer");
 const path = require("path");
 
-const jsonPath = path.join("backend", "uploads"); // ----> ../uploads/
+const jsonPath = path.join(__dirname, "../uploads"); // ----> ./uploads/
 
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, jsonPath);
   },
   filename: (req, file, cb) => {
-    console.log(file);
-
-    cb(
-      null,
-      file.originalname.split(".")[0] +
-        Date.now() +
-        "." +
-        file.originalname.split(".")[1]
-    );
+    cb(null, "img" + Date.now() + "." + file.originalname.split(".")[1]);
   },
 });
 

@@ -45,7 +45,6 @@ const getMe = asyncHandler(async (req, res) => {
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, password, email } = req.body;
-  console.log("Request:", req.body);
 
   if (!name || !password || !email) {
     res.status(400);

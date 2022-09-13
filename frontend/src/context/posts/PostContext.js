@@ -27,6 +27,7 @@ export const PostProvider = ({ children }) => {
     const data = await response.data;
     setPosts(data.posts);
     setIsLoading(false);
+    return;
   };
 
   // Get post by Id
@@ -148,7 +149,7 @@ export const PostProvider = ({ children }) => {
     try {
       setIsLoading(true);
       const { id } = params;
-      const response = await axios.delete(`/api/posts/${id}`, {
+      await axios.delete(`/api/posts/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,

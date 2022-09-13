@@ -255,8 +255,9 @@ function TanksClient() {
                       },
                     }}
                   >
-                    <h1 className='text-4xl max-w-3xl text-center text-white leading-loose'>
-                      No hay tanques de Almacenamiento
+                    <h1 className='text-4xl max-w-3xl text-center text-white leading-loose mx-4'>
+                      No hay tanques de <br />
+                      almacenamiento
                     </h1>
                   </motion.div>
                 )}

@@ -79,7 +79,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path='nosotros' element={<AboutUs />} />
             <Route path='historia' element={<History />} />
-            <Route path='posts' element={<PostsClient />} />
+            <Route path='publicaciones' element={<PostsClient />} />
             <Route path='proyectos' element={<Projects />} />
             <Route path='servicios' element={<Services />} />
             <Route path='contacto' element={<Contact />} />

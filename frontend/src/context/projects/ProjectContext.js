@@ -95,7 +95,7 @@ export const ProjectProvider = ({ children }) => {
     try {
       setIsLoading(true);
 
-      const response = await axios.delete(`/api/projects/photo/${photoId}`, {
+      await axios.delete(`/api/projects/photo/${photoId}`, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${user.token}`,

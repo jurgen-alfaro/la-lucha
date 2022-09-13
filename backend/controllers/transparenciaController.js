@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const pool = require("../config/database");
 
-const filesPath = path.join(__dirname, "..", "uploads", "transparencia"); // ----> ../uploads/transparencia
+const filesPath = path.join(__dirname, "uploads", "transparencia"); // ----> uploads/transparencia
 
 // @desc    Add new transparencia document
 // @route   POST /api/transparencias
@@ -21,7 +21,9 @@ const addDocumento = asyncHandler(async (req, res) => {
     }
 
     const resultHeader = await pool.query(
-      "INSERT INTO `db_lalucha`.`transparencias` (`dname`, `ddesc`, `ddoc`) VALUES (?, ?, ?);",
+      "INSERT INTO `" +
+        process.env.MYSQL_DATABASE +
+        "`.`transparencias` (`dname`, `ddesc`, `ddoc`) VALUES (?, ?, ?);",
       [dname, ddesc, ddoc]
     );
 
@@ -135,11 +137,10 @@ const updateDocumento = asyncHandler(async (req, res) => {
       if (oldDoc) {
         const oldPath = path.join(
           __dirname,
-          "..",
           "uploads",
           "transparencia",
           oldDoc[0].ddoc
-        ); // ---> backend\uploads\transparencia\[filename].pdf
+        ); // ---> uploads\transparencia\[filename].pdf
 
         if (fs.existsSync(oldPath)) {
           fs.unlink(oldPath, (err) => {
@@ -266,11 +267,10 @@ const deleteDocumento = asyncHandler(async (req, res) => {
     if (oldDoc) {
       const oldPath = path.join(
         __dirname,
-        "..",
         "uploads",
         "transparencia",
         oldDoc[0].ddoc
-      ); // ---> backend\uploads\transparencia\[filename].pdf
+      ); // ---> uploads\transparencia\[filename].pdf
 
       if (fs.existsSync(oldPath)) {
         fs.unlink(oldPath, (err) => {

@@ -5,7 +5,7 @@ function AboutUsHero() {
   return (
     <section className='grid grid-cols-1 md:grid-cols-2 justify-center'>
       <div className='hero-image'>
-        <img src={HeroImg} alt='People at work' className='object-cover' />
+        <img src={HeroImg} alt='ASADA' className='object-cover' />
       </div>
       <div className='grid items-center justify-center '>
         <div className='p-5 '>

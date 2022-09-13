@@ -617,12 +617,12 @@ function Documentation() {
               </div>
             </div>
           </div>
-          <div className='grid lg:grid-cols-2 xl:grid-cols-3 place-items-center text-center py-6 px-6 gap-5 max-h-screen overflow-y-auto scrollbar-hide '>
+          <div className='grid lg:grid-cols-2 xl:grid-cols-3 sm:justify-center gap-5 px-12 my-12'>
             {reglamentos.length !== 0 &&
               reglamentos.map((doc, i) => {
                 return (
                   <motion.div
-                    className='card bg-base-100 shadow-xl '
+                    className='card bg-base-100 shadow-xl min-h-64'
                     key={doc.idreglamento}
                     initial='hidden'
                     whileInView='visible'
@@ -637,7 +637,7 @@ function Documentation() {
                       hidden: { opacity: 0, x: "-200px", y: "-200px" },
                     }}
                   >
-                    <div className='card-body'>
+                    <div className='card-body max-h-64 '>
                       <motion.h2
                         className='card-title justify-center'
                         initial='hidden'

@@ -98,7 +98,7 @@ function Contact() {
             <div className='left'>
               <div className='inquiries'>
                 <h2 className='text-2xl py-2'>Buzón de Sugerencias</h2>
-                <p className='py-2 max-w-lg'>
+                <p className='py-2 max-w-lg text-justify'>
                   En esta sección puede dejarnos cualquier comentario,
                   sugerencia o solicitud que requiera de nuestra atención. Nos
                   pondremos en contacto a la mayor brevedad posible.
@@ -331,8 +331,8 @@ function Contact() {
                   </a>
                 </span>
               </div>
-              <div className='recruitment mt-12'>
-                <h2 className='text-2xl py-2'>
+              <div className='recruitment mt-12 '>
+                <h2 className='text-2xl py-2 '>
                   <motion.svg
                     initial='hidden'
                     whileInView='visible'
@@ -404,42 +404,44 @@ function Contact() {
                   trabajo y ayudar a nuestra comunidad, por favor déjanos tu
                   información en la siguiente sección:
                 </motion.p>
-                <motion.button
-                  initial='hidden'
-                  whileInView='visible'
-                  viewport={{ once: true }}
-                  transition={{ duration: 1 }}
-                  variants={{
-                    visible: {
-                      opacity: 1,
-                      x: 0,
-                      transition: {
-                        delay: 3,
-                        duration: 1,
+                <div className='w-full flex justify-center sm:justify-start'>
+                  <motion.button
+                    initial='hidden'
+                    whileInView='visible'
+                    viewport={{ once: true }}
+                    transition={{ duration: 1 }}
+                    variants={{
+                      visible: {
+                        opacity: 1,
+                        x: 0,
+                        transition: {
+                          delay: 3,
+                          duration: 1,
+                        },
                       },
-                    },
-                    hidden: { opacity: 0, x: 150 },
-                  }}
-                >
-                  <Link
-                    to='curriculum'
-                    className='btn btn-secondary btn-outline btn-sm mt-1 hover:scale-105'
+                      hidden: { opacity: 0, x: 150 },
+                    }}
                   >
-                    Me interesa&nbsp;
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-5 w-5'
-                      viewBox='0 0 20 20'
-                      fill='currentColor'
+                    <Link
+                      to='curriculum'
+                      className='btn btn-secondary btn-outline md:justify-start mt-1 hover:scale-105'
                     >
-                      <path
-                        fillRule='evenodd'
-                        d='M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z'
-                        clipRule='evenodd'
-                      />
-                    </svg>
-                  </Link>
-                </motion.button>
+                      Me interesa&nbsp;
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-5 w-5'
+                        viewBox='0 0 20 20'
+                        fill='currentColor'
+                      >
+                        <path
+                          fillRule='evenodd'
+                          d='M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z'
+                          clipRule='evenodd'
+                        />
+                      </svg>
+                    </Link>
+                  </motion.button>
+                </div>
               </div>
             </div>
           </div>

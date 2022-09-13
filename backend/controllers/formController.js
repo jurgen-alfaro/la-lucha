@@ -27,8 +27,11 @@ const addForm = asyncHandler(async (req, res) => {
     }
 
     const resultHeader = await pool.query(
-      "INSERT INTO `db_lalucha`.`forms` (`fname`, `fdesc`, `fdoc`) VALUES (?, ?, ?);",
-      [fname, fdesc, fdoc]
+      "INSERT INTO `" +
+        process.env.MYSQL_DATABASE +
+        ".`forms` (`fname`, `fdesc`, `fdoc`) VALUES (?, ?, ?);",
+      [fname, fdesc, fdoc],
+      (err) => console.log(err)
     );
 
     // If insert failed
@@ -263,13 +266,7 @@ const deleteForm = asyncHandler(async (req, res) => {
 
     // Check if oldDoc exists in server and delete it
     if (oldDoc) {
-      const oldPath = path.join(
-        __dirname,
-        "..",
-        "uploads",
-        "forms",
-        oldDoc[0].fdoc
-      ); // ---> backend\uploads\forms\[filename].pdf
+      const oldPath = path.join(__dirname, "uploads", "forms", oldDoc[0].fdoc); // ---> uploads\forms\[filename].pdf
 
       if (fs.existsSync(oldPath)) {
         fs.unlink(oldPath, (err) => {

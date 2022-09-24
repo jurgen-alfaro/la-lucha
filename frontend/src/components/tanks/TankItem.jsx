@@ -50,10 +50,12 @@ function TankItem() {
   const [newName, setNewName] = useState("");
   const [newLocation, setNewLocation] = useState("");
   const [newCapacity, setNewCapacity] = useState("");
+  const [newCosto, setNewCosto] = useState(0);
+  const [newProveedor, setNewProveedor] = useState("");
   const [newPhotos, setNewPhotos] = useState("");
 
   const { photos } = tank;
-  const { name, location, capacity } = tank;
+  const { name, location, capacity, costo, proveedor } = tank;
 
   // Options for the carouse Slider
   const settings = {
@@ -93,6 +95,12 @@ function TankItem() {
 
     if (newCapacity === "") fd.set("capacity", capacity);
     else fd.set("capacity", newCapacity);
+
+    if (newCosto === 0) fd.set("costo", costo);
+    else fd.set("costo", newCosto);
+
+    if (newProveedor === "") fd.set("proveedor", proveedor);
+    else fd.set("proveedor", newProveedor);
 
     if (newPhotos !== "") {
       Array.from(newPhotos).forEach((photo) =>
@@ -184,7 +192,7 @@ function TankItem() {
                   className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
                   htmlFor='grid-capacity'
                 >
-                  Capacidad en litros
+                  Capacidad en m³
                 </label>
                 <input
                   className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
@@ -192,9 +200,45 @@ function TankItem() {
                   type='text'
                   required
                   name='capacity'
-                  placeholder='Ingresar capacidad del tanque'
+                  placeholder='Ingresar capacidad del tanque (m³)'
                   defaultValue={capacity}
                   onChange={(e) => setNewCapacity(e.target.value)}
+                />
+              </div>
+              <div className='w-full px-3'>
+                <label
+                  className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                  htmlFor='grid-costo'
+                >
+                  Costo
+                </label>
+                <input
+                  className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                  id='grid-costo'
+                  type='text'
+                  required
+                  name='costo'
+                  placeholder='Ingresar costo'
+                  defaultValue={costo}
+                  onChange={(e) => setNewCosto(e.target.value)}
+                />
+              </div>
+              <div className='w-full px-3'>
+                <label
+                  className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                  htmlFor='grid-proveedor'
+                >
+                  Proveedor
+                </label>
+                <input
+                  className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                  id='grid-proveedor'
+                  type='text'
+                  required
+                  name='proveedor'
+                  placeholder='Ingresar proveedor'
+                  defaultValue={proveedor}
+                  onChange={(e) => setNewProveedor(e.target.value)}
                 />
               </div>
 

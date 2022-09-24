@@ -35,6 +35,8 @@ function TankAdd() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [capacity, setCapacity] = useState("");
+  const [costo, setCosto] = useState(0);
+  const [proveedor, setProveedor] = useState("");
   const [photos, setPhotos] = useState("");
 
   useEffect(() => {
@@ -148,6 +150,7 @@ function TankAdd() {
                 required
                 name='proveedor'
                 placeholder='Ingresar costo en colones'
+                onChange={(e) => setCosto(e.target.value)}
               />
             </div>
             <div className='w-full px-3'>
@@ -164,6 +167,7 @@ function TankAdd() {
                 required
                 name=' proveedor'
                 placeholder='Ingresar proveedor'
+                onChange={(e) => setProveedor(e.target.value)}
               />
             </div>
 

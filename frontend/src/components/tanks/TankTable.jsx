@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 import TanksContext from "../../context/tanks/TanksContext";
 import "moment/locale/es";
 import { useTable, usePagination, useSortBy } from "react-table";
+const formatter = new Intl.NumberFormat("es-CR", {
+  style: "currency",
+  currency: "CRC",
 
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
 function TankTable() {
   const { tanks } = useContext(TanksContext);
   const data = useMemo(() => tanks, [tanks]);
@@ -20,12 +27,20 @@ function TankTable() {
         },
       },
       {
-        Header: "Capacidad en Litros",
+        Header: "Capacidad (m³)",
         accessor: "capacity",
         Cell: ({ value }) => {
-          return `${value} L`;
+          return `${value} m³`;
         },
       },
+      {
+        Header: "Costo",
+        accessor: "costo",
+        Cell: ({ value }) => {
+          return formatter.format(value);
+        },
+      },
+      { Header: "Proveedor", accessor: "proveedor" },
     ],
     []
   );

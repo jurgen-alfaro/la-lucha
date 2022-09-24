@@ -134,6 +134,38 @@ function TankAdd() {
                 onChange={(e) => setCapacity(e.target.value)}
               />
             </div>
+            <div className='w-full px-3'>
+              <label
+                className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                htmlFor='grid-costo'
+              >
+                Costo
+              </label>
+              <input
+                className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                id='grid-costo'
+                type='text'
+                required
+                name='proveedor'
+                placeholder='Ingresar costo en colones'
+              />
+            </div>
+            <div className='w-full px-3'>
+              <label
+                className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                htmlFor='grid-proveedor'
+              >
+                Proveedor
+              </label>
+              <input
+                className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                id='grid-proveedor'
+                type='text'
+                required
+                name=' proveedor'
+                placeholder='Ingresar proveedor'
+              />
+            </div>
 
             <div className='w-full px-3'>
               <label

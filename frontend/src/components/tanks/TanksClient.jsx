@@ -8,6 +8,16 @@ import "slick-carousel/slick/slick-theme.css";
 import { motion, AnimatePresence } from "framer-motion";
 import NavFooter from "../shared/NavFooter";
 
+// Create our number formatter.
+const formatter = new Intl.NumberFormat("es-CR", {
+  style: "currency",
+  currency: "CRC",
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -123,7 +133,7 @@ function TanksClient() {
                         <motion.div
                           key={tank.idtanks}
                           idx={i}
-                          className='card md:max-h-[380px] max-h-[380px] mx-6 bg-base-100 shadow-xl md:w-[360px]'
+                          className='card md:max-h-[420px] max-h-[420px] md:w-[380px] mx-6 bg-base-100 shadow-xl '
                           initial='hidden'
                           whileInView='visible'
                           exit='hidden'
@@ -203,7 +213,7 @@ function TanksClient() {
                                   <span className='font-bold'>
                                     Capacidad:
                                   </span>{" "}
-                                  {tank.capacity} litros.
+                                  {tank.capacity} m³
                                 </small>
                               </motion.div>
                               <motion.div
@@ -227,6 +237,50 @@ function TanksClient() {
                                     Ubicación:
                                   </span>{" "}
                                   {tank.location}
+                                </small>
+                              </motion.div>
+                              <motion.div
+                                initial='hidden'
+                                whileInView='visible'
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                                variants={{
+                                  visible: {
+                                    opacity: 1,
+                                    transition: {
+                                      delay: 1.3,
+                                    },
+                                  },
+                                  hidden: { opacity: 0 },
+                                }}
+                              >
+                                <small>
+                                  &nbsp;
+                                  <span className='font-bold'>Costo: </span>
+                                  {formatter.format(tank.costo)}
+                                </small>
+                              </motion.div>
+                              <motion.div
+                                initial='hidden'
+                                whileInView='visible'
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                                variants={{
+                                  visible: {
+                                    opacity: 1,
+                                    transition: {
+                                      delay: 1.3,
+                                    },
+                                  },
+                                  hidden: { opacity: 0 },
+                                }}
+                              >
+                                <small>
+                                  &nbsp;
+                                  <span className='font-bold'>
+                                    Proveedor:
+                                  </span>{" "}
+                                  {tank.proveedor}
                                 </small>
                               </motion.div>
                             </FadeInWhenVisible>

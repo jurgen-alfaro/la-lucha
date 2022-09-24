@@ -134,16 +134,17 @@ const getTank = asyncHandler(async (req, res) => {
 const updateTank = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, location, capacity } = req.body;
+    const { name, location, capacity, costo, proveedor } = req.body;
 
     let photos = []; // <--- photos should be defined as null in case the tanks's photo is not updated/changed
 
     if (req.files !== undefined)
       req.files.forEach((photo) => photos.push(photo));
 
-    if (!name || !location || !capacity)
+    if (!name || !location || !capacity || !costo || !proveedor)
       return res.status(400).json({
-        error: "Please enter all the fields (name, location, capacity)",
+        error:
+          "Please enter all the fields (name, location, capacity, costo, proveedor)",
       });
 
     // If photos is not defined, then the same photo should be retained
@@ -153,7 +154,7 @@ const updateTank = asyncHandler(async (req, res) => {
       photos === "" ||
       photos.length === 0
     ) {
-      const q = `UPDATE tanks SET name = '${name}', location = '${location}', capacity = '${capacity}' WHERE idtanks = ?`;
+      const q = `UPDATE tanks SET name = '${name}', location = '${location}', capacity = '${capacity}', costo = '${costo}', proveedor = '${proveedor}' WHERE idtanks = ?`;
       const resultHeaders = await pool.query(q, [id]);
 
       if (resultHeaders.affectedRows <= 0)
@@ -163,7 +164,7 @@ const updateTank = asyncHandler(async (req, res) => {
     } else {
       // Update the tank
       // The previous photos will be retained, the new photos will be added to the existing tank's photos.
-      const q = `UPDATE tanks SET name = '${name}', location = '${location}', capacity = '${capacity}' WHERE idtanks = ?`,
+      const q = `UPDATE tanks SET name = '${name}', location = '${location}', capacity = '${capacity}', costo = '${costo}', proveedor = '${proveedor}' WHERE idtanks = ?`,
         resultHeaders = await pool.query(q, [id]);
 
       if (resultHeaders.affectedRows <= 0)

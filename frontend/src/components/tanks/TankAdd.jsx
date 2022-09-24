@@ -41,7 +41,10 @@ function TankAdd() {
 
   useEffect(() => {
     setInputFilter(document.getElementById("grid-capacity"), function (value) {
-      return /^\d*$/.test(value);
+      return /^[0-9]*\.?[0-9]*$/.test(value); // allow digits and only 1 dot
+    });
+    setInputFilter(document.getElementById("grid-costo"), function (value) {
+      return /^[0-9]*\.?[0-9]*$/.test(value); // allow digits and only 1 dot
     });
     setIsLoading(false);
   }, []);

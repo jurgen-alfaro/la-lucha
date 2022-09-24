@@ -8,12 +8,14 @@ const pool = require("../config/database");
 // @access  Private
 const addTank = asyncHandler(async (req, res) => {
   try {
-    const { name, location, capacity } = req.body;
+    const { name, location, capacity, costo, proveedor } = req.body;
     const photos = req.files || [];
 
-    if (!name || !location || !capacity)
+    console.log(costo, proveedor);
+    if (!name || !location || !capacity || !costo || !proveedor)
       return res.status(400).json({
-        error: "Please enter all fields (name, location, capacity)",
+        error:
+          "Please enter all fields (name, location, capacity, costo, proveedor)",
       });
 
     if (photos.length === 0)
@@ -24,8 +26,14 @@ const addTank = asyncHandler(async (req, res) => {
     const q =
       "INSERT INTO `" +
       process.env.MYSQL_DATABASE +
-      "`.`tanks` (`name`, `location`, `capacity`) VALUES (?, ?, ?);";
-    const resultHeaders = await pool.query(q, [name, location, capacity]);
+      "`.`tanks` (`name`, `location`, `capacity`, `costo`, `proveedor`) VALUES (?, ?, ?, ?, ?);";
+    const resultHeaders = await pool.query(q, [
+      name,
+      location,
+      capacity,
+      costo,
+      proveedor,
+    ]);
 
     // If insert failed
     if (resultHeaders.affectedRows <= 0)

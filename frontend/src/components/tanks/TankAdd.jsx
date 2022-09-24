@@ -56,6 +56,8 @@ function TankAdd() {
     fd.set("name", name);
     fd.set("location", location);
     fd.set("capacity", capacity);
+    fd.set("costo", costo);
+    fd.set("proveedor", proveedor);
 
     photos.forEach((photo) => fd.append("images", photo, photos.filename));
 

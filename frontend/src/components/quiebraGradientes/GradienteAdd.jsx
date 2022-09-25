@@ -36,11 +36,16 @@ function GradienteAdd() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [capacity, setCapacity] = useState("");
+  const [costo, setCosto] = useState(0);
+  const [proveedor, setProveedor] = useState("");
   const [photos, setPhotos] = useState("");
 
   useEffect(() => {
     setInputFilter(document.getElementById("grid-capacity"), function (value) {
-      return /^\d*$/.test(value);
+      return /^[0-9]*\.?[0-9]*$/.test(value); // allow digits and only 1 dot
+    });
+    setInputFilter(document.getElementById("grid-costo"), function (value) {
+      return /^[0-9]*\.?[0-9]*$/.test(value); // allow digits and only 1 dot
     });
     setIsLoading(false);
   }, []);
@@ -52,6 +57,8 @@ function GradienteAdd() {
     fd.set("name", name);
     fd.set("location", location);
     fd.set("capacity", capacity);
+    fd.set("costo", costo);
+    fd.set("proveedor", proveedor);
 
     photos.forEach((photo) => {
       fd.append("images", photo, photos.filename);
@@ -125,7 +132,7 @@ function GradienteAdd() {
                 className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
                 htmlFor='grid-capacity'
               >
-                Capacidad en litros
+                Capacidad en metros cúbicos
               </label>
               <input
                 className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
@@ -133,8 +140,42 @@ function GradienteAdd() {
                 type='text'
                 required
                 name='capacity'
-                placeholder='Ingresar litros (número entero positivo)'
+                placeholder='Ingresar m³ (Ej: 300.25)'
                 onChange={(e) => setCapacity(e.target.value)}
+              />
+            </div>
+            <div className='w-full px-3'>
+              <label
+                className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                htmlFor='grid-costo'
+              >
+                Costo
+              </label>
+              <input
+                className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                id='grid-costo'
+                type='text'
+                required
+                name='proveedor'
+                placeholder='Ingresar costo en colones'
+                onChange={(e) => setCosto(e.target.value)}
+              />
+            </div>
+            <div className='w-full px-3'>
+              <label
+                className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                htmlFor='grid-proveedor'
+              >
+                Proveedor
+              </label>
+              <input
+                className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                id='grid-proveedor'
+                type='text'
+                required
+                name=' proveedor'
+                placeholder='Ingresar proveedor'
+                onChange={(e) => setProveedor(e.target.value)}
               />
             </div>
 

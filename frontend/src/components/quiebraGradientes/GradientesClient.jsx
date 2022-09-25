@@ -8,6 +8,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import NavFooter from "../shared/NavFooter";
 import GradientePhotosClient from "./GradientePhotosClient";
 
+// Create our number formatter.
+const formatter = new Intl.NumberFormat("es-CR", {
+  style: "currency",
+  currency: "CRC",
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -126,7 +136,7 @@ function GradientesClient() {
                         <motion.div
                           key={gradiente.idgradientes}
                           idx={i}
-                          className='card md:max-h-[360px] max-h-[360px] mx-6 bg-base-100 shadow-xl md:w-[360px] '
+                          className='card md:max-h-[420px] max-h-[420px] md:w-[380px] mx-6 bg-base-100 shadow-xl'
                           initial='hidden'
                           whileInView='visible'
                           exit='hidden'
@@ -203,7 +213,8 @@ function GradientesClient() {
                                 }}
                               >
                                 <small>
-                                  Capacidad: {gradiente.capacity} litros.
+                                  <span className='font-bold'>Capacidad: </span>
+                                  {gradiente.capacity} m³
                                 </small>
                               </motion.div>
                               <motion.div
@@ -221,7 +232,53 @@ function GradientesClient() {
                                   hidden: { opacity: 0 },
                                 }}
                               >
-                                <small>Ubicación: {gradiente.location}</small>
+                                <small>
+                                  {" "}
+                                  <span className='font-bold'>
+                                    Ubicación:
+                                  </span>{" "}
+                                  {gradiente.location}
+                                </small>
+                              </motion.div>
+                              <motion.div
+                                initial='hidden'
+                                whileInView='visible'
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                                variants={{
+                                  visible: {
+                                    opacity: 1,
+                                    transition: {
+                                      delay: 1.3,
+                                    },
+                                  },
+                                  hidden: { opacity: 0 },
+                                }}
+                              >
+                                <small>
+                                  <span className='font-bold'>Costo: </span>
+                                  {formatter.format(gradiente.costo)}
+                                </small>
+                              </motion.div>
+                              <motion.div
+                                initial='hidden'
+                                whileInView='visible'
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                                variants={{
+                                  visible: {
+                                    opacity: 1,
+                                    transition: {
+                                      delay: 1.3,
+                                    },
+                                  },
+                                  hidden: { opacity: 0 },
+                                }}
+                              >
+                                <small>
+                                  <span className='font-bold'>Proveedor: </span>
+                                  {gradiente.proveedor}
+                                </small>
                               </motion.div>
                             </FadeInWhenVisible>
                           </div>

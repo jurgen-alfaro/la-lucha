@@ -67,12 +67,13 @@ const getGradiente = asyncHandler(async (req, res) => {
 // @access  Private
 const addGradiente = asyncHandler(async (req, res) => {
   try {
-    const { name, location, capacity } = req.body;
+    const { name, location, capacity, costo, proveedor } = req.body;
     const photos = req.files || [];
 
-    if (!name || !location || !capacity)
+    if (!name || !location || !capacity || !costo || !proveedor)
       return res.status(400).json({
-        error: "Please enter all fields (name, location, capacity)",
+        error:
+          "Please enter all fields (name, location, capacity, costo, proveedor)",
       });
 
     if (photos.length === 0)
@@ -83,12 +84,18 @@ const addGradiente = asyncHandler(async (req, res) => {
     const q =
       "INSERT INTO `" +
       process.env.MYSQL_DATABASE +
-      "`.`gradientes` (`name`, `location`, `capacity`) VALUES (?, ?, ?);";
-    const resultHeaders = await pool.query(q, [name, location, capacity]);
+      "`.`gradientes` (`name`, `location`, `capacity`, `costo`, `proveedor`) VALUES (?, ?, ?, ?, ?);";
+    const resultHeaders = await pool.query(q, [
+      name,
+      location,
+      capacity,
+      costo,
+      proveedor,
+    ]);
 
     // If insert failed
     if (resultHeaders.affectedRows <= 0)
-      throw new Error("Unable to insert data in 'tanks' table");
+      throw new Error("Unable to insert data in 'gradientes' table");
 
     const q2 =
       "INSERT INTO `" +

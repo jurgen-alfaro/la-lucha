@@ -136,7 +136,7 @@ function GradientesClient() {
                         <motion.div
                           key={gradiente.idgradientes}
                           idx={i}
-                          className='card md:max-h-[420px] max-h-[420px] md:w-[380px] mx-6 bg-base-100 shadow-xl'
+                          className='card md:w-[380px] mx-6 bg-base-100 shadow-xl overflow-hidden overflow-x-hidden'
                           initial='hidden'
                           whileInView='visible'
                           exit='hidden'

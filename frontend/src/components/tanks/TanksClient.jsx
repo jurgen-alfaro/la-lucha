@@ -133,7 +133,7 @@ function TanksClient() {
                         <motion.div
                           key={tank.idtanks}
                           idx={i}
-                          className='card md:max-h-[420px] max-h-[420px] md:w-[380px] mx-6 bg-base-100 shadow-xl '
+                          className='card md:w-[380px] mx-6 bg-base-100 shadow-xl overflow-hidden overflow-x-hidden'
                           initial='hidden'
                           whileInView='visible'
                           exit='hidden'
@@ -182,13 +182,13 @@ function TanksClient() {
                                 variants={{
                                   visible: {
                                     opacity: 1,
-                                    x: "0",
+                                    y: "0",
                                     transition: {
                                       delay: 0.8,
                                       duration: 0.5,
                                     },
                                   },
-                                  hidden: { opacity: 0, x: "200px" },
+                                  hidden: { opacity: 0, y: "50px" },
                                 }}
                               >
                                 {tank.name}

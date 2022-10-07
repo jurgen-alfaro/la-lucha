@@ -44,6 +44,14 @@ function Dashboard() {
         >
           Usuarios del Sistema
         </NavLink>
+        <NavLink
+          to='contacto'
+          className={({ isActive }) =>
+            isActive ? "tab tab-lifted tab-active" : "tab tab-lifted"
+          }
+        >
+          Contacto
+        </NavLink>
       </div>
       <div className='rounded-lg p-7 shadow-lg card bg-base-100 border-t-none '>
         <Outlet />

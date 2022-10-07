@@ -1,9 +1,8 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import ProjectContext from "../../context/projects/ProjectContext";
 function ProjectPhotos({ photo, onClick }) {
   const { deleteProjectPhoto, getPhoto } = useContext(ProjectContext);
   const [photoId, setPhotoId] = useState(photo.idphoto);
-  const imageRef = useRef();
 
   const handleClick = (e) => {
     e.preventDefault();

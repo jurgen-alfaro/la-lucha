@@ -22,7 +22,8 @@ const pageTransition = {
 };
 
 function Contact() {
-  const { asada, getAsada, isLoading } = useContext(AsadaContext);
+  const { asada, getAsada, isLoading, getAsadaContactos, contactos } =
+    useContext(AsadaContext);
 
   const { addSuggestion } = useContext(SuggestionContext);
 
@@ -38,8 +39,13 @@ function Contact() {
   const { address, schedule } = asada;
 
   useEffect(() => {
-    const fetchAsada = async () => await getAsada();
-    fetchAsada();
+    const fetchAsada = async () => {
+      await getAsada();
+    };
+
+    if (contactos.length === 0) fetchAsada();
+
+    console.log(contactos);
     window.scrollTo(0, 0);
   }, []);
 
@@ -257,66 +263,144 @@ function Contact() {
               </div>
               <div className='info mt-6'>
                 <h2 className='text-2xl py-2'>Contactos</h2>
-                <span className='flex py-1 cursor-pointer'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-6 w-6'
-                    viewBox='0 0 20 20'
-                    fill='currentColor'
-                  >
-                    <path d='M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z' />
-                    <path d='M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z' />
-                  </svg>
-                  &nbsp;
-                  <a
-                    href='mailto:acueductolalucha@gmail.com'
-                    className='cursor-pointer'
-                  >
-                    acueductolalucha@gmail.com
-                  </a>
-                </span>
-                <span className='flex py-1 cursor-pointer'>
-                  <SocialIcon
-                    url='https://www.facebook.com/people/Asada-La-Lucha-La-Vega/100006408049102/'
-                    style={{ width: "1.5rem", height: "1.5rem" }}
-                    target='_blank'
-                    bgColor='#333C4D'
-                  />
-                  &nbsp;{" "}
-                  <a
-                    href='https://www.facebook.com/people/Asada-La-Lucha-La-Vega/100006408049102/'
-                    rel='noreferrer'
-                    target='_blank'
-                    className='cursor-pointer'
-                  >
-                    Asada La Lucha La Vega, San Carlos
-                  </a>
-                </span>
-
-                <span className='flex py-1 cursor-pointer'>
-                  <SocialIcon
-                    url='https://web.whatsapp.com/'
-                    style={{ width: "1.5rem", height: "1.5rem" }}
-                    target='_blank'
-                    bgColor='#333C4D'
-                  />
-                  &nbsp;(+506) 8709-4950
-                </span>
-                <span className='flex py-1 cursor-pointer'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-6 w-6 '
-                    viewBox='0 0 20 20'
-                    fill='currentColor'
-                  >
-                    <path d='M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z' />
-                  </svg>
-                  &nbsp;
-                  <a href='tel:+50685410886' className='cursor-pointer'>
-                    (+506) 8541-0886 (Emergencias y Días Feriados)
-                  </a>
-                </span>
-                <span className='flex py-1 cursor-pointer'>
+                {contactos.length > 0 &&
+                  contactos.map((contacto, index) => (
+                    <span key={index} className='flex py-1 cursor-pointer'>
+                      {contacto.tipo === "correo" && (
+                        <>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-6 w-6'
+                            viewBox='0 0 20 20'
+                            fill='currentColor'
+                          >
+                            <path d='M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z' />
+                            <path d='M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z' />
+                          </svg>
+                          &nbsp;
+                          <a
+                            href={"mailto:" + contacto.info}
+                            className='cursor-pointer'
+                          >
+                            {contacto.info}
+                          </a>
+                        </>
+                      )}
+                      {contacto.tipo === "facebook" && (
+                        <>
+                          <SocialIcon
+                            url={contacto.info}
+                            style={{ width: "1.5rem", height: "1.5rem" }}
+                            target='_blank'
+                            bgColor='#333C4D'
+                          />
+                          &nbsp;{" "}
+                          <a
+                            href={contacto.info}
+                            rel='noreferrer'
+                            target='_blank'
+                            className='cursor-pointer'
+                          >
+                            {contacto.texto}
+                          </a>
+                        </>
+                      )}
+                      {contacto.tipo === "movil" && (
+                        <>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke-width='1.5'
+                            stroke='currentColor'
+                            class='w-6 h-6'
+                          >
+                            <path
+                              stroke-linecap='round'
+                              stroke-linejoin='round'
+                              d='M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3'
+                            />
+                          </svg>
+                          &nbsp;{" "}
+                          <a
+                            href={contacto.info}
+                            rel='noreferrer'
+                            target='_blank'
+                            className='cursor-pointer'
+                          >
+                            +506{" "}
+                            {`${contacto.info.substring(
+                              0,
+                              4
+                            )} ${contacto.info.substring(4)}`}{" "}
+                            | {contacto.texto}
+                          </a>
+                        </>
+                      )}
+                      {contacto.tipo === "fijo" && (
+                        <>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke-width='1.5'
+                            stroke='currentColor'
+                            class='w-6 h-6'
+                          >
+                            <path
+                              stroke-linecap='round'
+                              stroke-linejoin='round'
+                              d='M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z'
+                            />
+                          </svg>
+                          &nbsp;{" "}
+                          <a
+                            href={contacto.info}
+                            rel='noreferrer'
+                            target='_blank'
+                            className='cursor-pointer'
+                          >
+                            +506{" "}
+                            {`${contacto.info.substring(
+                              0,
+                              4
+                            )} ${contacto.info.substring(4)}`}{" "}
+                            | {contacto.texto}
+                          </a>
+                        </>
+                      )}
+                      {contacto.tipo === "whatsapp" && (
+                        <>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            class='ionicon h-6 w-6'
+                            viewBox='0 0 512 512'
+                          >
+                            <title>Logo Whatsapp</title>
+                            <path
+                              d='M414.73 97.1A222.14 222.14 0 00256.94 32C134 32 33.92 131.58 33.87 254a220.61 220.61 0 0029.78 111L32 480l118.25-30.87a223.63 223.63 0 00106.6 27h.09c122.93 0 223-99.59 223.06-222A220.18 220.18 0 00414.73 97.1zM256.94 438.66h-.08a185.75 185.75 0 01-94.36-25.72l-6.77-4-70.17 18.32 18.73-68.09-4.41-7A183.46 183.46 0 0171.53 254c0-101.73 83.21-184.5 185.48-184.5a185 185 0 01185.33 184.64c-.04 101.74-83.21 184.52-185.4 184.52zm101.69-138.19c-5.57-2.78-33-16.2-38.08-18.05s-8.83-2.78-12.54 2.78-14.4 18-17.65 21.75-6.5 4.16-12.07 1.38-23.54-8.63-44.83-27.53c-16.57-14.71-27.75-32.87-31-38.42s-.35-8.56 2.44-11.32c2.51-2.49 5.57-6.48 8.36-9.72s3.72-5.56 5.57-9.26.93-6.94-.46-9.71-12.54-30.08-17.18-41.19c-4.53-10.82-9.12-9.35-12.54-9.52-3.25-.16-7-.2-10.69-.2a20.53 20.53 0 00-14.86 6.94c-5.11 5.56-19.51 19-19.51 46.28s20 53.68 22.76 57.38 39.3 59.73 95.21 83.76a323.11 323.11 0 0031.78 11.68c13.35 4.22 25.5 3.63 35.1 2.2 10.71-1.59 33-13.42 37.63-26.38s4.64-24.06 3.25-26.37-5.11-3.71-10.69-6.48z'
+                              fill-rule='evenodd'
+                            />
+                          </svg>
+                          &nbsp;{" "}
+                          <a
+                            href={"https://wa.me/506" + contacto.info}
+                            rel='noreferrer'
+                            target='_blank'
+                            className='cursor-pointer'
+                          >
+                            +506{" "}
+                            {`${contacto.info.substring(
+                              0,
+                              4
+                            )} ${contacto.info.substring(4)}`}{" "}
+                            | {contacto.texto}
+                          </a>
+                        </>
+                      )}
+                    </span>
+                  ))}
+                {/*    <span className='flex py-1 cursor-pointer'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-6 w-6 '
@@ -327,9 +411,9 @@ function Contact() {
                   </svg>
                   &nbsp;
                   <a href='tel:+50689810536' className='cursor-pointer'>
-                    (+506) 8981-0536 (Averías, Quejas y Sugerencias)
+                    (+506) 8541-0886&nbsp;|&nbsp;8751-2272 - Disponibilidad{" "}
                   </a>
-                </span>
+                </span> */}
               </div>
               <div className='recruitment mt-12 '>
                 <h2 className='text-2xl py-2 '>
@@ -390,7 +474,6 @@ function Contact() {
                   variants={{
                     visible: {
                       opacity: 1,
-
                       transition: {
                         delay: 2.5,
                         duration: 0.7,

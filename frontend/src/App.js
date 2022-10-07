@@ -13,6 +13,9 @@ import TanksClient from "./components/tanks/TanksClient";
 import GradientesClient from "./components/quiebraGradientes/GradientesClient";
 /* Admin layout components */
 import Dashboard from "./components/layout/Dashboard";
+import Contacto from "./components/asada/Contacto";
+import ContactoAdd from "./components/asada/ContactoAdd";
+import ContactoUpdate from "./components/asada/ContactoUpdate";
 import DocsAdmin from "./components/layout/DocsAdmin";
 import GeneralInfo from "./components/asada/GeneralInfo";
 import UserLogin from "./components/users/UserLogin";
@@ -92,6 +95,9 @@ function App() {
           <Route path='/admin' element={<AdminLayout />}>
             <Route path='dashboard' element={<Dashboard />}>
               <Route path='general' element={<GeneralInfo />} />
+              <Route path='contacto' element={<Contacto />} />
+              <Route path='contacto/add' element={<ContactoAdd />} />
+              <Route path='contacto/:id' element={<ContactoUpdate />} />
               <Route path='juntaDirectiva' element={<JuntaDirectiva />} />
               <Route
                 path='juntaDirectiva/add'

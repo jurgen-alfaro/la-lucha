@@ -273,46 +273,7 @@ function GeneralInfo() {
             />
           </div>
         </div>
-
         <div className='divider'></div>
-        <div className='w-full px-3'>
-          <label
-            className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-            htmlFor='grid-address'
-          >
-            Dirección
-          </label>
-          <textarea
-            className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-            id='grid-address'
-            type='text'
-            required
-            name='address'
-            placeholder='Direccióh de la ASADA'
-            defaultValue={address}
-            onChange={(e) => setNewAddress(e.target.value)}
-          />
-        </div>
-        <div className='w-full px-3'>
-          <label
-            className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-            htmlFor='grid-schedule'
-          >
-            Horario de atención
-          </label>
-          <textarea
-            className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-            id='grid-schedule'
-            type='text'
-            required
-            name='schedule'
-            placeholder='Horario de atención'
-            defaultValue={schedule}
-            onChange={(e) => setNewSchedule(e.target.value)}
-          />
-        </div>
-        <div className='divider'></div>
-
         <div className='card-actions justify-start'>
           <button
             type='submit'

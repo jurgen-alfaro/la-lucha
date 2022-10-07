@@ -1,4 +1,5 @@
 import { createContext, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import LoginContext from "../login/LoginContext";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -9,17 +10,121 @@ export const AsadaProvider = ({ children }) => {
   const { user } = useContext(LoginContext);
   const [isLoading, setIsLoading] = useState(true);
   const [asada, setAsada] = useState({});
+  const [contactos, setContactos] = useState([]);
+  const [contacto, setContacto] = useState({});
   const [facturas, setFacturas] = useState([]);
   const [detalles, setDetalles] = useState([]);
   const [nombreAbonado, setNombreAbonado] = useState("");
+  const params = useParams();
+  const navigate = useNavigate();
 
   // Get asada
   const getAsada = async () => {
     setIsLoading(true);
     const response = await axios.get(`/api/asada`);
     const data = await response.data;
+    await getAsadaContactos();
     setAsada(data);
     setIsLoading(false);
+  };
+
+  // Get asada contactos
+  const getAsadaContactos = async () => {
+    setIsLoading(true);
+    const response = await axios.get(`/api/asada/1/contactos`);
+    const data = await response.data;
+    setContactos(data);
+    setIsLoading(false);
+  };
+
+  // Get asada contacto
+  const getAsadaContacto = async (idcontacto) => {
+    setIsLoading(true);
+    const response = await axios.get(`/api/asada/1/contactos/${idcontacto}`);
+    const data = await response.data;
+    setContacto(data.contacto);
+    setIsLoading(false);
+  };
+
+  // Create asada contacto
+  const createAsadaContacto = async (contacto) => {
+    setIsLoading(true);
+    try {
+      /* WARNING - HARD CODED VALUE */
+      const response = await axios.post(`/api/asada/1/contactos`, contacto, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const data = await response.data;
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Patch asada contacto
+  const patchAsadaContacto = async (contactoObj) => {
+    const { id: idcontacto } = params;
+    setIsLoading(true);
+    try {
+      /* 
+        WARNING 
+        HARD CODED VALUE 
+        It is not recommended to explicitly use a number to call the API endpoint.
+        Try to use dinamic variable. 
+      */
+      await axios.patch(`/api/asada/1/contactos/${idcontacto}`, contactoObj, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setIsLoading(false);
+      toast.info(`Se ha actualizado la información del contacto`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.log(error);
+      throw new Error(`Error al actualizar informacion la ASADA`);
+    }
+  };
+
+  // Delete contacto
+  const deleteAsadaContacto = async () => {
+    setIsLoading(true);
+    try {
+      const { id } = params;
+      console.log("context: ", id);
+      await axios.delete(`/api/asada/1/contactos/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      await getAsadaContactos();
+
+      setIsLoading(false);
+      toast.info(`Se ha borrado el registro del contacto de la ASADA`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      throw new Error(`Error al borrar contacto: ${contacto}`);
+    }
   };
 
   // Update asada
@@ -33,6 +138,40 @@ export const AsadaProvider = ({ children }) => {
   Try to use dinamic variable. 
   */
       const response = await axios.put(`/api/asada/1`, asada, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      await getAsada();
+      setIsLoading(false);
+      toast.info(`Se ha actualizado la información de la ASADA`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.log(error);
+      throw new Error(`Error al actualizar informacion la ASADA`);
+    }
+  };
+
+  // Patch asada
+  const patchAsada = async (asada) => {
+    setIsLoading(true);
+    try {
+      /* 
+        WARNING 
+        HARD CODED VALUE 
+        It is not recommended to explicitly use a number to call the API endpoint.
+        Try to use dinamic variable. 
+      */
+      await axios.patch(`/api/asada/1`, asada, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
@@ -285,6 +424,16 @@ export const AsadaProvider = ({ children }) => {
         nombreAbonado,
         detalles,
         setDetalles,
+        createAsadaContacto,
+        contactos,
+        setContactos,
+        getAsadaContactos,
+        getAsadaContacto,
+        patchAsada,
+        contacto,
+        setContacto,
+        patchAsadaContacto,
+        deleteAsadaContacto,
       }}
     >
       {children}

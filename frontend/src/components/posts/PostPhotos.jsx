@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import PostContext from "../../context/posts/PostContext";
 import Spinner from "../shared/Spinner";
 

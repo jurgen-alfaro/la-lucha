@@ -142,13 +142,20 @@ function Home() {
       <section className='storage-tanks h-full'>
         <div className='storage-tanks-wrapper grid grid-cols-1 md:grid-cols-2'>
           <div className='storage-tanks-info flex flex-col justify-center items-center mb-28 md:mb-0'>
-            <h2 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-3xl text-center px-3 xl:px-5 break-words max-w-full'>
+            <h2 className='xl:text-6xl lg:text-5xl md:text-4xl sm:text-3xl text-2xl mt-5 text-center px-3 xl:px-5 break-words max-w-full'>
               Tanques de Almacenamiento
             </h2>
-            <p className='sm:text-lg text-center my-5 px-3 xl:px-12'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-              sunt cupiditate, facere perspiciatis doloremque suscipit explicabo
-              recusandae beatae quo iste!
+            <p className='sm:text-md text-center my-5 px-3 xl:px-12'>
+              La Asada al contar con un estudio técnico debidamente aprobado por
+              AyA, tiene la información a mano de los sitios donde se deben
+              ubicar los tanques, además se ha invertido en la compra de todos
+              esos terrenos. Los tanques de almacenamiento permiten que el agua
+              alcance más, ya que al tener almacenamiento se aprovechan las
+              horas de menor consumo para el almacenamiento. En caso de
+              presentarse averías repentinas en lugares anteriores al tanque,
+              permite que se realicen las reparaciones sin necesidad de
+              suspender el servicio, de igual manera en casos de emergencias el
+              almacenamiento es vital.
             </p>
             <NavLink
               to='/tanques'
@@ -181,13 +188,19 @@ function Home() {
             <img src={riverImg} alt='Quiebra gradientes' />
           </div>
           <div className='quiebra-gradientes-info flex flex-col justify-center items-center my-6 md:mb-0'>
-            <h2 className='xl:text-7xl lg:text-6xl md:text-5xl sm:text-6xl text-3xl mt-5 text-center px-3 xl:px-5 break-words max-w-full'>
-              Quiebra Gradientes
+            <h2 className='xl:text-6xl lg:text-5xl md:text-4xl sm:text-3xl text-2xl mt-5 text-center px-3 xl:px-5 break-words max-w-3xl'>
+              Tanque de Captación del Naciente Vitaliano Vásquez
             </h2>
-            <p className='sm:text-lg text-center my-5  px-3 xl:px-12'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-              sunt cupiditate, facere perspiciatis doloremque suscipit explicabo
-              recusandae beatae quo iste!
+            <p className='sm:text-md text-center my-5 px-3 xl:px-12'>
+              La captación de este acueducto está ubicada en un área de
+              74.985.72 m<sup>2</sup>, que han sido adquiridos por las Asadas de
+              La Lucha y la Tigra. Un área totalmente cubierta de bosque, la
+              cual ha sido reforestada por los acueductos. Las Asadas han
+              realizado año con año constantes trabajos de mantenimiento y
+              mejoras con la finalidad de proteger el naciente, el cual es la
+              fuente de donde se les brinda servicio a las comunidades de La
+              Tigra, La Lucha, San Pedro, Javillos, El Molino y La Vega. El
+              cuido, mejoras y conservación debe ser prioridad para todos.
             </p>
             <NavLink
               to='/quiebraGradientes'
